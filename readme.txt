@@ -16,14 +16,17 @@ The subtitle allows you to easily add a subtitle to your posts and retrieve it i
 
 It adds a simple inputfield right under the title field of posts, pages and any custom post type.
 
-You can also use the shortcode [the-subtitle] to display it.
+You can also use the shortcode [the-subtitle] to display it within the post content.
 
 
 == Installation ==
 
 1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Add the 'the_subtitle()' tag to your theme: if(function_exists('the_subtitle')) the_subtitle();
+3. Add the 'the_subtitle()' tag to your theme: 
+		if(function_exists('the_subtitle')) the_subtitle();
+4. if you need to 'return' the value, you can use get_the_subtitle() which accepts a $post_id parameter if you need to use it outside the loop
+		if(function_exists('the_subtitle')) $subtitle = get_the_subtitle($post_id);
 
 == Changelog ==
 
