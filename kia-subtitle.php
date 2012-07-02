@@ -108,6 +108,10 @@ class KIA_Subtitle {
         //add the styles and scripts:
         add_action('admin_head',array(__CLASS__,'inline_style'));
         wp_enqueue_script('kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.2', true);
+        
+        $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia_subtitle' ) );
+        wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
+
     }
 
     /**
@@ -123,6 +127,9 @@ class KIA_Subtitle {
                 width: 100%;
                 padding: 3px 8px;
                 font-size: 1.3em;
+            }
+            #the_subtitle.prompt {
+                color: #BBB;
             }
         </style>
     <?php }
@@ -142,9 +149,10 @@ class KIA_Subtitle {
         $sub = get_post_meta(get_the_ID(), 'kia_subtitle', true);
         if($sub == null){
             $sub = __('Subtitle','kia_subtitle');
+            $prompt = 'prompt';
         }
         // echo the inputfield with the value.
-        echo '<input type="text" class="widefat" name="subtitle" value="'.$sub.'" id="the_subtitle"/>';      
+        echo '<input type="text" class="widefat '.$prompt.'" name="subtitle" value="'.$sub.'" id="the_subtitle" tabindex="1"/>';      
     }
 
     /**
