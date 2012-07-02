@@ -2,7 +2,7 @@
 /*
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
-Description: Allows for a subtitle in your posts, pages and custom post types
+Description: Adds a subtitle field to WordPress' Post editor
 Version: 0.1
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
