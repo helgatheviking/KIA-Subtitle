@@ -1,6 +1,6 @@
 === KIA Subtitle ===
 Contributors: Kathy Darling 
-Donate link: http://kathyisawesome/kia-subtitle
+Plugin URL: http://www.kathyisawesome.com/kia-subtitle
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.4
