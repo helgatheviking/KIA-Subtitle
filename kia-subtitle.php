@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: KIA Subtitle
-Plugin URI: http://www.kathyisawesome.com/kia-subtitle
+Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Allows for a subtitle in your posts, pages and custom post types
 Version: 0.1
 Author: Kathy Darling
