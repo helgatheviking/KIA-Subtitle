@@ -51,10 +51,6 @@ class KIA_Subtitle {
         add_action( 'edit_form_advanced', array(__CLASS__,'add_input' ));
         add_action( 'edit_page_form', array(__CLASS__,'add_input' ));
         add_action( 'save_post', array(__CLASS__,'meta_save' ));
-
-        // add columns and quick edit
-        add_filter( 'manage_post_posts_columns', array(__CLASS__,'shiba_add_post_columns'));
-        
     }
 
     /**
