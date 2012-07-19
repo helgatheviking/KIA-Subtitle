@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.0
+Version: 1.0.1
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -98,7 +98,7 @@ class KIA_Subtitle {
      */
     function load_scripts($hook) {
      
-        if( $hook != 'edit.php' && $hook != 'post.php' && $hook != 'post-new.php' ) 
+        if( $hook != 'post.php' && $hook != 'post-new.php' ) 
             return;
             
         //add the styles and scripts:
