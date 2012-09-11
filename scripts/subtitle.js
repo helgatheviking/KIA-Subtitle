@@ -32,9 +32,13 @@
 	 */
 
 	$( '.editinline' ).on( 'click', function(){
+		// revert Quick Edit menu so that it refreshes properly
+		inlineEditPost.revert();
+		
+		posttitlelabel = $( ':input[name="post_title"]', '.inline-edit-row' ).parents( 'label' ); 
 		var tag_id = $( this ).parents( 'tr' ).attr( 'id' );	
 		var subtitle = $( '.kia-subtitle', '#' + tag_id ).text();  
-		$( ':input[name="subtitle"]', '.inline-edit-row' ).val( subtitle );
+		$( ':input[name="subtitle"]', '.inline-edit-row' ).val( subtitle ).parents( 'label' ).insertAfter( posttitlelabel );
 	});
 
 })(jQuery);

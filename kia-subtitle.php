@@ -223,17 +223,13 @@ class KIA_Subtitle {
     function quick_edit_custom_box( $column_name, $screen ) {   
         if($column_name != 'subtitle') return false;
     ?>
-        <fieldset>
-            <div id="kia-subtitle" class="inline-edit-col">
-                <label>
-                    <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
-                    <span class="input-text-wrap"><input type="text" name="<?php echo $column_name; ?>" class="ptitle" value=""></span>
+            <label class="kia-subtitle">
+                <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
+                <span class="input-text-wrap"><input type="text" name="<?php echo $column_name; ?>" class="ptitle" value=""></span>
 
-                    <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce'); ?>
+                <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce'); ?>
 
-                </label>
-            </div>
-        </fieldset>
+            </label>
     <?php 
     }
 
