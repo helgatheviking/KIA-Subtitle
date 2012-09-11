@@ -1,5 +1,10 @@
-jQuery(document).ready(function($){
-	
+(function($) {
+
+	/*
+	 * SINGLE POST SCREEN
+	 * @since 1.0
+	 */
+
 	$('#the_subtitle').insertAfter('#title');
 
 	//smart empty:
@@ -17,20 +22,22 @@ jQuery(document).ready(function($){
 
 	});
 
+})(jQuery);
+
+(function($) {
+
 	/*
-	$('#the_subtitle').click(function(){
-		if($(this).val() == 'Subtitle'){
-			$(this).val('');
-			$(this).focus();
-			$(this).bind('blur', function(){
-				if($(this).val() == ''){
-					$(this).val('Subtitle');
-				}
-			})
-		}
-#BBB
-*/
-});
+	 * EDIT SCREEN
+	 * @since 1.1
+	 */
+
+	$( '.editinline' ).on( 'click', function(){
+		var tag_id = $( this ).parents( 'tr' ).attr( 'id' );	
+		var subtitle = $( '.kia-subtitle', '#' + tag_id ).text();  
+		$( ':input[name="subtitle"]', '.inline-edit-row' ).val( subtitle );
+	});
+
+})(jQuery);
 
 
 

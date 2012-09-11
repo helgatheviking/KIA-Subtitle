@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.0.2
+Version: 1.1
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -27,30 +27,38 @@ License: GPL2
 
 
 // don't load directly
-if (!function_exists('is_admin')) {
-    header('Status: 403 Forbidden');
-    header('HTTP/1.1 403 Forbidden');
+if ( ! function_exists( 'is_admin' ) ) {
+    header( 'Status: 403 Forbidden' );
+    header( 'HTTP/1.1 403 Forbidden' );
     exit();
 }
 
 
-if (!class_exists("KIA_Subtitle")) :
+if ( ! class_exists( "KIA_Subtitle" ) ) :
 
 class KIA_Subtitle {
 
     function __construct(){
 
         // load the textdomain
-        add_action( 'plugins_loaded', array(__CLASS__,'load_textdomain'));
+        add_action( 'plugins_loaded', array( __CLASS__, 'load_textdomain' ) );
 
         // register the shortcode:
-        add_shortcode( 'the-subtitle', array(__CLASS__,'shortcode' ));
+        add_shortcode( 'the-subtitle', array( __CLASS__, 'shortcode' ));
 
-        //  Backend functions:
-        add_action( 'admin_enqueue_scripts', array(__CLASS__,'load_scripts' ));
-        add_action( 'edit_form_advanced', array(__CLASS__,'add_input' ));
-        add_action( 'edit_page_form', array(__CLASS__,'add_input' ));
-        add_action( 'save_post', array(__CLASS__,'meta_save' ));
+        // Backend functions:
+        add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_scripts' ));
+        add_action( 'edit_form_advanced', array( __CLASS__, 'add_input' ));
+        add_action( 'edit_page_form', array( __CLASS__, 'add_input' ));
+        add_action( 'save_post', array( __CLASS__, 'meta_save' ));
+
+        // Edit Columns + Quickedit:
+        add_action( 'manage_posts_columns', array( __CLASS__, 'column_header' ));
+        add_action( 'manage_pages_columns', array( __CLASS__, 'column_header' ));
+        add_filter( 'manage_posts_custom_column', array( __CLASS__, 'column_value'), 10, 2 );
+        add_filter( 'manage_pages_custom_column', array( __CLASS__, 'column_value'), 10, 2 );
+        add_action( 'quick_edit_custom_box', array( __CLASS__, 'quick_edit_custom_box'), 10, 2 );
+
     }
 
     /**
@@ -96,17 +104,17 @@ class KIA_Subtitle {
      * Uses jquery to re-locate the subtitle text input to just below the Title input
      * @since 1.0
      */
-    function load_scripts($hook) {
+    function load_scripts( $hook ) {
      
-        if( $hook != 'post.php' && $hook != 'post-new.php' ) 
-            return;
+        if( $hook == 'post.php' || $hook == 'post-new.php' || $hook == 'edit.php' ) {
+                
+            //add the styles and scripts:
+            if( $hook == 'post.php' || $hook == 'post-new.php' ) add_action('admin_head',array(__CLASS__,'inline_style'));
+            wp_enqueue_script('kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.2', true);
             
-        //add the styles and scripts:
-        add_action('admin_head',array(__CLASS__,'inline_style'));
-        wp_enqueue_script('kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.2', true);
-        
-        $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia_subtitle' ) );
-        wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
+            $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia_subtitle' ) );
+            wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
+        }
 
     }
 
@@ -166,12 +174,72 @@ class KIA_Subtitle {
             return;
         
         //don't save if the subtitle equals the default text (ideally we'd use the placeholder html5 attribute)
-        if($_POST['subtitle'] == __('Subtitle','kia_subtitle'))
+        if( $_POST['subtitle'] == __( 'Subtitle', 'kia_subtitle' ) )
             return;
 
-        update_post_meta($post_id, 'kia_subtitle', sanitize_text_field($_POST['subtitle']));
+        update_post_meta( $post_id, 'kia_subtitle', sanitize_text_field( $_POST['subtitle'] ) );
         return;
     }
+
+
+    /**
+     * Create the Subtitle Column
+     * CALLBACK FUNCTION FOR:  add_action( 'manage_posts_columns', array(__CLASS__,'column_header' ));
+     * @since 1.1
+     */
+
+    function column_header( $columns ){ 
+        $new_columns = array();
+         foreach( $columns as $key => $value ) {
+            $new_columns[ $key ] = $value;
+            if ( $key == 'title' )
+               $new_columns['subtitle'] = __( 'Subtitle', 'kia_subtitle' );
+         } 
+
+         return $new_columns;
+    }
+
+    /**
+     * Add subtitle value to column data
+     * CALLBACK FUNCTION FOR:  add_action( 'manage_posts_custom_column', array(__CLASS__,'column_value' ), 10, 2);
+     * @since 1.1
+     */
+
+    function column_value( $column_name, $post_id ){ 
+        switch ( $column_name ) :
+            case 'subtitle' :
+                echo $sub = get_post_meta(get_the_ID(), 'kia_subtitle', true);
+                echo '<div class="hidden kia-subtitle">' . $sub . '</div>';
+            break;
+        endswitch;
+    }
+
+    /**
+     * Add Quick Edit Form
+     * CALLBACK FUNCTION FOR:  add_action( 'quick_edit_custom_box', array(__CLASS__, 'quick_edit_custom_box'), 10, 2 );
+     * @since 1.1
+     */
+
+    function quick_edit_custom_box( $column_name, $screen ) {   
+        if($column_name != 'subtitle') return false;
+    ?>
+        <fieldset>
+            <div id="kia-subtitle" class="inline-edit-col">
+                <label>
+                    <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
+                    <span class="input-text-wrap"><input type="text" name="<?php echo $column_name; ?>" class="ptitle" value=""></span>
+
+                    <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce'); ?>
+
+                </label>
+            </div>
+        </fieldset>
+    <?php 
+    }
+
+
+
+
 
 } // end class
 
