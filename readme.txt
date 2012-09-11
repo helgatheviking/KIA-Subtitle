@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.4
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ This plugin is adapted from Luc Princen's The Subtitle plugin http://www.to-wond
 
 The subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using the_subtitle() or get_the_subtitle(). 
 
-It adds a simple inputfield right under the title field of posts, pages and any custom post type.
+It adds a simple inputfield right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
 You can also use the shortcode [the-subtitle] to display it within the post content.
 
@@ -35,6 +35,11 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 1. This is what the input will look like on the post editor screen.
 
 == Changelog ==
+
+= 1.1 =
+* Add column to edit.php screen
+* Add subtitle to quick edit
+* Load script on edit.php screen again
 
 = 1.0.2 =
 * update donate link
