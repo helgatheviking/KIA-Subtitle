@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.4
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,9 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 1. This is what the input will look like on the post editor screen.
 
 == Changelog ==
+
+= 1.1.1 =
+* Fix ability to remove subtitle
 
 = 1.1 =
 * Add column to edit.php screen

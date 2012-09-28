@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.1
+Version: 1.1.1
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -147,14 +147,16 @@ class KIA_Subtitle {
     function add_input(){
         
         //create the meta field (don't use a metabox, we have our own styling):
-        wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce');
+        wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
         
         //get the subtitle value (if set)
-        $sub = get_post_meta(get_the_ID(), 'kia_subtitle', true);
-        if($sub == null){
-            $sub = __('Subtitle','kia_subtitle');
+        if ( $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true ) ) {
+            $prompt = ''; 
+        } else {
+            $sub = __( 'Subtitle','kia_subtitle' );
             $prompt = 'prompt';
         }
+
         // echo the inputfield with the value.
         echo '<input type="text" class="widefat '.$prompt.'" name="subtitle" value="'.$sub.'" id="the_subtitle" tabindex="1"/>';      
     }
@@ -164,20 +166,28 @@ class KIA_Subtitle {
      * CALLBACK FUNCTION FOR:  add_action( 'save_post', array(__CLASS__,'meta_save' ));
      * @since 1.0
      */
-    function meta_save($post_id){
+    function meta_save( $post_id ){
         
         //check to see if this is an autosafe and if the nonce is verified:
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
             return;
 
-        if ( !wp_verify_nonce( $_POST['kia_subnonce'], plugin_basename( __FILE__ ) ) )
+        if ( ! wp_verify_nonce( $_POST['kia_subnonce'], plugin_basename( __FILE__ ) ) )
             return;
+     
+        // Check permissions
+        if ( 'page' == $_POST['post_type'] ) {
+            if ( !current_user_can( 'edit_page', $post_id ) ) return;
+        } else {
+            if ( !current_user_can( 'edit_post', $post_id ) ) return;
+        }
         
         //don't save if the subtitle equals the default text (ideally we'd use the placeholder html5 attribute)
-        if( $_POST['subtitle'] == __( 'Subtitle', 'kia_subtitle' ) )
-            return;
-
-        update_post_meta( $post_id, 'kia_subtitle', sanitize_text_field( $_POST['subtitle'] ) );
+        if( in_array ( trim($_POST['subtitle'] ), array( __( 'Subtitle', 'kia_subtitle' ), '' ) ) ) {
+            delete_post_meta( $post_id, 'kia_subtitle' );
+        } else { 
+            update_post_meta( $post_id, 'kia_subtitle', sanitize_text_field( $_POST['subtitle'] ) );
+        }
         return;
     }
 
