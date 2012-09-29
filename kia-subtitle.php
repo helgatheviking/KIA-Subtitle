@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.1.1
+Version: 1.1.2
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -219,7 +219,7 @@ class KIA_Subtitle {
         switch ( $column_name ) :
             case 'subtitle' :
                 echo $sub = get_post_meta(get_the_ID(), 'kia_subtitle', true);
-                echo '<div class="hidden kia-subtitle">' . $sub . '</div>';
+                echo '<div class="hidden kia-subtitle-value">' . $sub . '</div>';
             break;
         endswitch;
     }
@@ -235,17 +235,13 @@ class KIA_Subtitle {
     ?>
             <label class="kia-subtitle">
                 <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
-                <span class="input-text-wrap"><input type="text" name="<?php echo $column_name; ?>" class="ptitle" value=""></span>
+                <span class="input-text-wrap"><input type="text" name="<?php echo $column_name; ?>" class="ptitle kia-subtitle-input" value=""></span>
 
                 <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce'); ?>
 
             </label>
     <?php 
     }
-
-
-
-
 
 } // end class
 
@@ -265,7 +261,7 @@ $KIA_Subtitle = new KIA_Subtitle();
 * @output string
 * @since 1.0
 */
-if(!function_exists('the_subtitle')){
+if( ! function_exists( 'the_subtitle' ) ){
     function the_subtitle(){
         return KIA_Subtitle::the_subtitle();
     }
@@ -278,9 +274,9 @@ if(!function_exists('the_subtitle')){
 * @return string
 * @since 1.0
 */
-if(!function_exists('get_the_subtitle')){
-    function get_the_subtitle($post_id = null){
-        return KIA_Subtitle::get_the_subtitle($post_id);
+if( ! function_exists( 'get_the_subtitle' )){
+    function get_the_subtitle( $post_id = null ){
+        return KIA_Subtitle::get_the_subtitle( $post_id );
     }
 }
 ?>
