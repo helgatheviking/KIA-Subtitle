@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.4
-Stable tag: 1.1.2
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,8 +27,10 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add the 'the_subtitle()' tag to your theme: 
 		`if(function_exists('the_subtitle')) the_subtitle();`
-1. if you need to 'return' the value, you can use get_the_subtitle() which accepts a $post_id parameter if you need to use it outside the loop
+1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
 		`if(function_exists('the_subtitle')) $subtitle = get_the_subtitle($post_id);`
+1. Or as of version 1.2 you can pass a third parameter of FALSE to `the_title( Null, Null, False );`
+1. As of 1.2 you can add strings before and after like so: `the_title( '<h3>', '</h3>' );`
 
 == Screenshots ==
 
@@ -39,6 +41,10 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 Please report any issues at: https://github.com/helgatheviking/KIA-Subtitle/issues
 
 == Changelog ==
+
+= 1.2 =
+* Mimic the_title(), so the_subtitle() now accepts before, after and echo parameters: 
+	`the_subtitle( $before = '', $after = '', $echo = true )`
 
 = 1.1.2 =
 * Fixed quick edit refresh ( second click on quick edit for same item and the value still reflected the original )
