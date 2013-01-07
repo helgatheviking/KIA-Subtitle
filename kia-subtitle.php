@@ -179,7 +179,7 @@ class KIA_Subtitle {
         }
 
         // echo the inputfield with the value.
-        echo '<input type="text" class="widefat '.$prompt.'" name="subtitle" value="'.$sub.'" id="the_subtitle" tabindex="1"/>';
+        echo '<input type="text" class="widefat '.$prompt.'" name="subtitle" value="'.esc_attr($sub).'" id="the_subtitle" tabindex="1"/>';
     }
 
     /**
@@ -240,7 +240,7 @@ class KIA_Subtitle {
         switch ( $column_name ) :
             case 'subtitle' :
                 echo $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true );
-                echo '<div class="hidden kia-subtitle-value">' . $sub . '</div>';
+                echo '<div class="hidden kia-subtitle-value">' . esc_html($sub) . '</div>';
             break;
         endswitch;
     }
@@ -256,7 +256,7 @@ class KIA_Subtitle {
     ?>
             <label class="kia-subtitle">
                 <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
-                <span class="input-text-wrap"><input type="text" name="<?php echo $column_name; ?>" class="ptitle kia-subtitle-input" value=""></span>
+                <span class="input-text-wrap"><input type="text" name="<?php echo esc_attr($column_name); ?>" class="ptitle kia-subtitle-input" value=""></span>
 
                 <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' ); ?>
 
