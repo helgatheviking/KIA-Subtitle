@@ -3,7 +3,7 @@ Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
-Tested up to: 3.4
+Tested up to: 3.5
 Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -41,6 +41,10 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 Please report any issues at: https://github.com/helgatheviking/KIA-Subtitle/issues
 
 == Changelog ==
+
+= 1.3 =
+* Better escaping of HTML attributes thanks to @nealpoole
+* Take advantage of new action hook in WP 3.5
 
 = 1.2 =
 * Mimic the_title(), so the_subtitle() now accepts before, after and echo parameters: 

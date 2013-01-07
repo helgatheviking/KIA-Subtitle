@@ -4,7 +4,7 @@
 	 * SINGLE POST SCREEN
 	 * @since 1.0
 	 */
-
+	 //@todo: not needed b/c wp3.5 has hook in right place - remove in next version
 	$( '#the_subtitle' ).insertAfter( '#title' );
 
 	//smart empty:
