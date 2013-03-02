@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.3.2
+Version: 1.3.3
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -54,7 +54,7 @@ class KIA_Subtitle {
         add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_scripts' ) );
 
         // @ Todo : in next version of WP remove this back-compatibility
-        if ( version_compare( $wp_version, $min_wp, '>=' ) ) {
+        if ( version_compare( $wp_version, self::$min_wp, '>=' ) ) {
             add_action( 'edit_form_after_title', array( __CLASS__, 'add_input' ) );
         } else {
             add_action( 'edit_form_advanced', array( __CLASS__, 'add_input' ) );
@@ -127,11 +127,15 @@ class KIA_Subtitle {
      */
     function load_scripts( $hook ) {
 
-        if( $hook == 'post.php' || $hook == 'post-new.php' || $hook == 'edit.php' ) {
+        // conditionally add the styles and scripts:
+        if( in_array( $hook, array ( 'post.php', 'post-new.php', 'edit.php' ) ) ) {
 
-            //add the styles and scripts:
-            if( $hook == 'post.php' || $hook == 'post-new.php' ) add_action('admin_head',array(__CLASS__,'inline_style'));
-            wp_enqueue_script('kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.2', true);
+            // only add style on post screens
+            if( $hook == 'post.php' || $hook == 'post-new.php' )
+                add_action('admin_head',array(__CLASS__,'inline_style'));
+
+            // load the script
+            wp_enqueue_script('kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.3.3', true);
 
             $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia_subtitle' ) );
             wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
