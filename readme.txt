@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,7 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
 		`if(function_exists('the_subtitle')) $subtitle = get_the_subtitle( $post_id );`
 1. As of version 1.2 `the_subtitle` accepts 3 parameters: `the_subtitle( $before = Null, $after = Null, $echo = True );`
+1. As of version 1.3.4, there is a filter for `the_subtitle`
 
 == Screenshots ==
 
@@ -61,6 +62,9 @@ h2.subtitle { color: pink; }
 `
 
 == Changelog ==
+
+= 1.3.4 =
+* Add filter `the_subtitle` to allow subtitle content to be modified
 
 = 1.3.3 =
 * Fix Notice: Undefined property
