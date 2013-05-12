@@ -12,18 +12,18 @@
   <!-- Display Plugin Icon, Header, and Description -->
   <?php screen_icon(); ?>
 
-  <h2><?php _e('KIA Subtitle','kia_subtitle');?></h2>
+  <h2><?php _e( 'KIA Subtitle', 'kia-subtitle' );?></h2>
 
   <!-- Beginning of the Plugin Options Form -->
   <form method="post" action="<?php echo admin_url( 'options.php' );?>">
-    <?php settings_fields('kia_subtitle_options'); ?>
-    <?php $options = get_option('kia_subtitle_options'); ?>
+    <?php settings_fields( 'kia_subtitle_options' ); ?>
+    <?php $options = get_option( 'kia_subtitle_options' ); ?>
 
     <div id="general">
         <fieldset>
               <table class="form-table">
                     <tr>
-                      <th scope="row"><?php _e('Exclude Post Types');?></th>
+                      <th scope="row"><?php _e( 'Exclude Post Types', 'kia-subtitle' );?></th>
                       <td>
 
                         <?php
@@ -47,7 +47,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row"><?php _e('Completely remove options on plugin removal');?></th>
+                      <th scope="row"><?php _e('Completely remove options on plugin removal', 'kia-subtitle' );?></th>
                       <td>
                         <input type="checkbox" name="kia_subtitle_options[delete]" value="1" <?php checked( isset( $options['delete'] ) && $options['delete'], 1 );?> />
                       </td>
@@ -57,7 +57,7 @@
       </div>
 
           <p class="submit">
-                <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+                <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'kia-subtitle' ); ?>" />
           </p>
     </form>
   </div>

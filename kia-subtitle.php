@@ -51,10 +51,10 @@ class KIA_Subtitle {
         add_action( 'plugins_loaded', array( __CLASS__, 'load_textdomain' ) );
 
         //register settings
-        add_action( 'admin_init', array( __CLASS__,'admin_init' ));
+        add_action( 'admin_init', array( __CLASS__, 'admin_init' ));
 
         //add plugin options page
-        add_action( 'admin_menu', array( __CLASS__,'add_options_page' ) );
+        add_action( 'admin_menu', array( __CLASS__, 'add_options_page' ) );
 
         // register the shortcode:
         add_shortcode( 'the-subtitle', array( __CLASS__, 'shortcode' ) );
@@ -98,7 +98,7 @@ class KIA_Subtitle {
      */
 
     function load_textdomain() {
-        load_plugin_textdomain( 'kia_subtitle', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        load_plugin_textdomain( 'kia-subtitle', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
     /**
@@ -117,7 +117,7 @@ class KIA_Subtitle {
      */
 
     function add_options_page() {
-        add_options_page(__( 'KIA Subtitle Options Page', 'kia_subtitle' ), __( 'KIA Subtitle', 'kia_subtitle' ), 'manage_options', 'kia_subtitle', array( __CLASS__, 'render_form' ) );
+        add_options_page(__( 'KIA Subtitle Options Page', 'kia-subtitle' ), __( 'KIA Subtitle', 'kia-subtitle' ), 'manage_options', 'kia_subtitle', array( __CLASS__, 'render_form' ) );
     }
 
     /**
@@ -209,9 +209,9 @@ class KIA_Subtitle {
                 add_action('admin_head',array(__CLASS__,'inline_style'));
 
             // load the script
-            wp_enqueue_script('kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.3.3', true);
+            wp_enqueue_script( 'kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.3.3', true );
 
-            $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia_subtitle' ) );
+            $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle'   ) );
             wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
         }
 
@@ -259,7 +259,7 @@ class KIA_Subtitle {
             if ( $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true ) ) {
                 $prompt = '';
             } else {
-                $sub = __( 'Subtitle','kia_subtitle' );
+                $sub = __( 'Subtitle', 'kia-subtitle'   );
                 $prompt = 'prompt';
             }
 
@@ -285,13 +285,13 @@ class KIA_Subtitle {
 
         // Check permissions
         if ( 'page' == $_POST['post_type'] ) {
-            if ( !current_user_can( 'edit_page', $post_id ) ) return;
+            if ( ! current_user_can( 'edit_page', $post_id ) ) return;
         } else {
-            if ( !current_user_can( 'edit_post', $post_id ) ) return;
+            if ( ! current_user_can( 'edit_post', $post_id ) ) return;
         }
 
         //don't save if the subtitle equals the default text (ideally we'd use the placeholder html5 attribute)
-        if( in_array ( trim($_POST['subtitle'] ), array( __( 'Subtitle', 'kia_subtitle' ), '' ) ) ) {
+        if( in_array ( trim($_POST['subtitle'] ), array( __( 'Subtitle', 'kia-subtitle'   ), '' ) ) ) {
             delete_post_meta( $post_id, 'kia_subtitle' );
         } else {
             update_post_meta( $post_id, 'kia_subtitle', sanitize_text_field( $_POST['subtitle'] ) );
@@ -311,7 +311,7 @@ class KIA_Subtitle {
          foreach( $columns as $key => $value ) {
             $new_columns[ $key ] = $value;
             if ( $key == 'title' )
-               $new_columns['subtitle'] = __( 'Subtitle', 'kia_subtitle' );
+               $new_columns['subtitle'] = __( 'Subtitle', 'kia-subtitle'   );
          }
 
          return $new_columns;
@@ -347,7 +347,7 @@ class KIA_Subtitle {
             if ( isset ( $options['post_types'] ) && ! in_array( $post->post_type, $options[ 'post_types'] ) ) { ?>
 
                 <label class="kia-subtitle">
-                    <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
+                    <span class="title"><?php _e( 'Subtitle', 'kia-subtitle'   ) ?></span>
                     <span class="input-text-wrap"><input type="text" name="<?php echo esc_attr($column_name); ?>" class="ptitle kia-subtitle-input" value=""></span>
 
                     <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' ); ?>
