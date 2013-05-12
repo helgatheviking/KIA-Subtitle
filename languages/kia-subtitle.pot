@@ -1,20 +1,57 @@
+# Copyright (C) 2013 KIA Subtitle
+# This file is distributed under the same license as the KIA Subtitle package.
 msgid ""
 msgstr ""
-"Project-Id-Version: KIA Subtitle\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-02 15:08-0600\n"
-"PO-Revision-Date: 2012-07-02 15:08-0600\n"
-"Last-Translator: Kathy <helgatheviking@gmail.com>\n"
-"Language-Team: \n"
+"Project-Id-Version: KIA Subtitle 1.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/kia-subtitle\n"
+"POT-Creation-Date: 2013-05-12 19:10:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ..\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: ../kia-subtitle.php:104
-#: ../kia-subtitle.php:121
-msgid "Subtitle"
+#: inc/plugin-options.php:15 kia-subtitle.php:120
+msgid "KIA Subtitle"
 msgstr ""
 
+#: inc/plugin-options.php:26
+msgid "Exclude Post Types"
+msgstr ""
+
+#: inc/plugin-options.php:50
+msgid "Completely remove options on plugin removal"
+msgstr ""
+
+#: inc/plugin-options.php:60
+msgid "Save Changes"
+msgstr ""
+
+#: kia-subtitle.php:120
+msgid "KIA Subtitle Options Page"
+msgstr ""
+
+#: kia-subtitle.php:214 kia-subtitle.php:262 kia-subtitle.php:294
+#: kia-subtitle.php:314 kia-subtitle.php:350
+msgid "Subtitle"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "KIA Subtitle"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.kathyisawesome.com/436/kia-subtitle/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Adds a subtitle field to WordPress' Post editor"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Kathy Darling"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.kathyisawesome.com"
+msgstr ""
