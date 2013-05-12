@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.3.4
+Version: 1.4
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -44,8 +44,17 @@ class KIA_Subtitle {
 
         global $wp_version;
 
+        // Set-up Action and Filter Hooks
+        register_uninstall_hook( __FILE__, array( __CLASS__, 'delete_plugin_options' ) );
+
         // load the textdomain
         add_action( 'plugins_loaded', array( __CLASS__, 'load_textdomain' ) );
+
+        //register settings
+        add_action( 'admin_init', array( __CLASS__,'admin_init' ));
+
+        //add plugin options page
+        add_action( 'admin_menu', array( __CLASS__,'add_options_page' ) );
 
         // register the shortcode:
         add_shortcode( 'the-subtitle', array( __CLASS__, 'shortcode' ) );
@@ -73,14 +82,78 @@ class KIA_Subtitle {
     }
 
     /**
+     * Delete options table entries ONLY when plugin deactivated AND deleted
+     * register_uninstall_hook( __FILE__, array( __CLASS__,'delete_plugin_options' ) );
+     * @since 1.4
+     */
+
+    function delete_plugin_options() {
+       $options = get_option( 'kia_subtitle_options', true );
+       if( isset( $options['delete'] ) && $options['delete'] ) delete_option( 'kia_subtitle_options' );
+    }
+
+    /**
      * Make Plugin Translation-ready
-     * CALLBACK FUNCTION FOR:  add_action( 'plugins_loaded', array(__CLASS__,'load_textdomain' ) );
      * @since 1.0
      */
 
     function load_textdomain() {
         load_plugin_textdomain( 'kia_subtitle', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
+
+    /**
+     * Register admin settings
+     * @since 1.4
+     */
+
+      function admin_init(){
+        register_setting( 'kia_subtitle_options', 'kia_subtitle_options', array( __CLASS__, 'validate_options' ) );
+      }
+
+
+    /**
+     * Add options page
+     * @since 1.4
+     */
+
+    function add_options_page() {
+        add_options_page(__( 'KIA Subtitle Options Page', 'kia_subtitle' ), __( 'KIA Subtitle', 'kia_subtitle' ), 'manage_options', 'kia_subtitle', array( __CLASS__, 'render_form' ) );
+    }
+
+    /**
+     * Render the Plugin options form
+     * @since 1.4
+     */
+
+      function render_form(){
+        include( 'inc/plugin-options.php' );
+      }
+
+    /**
+     * Sanitize and validate input.
+     * Accepts an array, return a sanitized array.
+     * @since 1.4
+     */
+
+      function validate_options( $input ){
+
+        $clean = array();
+
+        //probably overkill, but make sure that the post type actually exists and is one we're cool with modifying
+        $args = array( 'public'   => true,
+                       'show_ui' => true );
+
+        $post_types = get_post_types( $args );
+
+        if( isset( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ){
+            if( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
+        }
+
+        $clean['delete'] =  isset( $input['delete'] ) && $input['delete'] ? 1 : 0 ;  //checkbox
+
+        return $clean;
+      }
+
     /**
      * Outputs the Subtitle
      * @output string
@@ -118,6 +191,7 @@ class KIA_Subtitle {
     function shortcode(){
         return self::get_the_subtitle();
     }
+
 
     /**
      * Load Script in Admin
@@ -171,19 +245,28 @@ class KIA_Subtitle {
      */
     function add_input(){
 
-        //create the meta field (don't use a metabox, we have our own styling):
-        wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
+        global $post;
 
-        //get the subtitle value (if set)
-        if ( $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true ) ) {
-            $prompt = '';
-        } else {
-            $sub = __( 'Subtitle','kia_subtitle' );
-            $prompt = 'prompt';
+        $options = get_option('kia_subtitle_options');
+
+        // only show input if the post type was not excluded in options
+        if ( isset ( $options['post_types'] ) && ! in_array( $post->post_type, $options[ 'post_types'] ) ) {
+
+            //create the meta field (don't use a metabox, we have our own styling):
+            wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
+
+            //get the subtitle value (if set)
+            if ( $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true ) ) {
+                $prompt = '';
+            } else {
+                $sub = __( 'Subtitle','kia_subtitle' );
+                $prompt = 'prompt';
+            }
+
+            // echo the inputfield with the value.
+            echo '<input type="text" class="widefat '.$prompt.'" name="subtitle" value="'.esc_attr($sub).'" id="the_subtitle" tabindex="1"/>';
+
         }
-
-        // echo the inputfield with the value.
-        echo '<input type="text" class="widefat '.$prompt.'" name="subtitle" value="'.esc_attr($sub).'" id="the_subtitle" tabindex="1"/>';
     }
 
     /**
@@ -256,16 +339,22 @@ class KIA_Subtitle {
      */
 
     function quick_edit_custom_box( $column_name, $screen ) {
-        if( $column_name != 'subtitle' ) return false;
-    ?>
-            <label class="kia-subtitle">
-                <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
-                <span class="input-text-wrap"><input type="text" name="<?php echo esc_attr($column_name); ?>" class="ptitle kia-subtitle-input" value=""></span>
+        if( $column_name == 'subtitle' ) {
 
-                <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' ); ?>
+            global $post;
 
-            </label>
-    <?php
+            // only show input if the post type was not excluded in options
+            if ( isset ( $options['post_types'] ) && ! in_array( $post->post_type, $options[ 'post_types'] ) ) { ?>
+
+                <label class="kia-subtitle">
+                    <span class="title"><?php _e( 'Subtitle', 'kia_subtitle' ) ?></span>
+                    <span class="input-text-wrap"><input type="text" name="<?php echo esc_attr($column_name); ?>" class="ptitle kia-subtitle-input" value=""></span>
+
+                    <?php wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' ); ?>
+
+                </label>
+    <?php   }
+        }
     }
 
 } // end class
