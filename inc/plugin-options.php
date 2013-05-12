@@ -17,7 +17,7 @@
   <!-- Beginning of the Plugin Options Form -->
   <form method="post" action="<?php echo admin_url( 'options.php' );?>">
     <?php settings_fields('kia_subtitle_options'); ?>
-    <?php $options = get_option('kia_subtitle_options');?>
+    <?php $options = get_option('kia_subtitle_options'); ?>
 
     <div id="general">
         <fieldset>
@@ -28,8 +28,7 @@
 
                         <?php
 
-                        $args = array( 'public'   => true,
-                                       'show_ui' => true );
+                        $args = array( 'public'   => true );
 
                         $post_types = get_post_types( $args, 'objects' );
 
