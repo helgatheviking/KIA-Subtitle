@@ -247,7 +247,7 @@ class KIA_Subtitle {
 
         global $post;
 
-        $options = get_option('kia_subtitle_options');
+        $options = get_option( 'kia_subtitle_options' );
 
         // only show input if the post type was not excluded in options
         if ( isset ( $options['post_types'] ) && ! in_array( $post->post_type, $options[ 'post_types'] ) ) {
