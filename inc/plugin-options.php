@@ -28,11 +28,11 @@
 
                         <?php
 
-                        $args = array( '_builtin'   => false );
+                        $args = ( array ) apply_filters( 'kia_subtitle_post_type_args', array() );
 
                         $post_types = get_post_types( $args, 'objects' );
 
-                        ksort( apply_filters( 'kia_subtitle_post_types', $post_types ) );
+                        ksort( $post_types );
 
                         if( ! is_wp_error( $post_types ) ) {
 

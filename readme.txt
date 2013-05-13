@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,10 @@ h2.subtitle { color: pink; }
 `
 
 == Changelog ==
+
+= 1.4.2 =
+* Adjust $args for get_post_types()
+* switch 'kia_subtitle_post_types' filter to 'kia_subtitle_post_type_args'
 
 = 1.4.1 =
 * Adjust $args for get_post_types()
