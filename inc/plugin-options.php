@@ -28,7 +28,7 @@
 
                         <?php
 
-                        $args = ( array ) apply_filters( 'kia_subtitle_post_type_args', array() );
+                        $args = ( array ) apply_filters( 'kia_subtitle_post_type_args', array( 'show_in_menu' => true ) );
 
                         $post_types = get_post_types( $args, 'objects' );
 
