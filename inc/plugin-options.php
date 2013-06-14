@@ -23,7 +23,7 @@
         <fieldset>
               <table class="form-table">
                     <tr>
-                      <th scope="row"><?php _e( 'Exclude Post Types', 'kia-subtitle' );?></th>
+                      <th scope="row"><?php _e( 'Enable on Post Types', 'kia-subtitle' );?></th>
                       <td>
 
                         <?php
@@ -37,7 +37,7 @@
                         if( ! is_wp_error( $post_types ) ) {
 
                           foreach ($post_types as $i=>$post_type)  { ?>
-                            <input type="checkbox" name="kia_subtitle_options[post_types][]" value="<?php echo $i;?>" <?php checked( isset($options['post_types']) && is_array($options['post_types']) && in_array($i, $options['post_types']), 1 ); ?> /> <?php echo $post_type->labels->name; ?><br/>
+                            <input type="checkbox" name="kia_subtitle_options[post_types][]" value="<?php echo $i;?>" <?php checked( isset( $options['post_types'] ) && is_array($options['post_types']) && in_array($i, $options['post_types']), 1 ); ?> /> <?php echo $post_type->labels->name; ?><br/>
 
                           <?php
                               }

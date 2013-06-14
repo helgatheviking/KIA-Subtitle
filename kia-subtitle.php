@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.4.3
+Version: 1.5
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -73,11 +73,23 @@ class KIA_Subtitle {
         add_action( 'save_post', array( __CLASS__, 'meta_save' ) );
 
         // Edit Columns + Quickedit:
-        add_action( 'manage_posts_columns', array( __CLASS__, 'column_header' ) );
-        add_action( 'manage_pages_columns', array( __CLASS__, 'column_header' ) );
-        add_filter( 'manage_posts_custom_column', array( __CLASS__, 'column_value'), 10, 2 );
-        add_filter( 'manage_pages_custom_column', array( __CLASS__, 'column_value'), 10, 2 );
+
+        $options = get_option( 'kia_subtitle_options', false );
+
+        // only show input if the post type was enabled in options
+        if ( isset ( $options['post_types'] ) && is_array( $options[ 'post_types'] ) ) {
+
+            foreach( $options['post_types'] as $post_type ) {
+                add_action( "manage_{$post_type}_posts_columns", array( __CLASS__, 'column_header' ) );
+                add_filter( "manage_{$post_type}_posts_custom_column", array( __CLASS__, 'column_value'), 10, 2 );
+            }
+
+        }
+
         add_action( 'quick_edit_custom_box', array( __CLASS__, 'quick_edit_custom_box'), 10, 2 );
+
+        //upgrade routine
+        add_action( 'admin_init', array( __CLASS__, 'upgrade_routine' ));
 
     }
 
@@ -88,8 +100,11 @@ class KIA_Subtitle {
      */
 
     function delete_plugin_options() {
-       $options = get_option( 'kia_subtitle_options', true );
-       if( isset( $options['delete'] ) && $options['delete'] ) delete_option( 'kia_subtitle_options' );
+        $options = get_option( 'kia_subtitle_options', true );
+        if( isset( $options['delete'] ) && $options['delete'] ) {
+            delete_option( 'kia_subtitle_options' );
+            delete_option( 'kia_subtitle_db_version' );
+        }
     }
 
     /**
@@ -144,7 +159,7 @@ class KIA_Subtitle {
 
         $post_types = get_post_types( $args );
 
-        if( isset( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ){
+        if( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ){
             if( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
         }
 
@@ -248,8 +263,8 @@ class KIA_Subtitle {
 
         $options = get_option( 'kia_subtitle_options' );
 
-        // only show input if the post type was not excluded in options
-        if ( ! isset ( $options['post_types'] ) || ! in_array( $post->post_type, $options[ 'post_types'] ) ) {
+        // only show input if the post type was not enabled in options
+        if ( isset ( $options['post_types'] ) && in_array( $post->post_type, $options[ 'post_types'] ) ) {
 
             //create the meta field (don't use a metabox, we have our own styling):
             wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
@@ -301,19 +316,22 @@ class KIA_Subtitle {
 
     /**
      * Create the Subtitle Column
-     * CALLBACK FUNCTION FOR:  add_action( 'manage_posts_columns', array(__CLASS__, 'column_header' ));
+     * CALLBACK FUNCTION FOR:  add_action( 'manage_posts_columns', array(__CLASS__, 'column_header' ) );
      * @since 1.1
      */
 
     function column_header( $columns ){
+
+        // reset the new columns
         $new_columns = array();
-         foreach( $columns as $key => $value ) {
+
+        foreach( $columns as $key => $value ) {
             $new_columns[ $key ] = $value;
             if ( $key == 'title' )
-               $new_columns['subtitle'] = __( 'Subtitle', 'kia-subtitle'   );
-         }
+                $new_columns['subtitle'] = __( 'Subtitle', 'kia-subtitle'   );
+        }
 
-         return $new_columns;
+        return $new_columns;
     }
 
     /**
@@ -342,8 +360,10 @@ class KIA_Subtitle {
 
             global $post;
 
-            // only show input if the post type was not excluded in options
-            if ( isset ( $options['post_types'] ) && ! in_array( $post->post_type, $options[ 'post_types'] ) ) { ?>
+            $options = get_option( 'kia_subtitle_options' );
+
+            // only show input if the post type was enabled in options
+            if ( isset ( $options['post_types'] ) && in_array( $post->post_type, $options[ 'post_types'] ) ) { ?>
 
                 <label class="kia-subtitle">
                     <span class="title"><?php _e( 'Subtitle', 'kia-subtitle'   ) ?></span>
@@ -354,6 +374,44 @@ class KIA_Subtitle {
                 </label>
     <?php   }
         }
+    }
+
+    /**
+     * Plugin Upgrade Routine
+     * previously used options to *exclude* post types from having subtitle
+     * going to switch to including them all by default
+     * @since 1.5
+     */
+
+    function upgrade_routine() {
+
+        $db_version = get_option( 'kia_subtitle_db_version', false );
+
+        if ( ! ( $db_version ) || version_compare( $db_version, '1.5', '<' ) ) {
+
+            // get any existing options
+            $options = get_option( 'kia_subtitle_options' );
+
+            // get all post types showing up in the menu
+            $args = array( 'show_in_menu' => true );
+            $post_types = get_post_types( $args );
+            ksort( $post_types );
+
+            // we're going to switch any checked to *disable* options from previous version
+            // into unchecked to disable
+            if( isset( $options['post_types'] ) && is_array( $options['post_types'] ) ){
+                $post_types = array_diff( $post_types, $options['post_types'] );
+            }
+
+            // merge the new options with any old options
+            $update_options = array_merge( (array)$options, array ( 'post_types' => $post_types, 'db_version' => '1.5' ) );
+
+            // update the options
+            update_option( 'kia_subtitle_options', $update_options );
+            update_option( 'kia_subtitle_db_version', '1.5' );
+
+        }
+
     }
 
 } // end class
@@ -392,9 +450,5 @@ if( ! function_exists( 'get_the_subtitle' )){
         return KIA_Subtitle::get_the_subtitle( $post_id );
     }
 }
-
-
-//delete_option( 'kia_subtitle_options' );
-
 
 ?>

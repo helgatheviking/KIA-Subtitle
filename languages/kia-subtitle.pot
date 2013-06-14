@@ -17,7 +17,7 @@ msgid "KIA Subtitle"
 msgstr ""
 
 #: inc/plugin-options.php:26
-msgid "Exclude Post Types"
+msgid "Enable on Post Types"
 msgstr ""
 
 #: inc/plugin-options.php:50
