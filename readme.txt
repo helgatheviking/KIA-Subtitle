@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.4.4
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +36,7 @@ You can also use the shortcode [the-subtitle] to display it within the post cont
 
 1. This is what the input will look like on the post editor screen.
 
-== FAQ ==
+== Frequently Asked Questions ==
 
 = How do I display the subtitle in my theme? =
 
