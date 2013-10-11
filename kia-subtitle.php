@@ -308,7 +308,7 @@ class KIA_Subtitle {
         if( in_array ( trim($_POST['subtitle'] ), array( __( 'Subtitle', 'kia-subtitle'   ), '' ) ) ) {
             delete_post_meta( $post_id, 'kia_subtitle' );
         } else {
-            update_post_meta( $post_id, 'kia_subtitle', sanitize_text_field( $_POST['subtitle'] ) );
+            update_post_meta( $post_id, 'kia_subtitle', sanitize_post_field( 'post_title', $_POST['subtitle'], $post_id, 'db' ) );
         }
         return;
     }
