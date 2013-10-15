@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.4
-Tested up to: 3.5.1
-Stable tag: 1.5
+Tested up to: 3.6
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,66 +91,3 @@ h2.subtitle { color: pink; }
 = Where can I report bugs? =
 
 Please report any issues at: https://github.com/helgatheviking/KIA-Subtitle/issues
-
-== Changelog ==
-
-= 1.5 =
-* Switch options to "check to enable" instead of "check to disable" (all post types are enabled by default)
-* Include upgrade routine to switch any old options to new format
-* Update FAQ with example for Twenty Twelve
-
-= 1.4.3 =
-* Adjust $args for get_post_types()
-* Fix buggy conditiona logic for users with no post types excluded
-
-= 1.4.2 =
-* Adjust $args for get_post_types()
-* switch 'kia_subtitle_post_types' filter to 'kia_subtitle_post_type_args'
-
-= 1.4.1 =
-* Adjust $args for get_post_types()
-* add 'kia_subtitle_post_types' filter to plugin's options
-
-= 1.4 =
-* Add ability to exclude subtitle from certain post types
-
-= 1.3.4 =
-* Add filter `the_subtitle` to allow subtitle content to be modified
-
-= 1.3.3 =
-* Fix Notice: Undefined property
-* Clean up enqueue scripts
-
-= 1.3.2 =
-* Fix for back-compatibility
-
-= 1.3.1 =
-* Add example code to FAQ
-
-= 1.3 =
-* Better escaping of HTML attributes thanks to @nealpoole
-* Take advantage of new action hook in WP 3.5
-
-= 1.2 =
-* Mimic the_title(), so the_subtitle() now accepts before, after and echo parameters:
-	`the_subtitle( $before = '', $after = '', $echo = true )`
-
-= 1.1.2 =
-* Fixed quick edit refresh ( second click on quick edit for same item and the value still reflected the original )
-
-= 1.1.1 =
-* Fix ability to remove subtitle
-
-= 1.1 =
-* Add column to edit.php screen
-* Add subtitle to quick edit
-* Load script on edit.php screen again
-
-= 1.0.2 =
-* update donate link
-
-= 1.0.1 =
-* Don't load script on edit.php screen
-
-= 1.0 =
-* Initial release.
