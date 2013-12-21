@@ -4,11 +4,11 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.8
 Tested up to: 3.8
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The KIA Subtitle plugin  allows you to easily add a subtitle to your posts.
+The KIA Subtitle plugin allows you to easily add a subtitle to your posts.
 
 == Description ==
 
@@ -19,7 +19,6 @@ The subtitle allows you to easily add a subtitle to your posts and retrieve it i
 It adds a simple inputfield right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
 You can also use the shortcode [the-subtitle] to display it within the post content.
-
 
 == Installation ==
 
@@ -93,6 +92,17 @@ h2.subtitle { color: pink; }
 Please report any issues at: https://github.com/helgatheviking/KIA-Subtitle/issues
 
 == Changelog ==
+
+= 1.5.4 =
+* remove unneeded script code now that input is using 'placeholder'
+* remove tabindex on input (wasn't doing anything anyway)
+* add script to tab from title to subtitle, to content. props @Giuseppe Mazzapica
+* add readme.md
+
+= 1.5.3 =
+* verify WP3.8 compatibility
+* remove backcompat on edit_form_after_title hook
+* better docbloc
 
 = 1.5.2 =
 * Move changelog back to readme.txt #facepalm
