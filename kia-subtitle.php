@@ -266,7 +266,7 @@ class KIA_Subtitle {
             $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true );
 
             // echo the inputfield with the value.
-            printf( '<input type="text" class="widefat" name="subtitle" placeholder="%s" value="%s" id="the_subtitle" tabindex="1"/>',
+            printf( '<input type="text" class="widefat" name="subtitle" placeholder="%s" value="%s" id="the_subtitle" />',
                      __( 'Subtitle', 'kia-subtitle'   ),
                      esc_attr($sub) );
 
