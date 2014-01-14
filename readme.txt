@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.8
 Tested up to: 3.8
-Stable tag: 1.5.4
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,13 +12,19 @@ The KIA Subtitle plugin allows you to easily add a subtitle to your posts.
 
 == Description ==
 
-This plugin is adapted from Luc Princen's The Subtitle plugin http://www.to-wonder.com/the-subtitle.  It differs in its class-based organization, uses less jquery, and only saves the post meta when needed.
+This plugin is adapted from [Luc Princen's The Subtitle plugin](http://www.to-wonder.com/the-subtitle).  It differs in its class-based organization, uses less jquery, and only saves the post meta when needed.
 
-The subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using the_subtitle() or get_the_subtitle().
+The subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
 
 It adds a simple inputfield right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
-You can also use the shortcode [the-subtitle] to display it within the post content.
+You can also use the shortcode `[the-subtitle]` to display it within the post content.
+
+= Support =
+
+Support is handled in the [WordPress forums](http://wordpress.org/support/plugin/kia-subtitle). Please note that support is limited and does not cover any custom implementation of the plugin. 
+
+Please report any bugs, errors, warnings, code problems to [Github](https://github.com/helgatheviking/KIA-Subtitle/issues)
 
 == Installation ==
 
@@ -87,11 +93,13 @@ If you have wrapped the subtitle in an H2 tag with the class of subtitle like in
 h2.subtitle { color: pink; }
 `
 
-= Where can I report bugs? =
-
-Please report any issues at: https://github.com/helgatheviking/KIA-Subtitle/issues
-
 == Changelog ==
+
+= 1.6 =
+* switch to KIA_Subtitle() instance versus global variable
+
+= 1.5.4 =
+* restored accidentally deleted script for quick edit
 
 = 1.5.4 =
 * remove unneeded script code now that input is using 'placeholder'

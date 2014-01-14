@@ -3,7 +3,7 @@
 Plugin Name: KIA Subtitle
 Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
 Description: Adds a subtitle field to WordPress' Post editor
-Version: 1.5.4
+Version: 1.6
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -34,11 +34,59 @@ if ( ! function_exists( 'is_admin' ) ) {
 }
 
 
-if ( ! class_exists( "KIA_Subtitle" ) ) :
+if ( ! class_exists( 'KIA_Subtitle' ) ) :
 
 class KIA_Subtitle {
 
-    static $min_wp = '3.5';
+  /**
+   * @var Radio_Buttons_for_Taxonomies The single instance of the class
+   * @since 1.6
+   */
+  protected static $_instance = null;
+
+  /**
+   * Main WooCommerce Instance
+   *
+   * Ensures only one instance of WooCommerce is loaded or can be loaded.
+   *
+   * @since 1.6
+   * @static
+   * @see Radio_Buttons_for_Taxonomies()
+   * @return Radio_Buttons_for_Taxonomies - Main instance
+   */
+  public static function instance() {
+    if ( is_null( self::$_instance ) ) {
+      self::$_instance = new self();
+    }
+    return self::$_instance;
+  }
+
+  /**
+   * Cloning is forbidden.
+   *
+   * @since 1.6
+   */
+  public function __clone() {
+    _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
+  }
+
+  /**
+   * Unserializing instances of this class is forbidden.
+   *
+   * @since 1.6
+   */
+  public function __wakeup() {
+    _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
+  }
+
+  /**
+   * Radio_Buttons_for_Taxonomies Constructor.
+   * @access public
+   * @return Radio_Buttons_for_Taxonomies
+   * @since  1.0
+   */
+  
+    static $version = '3.5.6';
 
     function __construct(){
 
@@ -86,7 +134,7 @@ class KIA_Subtitle {
         add_action( 'quick_edit_custom_box', array( __CLASS__, 'quick_edit_custom_box'), 10 );
 
         //upgrade routine
-        add_action( 'admin_init', array( __CLASS__, 'upgrade_routine' ));
+        add_action( 'admin_init', array( __CLASS__, 'upgrade_routine' ) );
 
     }
 
@@ -399,9 +447,10 @@ class KIA_Subtitle {
 
             // update the options
             update_option( 'kia_subtitle_options', $update_options );
-            update_option( 'kia_subtitle_db_version', '1.5' );
-
+            
         }
+
+        update_option( 'kia_subtitle_db_version', self::$version );
 
     }
 
@@ -411,11 +460,18 @@ endif; // class_exists check
 
 
 /**
-* Launch the whole plugin
-*/
-global $KIA_Subtitle;
-$KIA_Subtitle = new KIA_Subtitle();
+ * Launch the whole plugin
+ * Returns the main instance of WC to prevent the need to use globals.
+ *
+ * @since  1.6
+ * @return WooCommerce
+ */
+function KIA_Subtitle() {
+  return KIA_Subtitle::instance();
+}
 
+// Global for backwards compatibility.
+$GLOBALS['KIA_Subtitle'] = KIA_Subtitle();
 
 /**
 * Public Shortcut Function to KIA_Subtitle::the_subtitle()
