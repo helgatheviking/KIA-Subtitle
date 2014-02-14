@@ -8,20 +8,20 @@ Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
 
-    Copyright 2012  Kathy Darling  (email: kathy.darling@gmail.com)
+Copyright 2012  Kathy Darling  (email: kathy.darling@gmail.com)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as
+published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
 
@@ -38,84 +38,87 @@ if ( ! class_exists( 'KIA_Subtitle' ) ) :
 
 class KIA_Subtitle {
 
-  /**
-   * @var Radio_Buttons_for_Taxonomies The single instance of the class
-   * @since 1.6
-   */
-  protected static $_instance = null;
+    /**
+     * @var Radio_Buttons_for_Taxonomies The single instance of the class
+     * @since 1.6
+     */
+    protected static $_instance = null;
 
-  /**
-   * Main WooCommerce Instance
-   *
-   * Ensures only one instance of WooCommerce is loaded or can be loaded.
-   *
-   * @since 1.6
-   * @static
-   * @see Radio_Buttons_for_Taxonomies()
-   * @return Radio_Buttons_for_Taxonomies - Main instance
-   */
-  public static function instance() {
+    /**
+     * @var Radio_Buttons_for_Taxonomies The single instance of the class
+     * @since 1.6
+     */
+    public $version = '1.6.1';
+
+    /**
+     * Main WooCommerce Instance
+     *
+     * Ensures only one instance of WooCommerce is loaded or can be loaded.
+     *
+     * @since 1.6
+     * @static
+     * @see Radio_Buttons_for_Taxonomies()
+     * @return Radio_Buttons_for_Taxonomies - Main instance
+     */
+    public static function instance() {
     if ( is_null( self::$_instance ) ) {
-      self::$_instance = new self();
+    self::$_instance = new self();
     }
     return self::$_instance;
-  }
+    }
 
-  /**
-   * Cloning is forbidden.
-   *
-   * @since 1.6
-   */
-  public function __clone() {
+    /**
+     * Cloning is forbidden.
+     *
+     * @since 1.6
+     */
+    public function __clone() {
     _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
-  }
+    }
 
-  /**
-   * Unserializing instances of this class is forbidden.
-   *
-   * @since 1.6
-   */
-  public function __wakeup() {
+    /**
+     * Unserializing instances of this class is forbidden.
+     *
+     * @since 1.6
+     */
+    public function __wakeup() {
     _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
-  }
+    }
 
-  /**
-   * Radio_Buttons_for_Taxonomies Constructor.
-   * @access public
-   * @return Radio_Buttons_for_Taxonomies
-   * @since  1.0
-   */
-  
-    static $version = '3.5.6';
-
+    /**
+     * Radio_Buttons_for_Taxonomies Constructor.
+     * @access public
+     * @return Radio_Buttons_for_Taxonomies
+     * @since  1.0
+     */
     function __construct(){
 
         global $wp_version;
 
         // Set-up Action and Filter Hooks
-        register_uninstall_hook( __FILE__, array( __CLASS__, 'delete_plugin_options' ) );
+        register_uninstall_hook( __FILE__, array( $this, 'delete_plugin_options' ) );
 
         // load the textdomain
-        add_action( 'plugins_loaded', array( __CLASS__, 'load_textdomain' ) );
+        add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
         //register settings
-        add_action( 'admin_init', array( __CLASS__, 'admin_init' ));
+        add_action( 'admin_init', array( $this, 'admin_init' ));
 
         //add plugin options page
-        add_action( 'admin_menu', array( __CLASS__, 'add_options_page' ) );
+        add_action( 'admin_menu', array( $this, 'add_options_page' ) );
 
         // register the shortcode:
-        add_shortcode( 'the-subtitle', array( __CLASS__, 'shortcode' ) );
+        add_shortcode( 'the-subtitle', array( $this, 'shortcode' ) );
 
         // Backend functions
         // load the subtitle script
-        add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
 
         // add the input field
-        add_action( 'edit_form_after_title', array( __CLASS__, 'add_input' ) );
+        add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
 
         // save the subtitle as post meta
-        add_action( 'save_post', array( __CLASS__, 'meta_save' ) );
+        add_action( 'save_post', array( $this, 'meta_save' ) );
 
         // Edit Columns + Quickedit:
 
@@ -125,29 +128,29 @@ class KIA_Subtitle {
         if ( isset ( $options['post_types'] ) && is_array( $options[ 'post_types'] ) ) {
 
             foreach( $options['post_types'] as $post_type ) {
-                add_action( "manage_{$post_type}_posts_columns", array( __CLASS__, 'column_header' ) );
-                add_filter( "manage_{$post_type}_posts_custom_column", array( __CLASS__, 'column_value'), 10, 2 );
+                add_action( "manage_{$post_type}_posts_columns", array( $this, 'column_header' ) );
+                add_filter( "manage_{$post_type}_posts_custom_column", array( $this, 'column_value'), 10, 2 );
             }
 
         }
 
-        add_action( 'quick_edit_custom_box', array( __CLASS__, 'quick_edit_custom_box'), 10 );
+        add_action( 'quick_edit_custom_box', array( $this, 'quick_edit_custom_box'), 10 );
 
         //upgrade routine
-        add_action( 'admin_init', array( __CLASS__, 'upgrade_routine' ) );
+        add_action( 'admin_init', array( $this, 'upgrade_routine' ) );
 
     }
 
     /**
      * Delete options table entries ONLY when plugin deactivated AND deleted
-     * register_uninstall_hook( __FILE__, array( __CLASS__,'delete_plugin_options' ) );
+     * register_uninstall_hook( __FILE__, array( $this,'delete_plugin_options' ) );
      * @since 1.4
      */
     function delete_plugin_options() {
         $options = get_option( 'kia_subtitle_options', true );
         if( isset( $options['delete'] ) && $options['delete'] ) {
-            delete_option( 'kia_subtitle_options' );
-            delete_option( 'kia_subtitle_db_version' );
+        delete_option( 'kia_subtitle_options' );
+        delete_option( 'kia_subtitle_db_version' );
         }
     }
 
@@ -164,7 +167,7 @@ class KIA_Subtitle {
      * @since 1.4
      */
       function admin_init(){
-        register_setting( 'kia_subtitle_options', 'kia_subtitle_options', array( __CLASS__, 'validate_options' ) );
+        register_setting( 'kia_subtitle_options', 'kia_subtitle_options', array( $this, 'validate_options' ) );
       }
 
 
@@ -173,7 +176,7 @@ class KIA_Subtitle {
      * @since 1.4
      */
     function add_options_page() {
-        add_options_page(__( 'KIA Subtitle Options Page', 'kia-subtitle' ), __( 'KIA Subtitle', 'kia-subtitle' ), 'manage_options', 'kia_subtitle', array( __CLASS__, 'render_form' ) );
+        add_options_page(__( 'KIA Subtitle Options Page', 'kia-subtitle' ), __( 'KIA Subtitle', 'kia-subtitle' ), 'manage_options', 'kia_subtitle', array( $this, 'render_form' ) );
     }
 
     /**
@@ -218,7 +221,7 @@ class KIA_Subtitle {
      * @return string
      */
     function the_subtitle( $before = '', $after = '', $echo = true ){
-      $subtitle = self::get_the_subtitle();
+      $subtitle = $this->get_the_subtitle();
 
       if ( strlen( $subtitle ) == 0 )
         return;
@@ -249,7 +252,7 @@ class KIA_Subtitle {
      * @since 1.0
      */
     function shortcode(){
-        return self::get_the_subtitle();
+        return $this->get_the_subtitle();
     }
 
 
@@ -265,15 +268,15 @@ class KIA_Subtitle {
         // conditionally add the styles and scripts:
         if( in_array( $hook, array ( 'post.php', 'post-new.php', 'edit.php' ) ) ) {
 
-            // only add style on post screens
-            if( $hook == 'post.php' || $hook == 'post-new.php' )
-                add_action('admin_head',array(__CLASS__,'inline_style'));
+        // only add style on post screens
+        if( $hook == 'post.php' || $hook == 'post-new.php' )
+        add_action('admin_head',array( $this,'inline_style' ) );
 
-            // load the script
-            wp_enqueue_script( 'kia_subtitle', plugins_url('/scripts/subtitle.js', __FILE__), array('jquery'), '1.3.3', true );
+        // load the script
+        wp_enqueue_script( 'kia_subtitle', plugins_url( '/scripts/subtitle.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 
-            $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle'   ) );
-            wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
+        $translation_array = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle'   ) );
+        wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
         }
 
     }
@@ -285,12 +288,12 @@ class KIA_Subtitle {
 
     function inline_style(){ ?>
         <style type="text/css">
-            #the_subtitle {
-                margin: 5px 0px;
-            }
-            #the_subtitle.prompt {
-                color: #BBB;
-            }
+        #the_subtitle {
+            margin: 5px 0px;
+        }
+        #the_subtitle.prompt {
+            color: #BBB;
+        }
         </style>
     <?php }
 
@@ -315,8 +318,8 @@ class KIA_Subtitle {
 
             // echo the inputfield with the value.
             printf( '<input type="text" class="widefat" name="subtitle" placeholder="%s" value="%s" id="the_subtitle" />',
-                     __( 'Subtitle', 'kia-subtitle'   ),
-                     esc_attr($sub) );
+__( 'Subtitle', 'kia-subtitle' ),
+esc_attr($sub) );
 
         }
     }
@@ -450,7 +453,7 @@ class KIA_Subtitle {
             
         }
 
-        update_option( 'kia_subtitle_db_version', self::$version );
+        update_option( 'kia_subtitle_db_version', $this->version );
 
     }
 
@@ -484,7 +487,7 @@ $GLOBALS['KIA_Subtitle'] = KIA_Subtitle();
 */
 if( ! function_exists( 'the_subtitle' ) ){
     function the_subtitle( $before = '', $after = '', $echo = true ){
-        return KIA_Subtitle::the_subtitle( $before, $after, $echo );
+        return KIA_Subtitle()->the_subtitle( $before, $after, $echo );
     }
 }
 
@@ -497,6 +500,6 @@ if( ! function_exists( 'the_subtitle' ) ){
 */
 if( ! function_exists( 'get_the_subtitle' )){
     function get_the_subtitle( $post_id = null ){
-        return KIA_Subtitle::get_the_subtitle( $post_id );
+        return KIA_Subtitle()->get_the_subtitle( $post_id );
     }
 }
