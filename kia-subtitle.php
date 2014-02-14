@@ -96,7 +96,7 @@ class KIA_Subtitle {
         global $wp_version;
 
         // Set-up Action and Filter Hooks
-        register_uninstall_hook( __FILE__, array( $this, 'delete_plugin_options' ) );
+        register_uninstall_hook( __FILE__, array( __CLASS__, 'delete_plugin_options' ) );
 
         // load the textdomain
         add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
