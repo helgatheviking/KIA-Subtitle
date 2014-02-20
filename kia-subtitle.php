@@ -119,9 +119,9 @@ class KIA_Subtitle {
 
         // save the subtitle as post meta
         add_action( 'save_post', array( $this, 'meta_save' ) );
+        add_action( 'edit_attachment', array( $this, 'meta_save' ) );
 
         // Edit Columns + Quickedit:
-
         $options = get_option( 'kia_subtitle_options', false );
 
         // only show input if the post type was enabled in options
