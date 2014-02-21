@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.8
 Tested up to: 3.8
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ h2.subtitle { color: pink; }
 `
 
 == Changelog ==
+
+= 1.6.2 =
+* save subtitles on attachments. Apparently attachments don't fire save_post hook
 
 = 1.6.1 =
 * resolve PHP warnings in strict-standards mode
