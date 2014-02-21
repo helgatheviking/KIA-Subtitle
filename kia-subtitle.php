@@ -48,7 +48,7 @@ class KIA_Subtitle {
      * @var Radio_Buttons_for_Taxonomies The single instance of the class
      * @since 1.6
      */
-    public $version = '1.6.1';
+    public $version = '1.6.2';
 
     /**
      * Main WooCommerce Instance
