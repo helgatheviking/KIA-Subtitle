@@ -1,18 +1,18 @@
-# Copyright (C) 2013 KIA Subtitle
+# Copyright (C) 2014 KIA Subtitle
 # This file is distributed under the same license as the KIA Subtitle package.
 msgid ""
 msgstr ""
-"Project-Id-Version: KIA Subtitle 1.5\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/kia-subtitle\n"
-"POT-Creation-Date: 2013-06-18 15:50:51+00:00\n"
+"Project-Id-Version: KIA Subtitle 1.6.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/kia-subtitle\n"
+"POT-Creation-Date: 2014-04-11 10:08:16+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: inc/plugin-options.php:15 kia-subtitle.php:135
+#. Plugin Name of the plugin/theme
 msgid "KIA Subtitle"
 msgstr ""
 
@@ -28,16 +28,34 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: kia-subtitle.php:135
+#: kia-subtitle.php:76 kia-subtitle.php:85 nav-menu-roles.php:76
+#: nav-menu-roles.php:85
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: kia-subtitle.php:179
 msgid "KIA Subtitle Options Page"
 msgstr ""
 
-#: kia-subtitle.php:228 kia-subtitle.php:276 kia-subtitle.php:308
-#: kia-subtitle.php:331 kia-subtitle.php:369
+#: kia-subtitle.php:278 kia-subtitle.php:321 kia-subtitle.php:350
+#: kia-subtitle.php:374 kia-subtitle.php:412
 msgid "Subtitle"
 msgstr ""
-#. Plugin Name of the plugin/theme
-msgid "KIA Subtitle"
+
+#: nav-menu-roles.php:158
+msgid "Nav Menu Roles"
+msgstr ""
+
+#: nav-menu-roles.php:158
+msgid ""
+"Import %snav menu roles%s and other menu item meta skipped by the default "
+"importer"
+msgstr ""
+
+#: nav-menu-roles.php:209
+msgid ""
+"Nav Menu Roles has detected a conflict with the following functions or "
+"classes: %1$s. Please see the %2$sFAQ%3$s for more information."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
