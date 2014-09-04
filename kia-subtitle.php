@@ -39,32 +39,32 @@ if ( ! class_exists( 'KIA_Subtitle' ) ) :
 class KIA_Subtitle {
 
     /**
-     * @var Radio_Buttons_for_Taxonomies The single instance of the class
+     * @var KIA_Subtitle The single instance of the class
      * @since 1.6
      */
     protected static $_instance = null;
 
     /**
-     * @var Radio_Buttons_for_Taxonomies The single instance of the class
+     * @var KIA_Subtitle The single instance of the class
      * @since 1.6
      */
     public $version = '1.6.2';
 
     /**
-     * Main WooCommerce Instance
+     * Main KIA_Subtitle Instance
      *
-     * Ensures only one instance of WooCommerce is loaded or can be loaded.
+     * Ensures only one instance of KIA_Subtitle is loaded or can be loaded.
      *
      * @since 1.6
      * @static
-     * @see Radio_Buttons_for_Taxonomies()
-     * @return Radio_Buttons_for_Taxonomies - Main instance
+     * @see KIA_Subtitle()
+     * @return KIA_Subtitle - Main instance
      */
     public static function instance() {
     if ( is_null( self::$_instance ) ) {
-    self::$_instance = new self();
+        self::$_instance = new self();
     }
-    return self::$_instance;
+        return self::$_instance;
     }
 
     /**
@@ -73,7 +73,7 @@ class KIA_Subtitle {
      * @since 1.6
      */
     public function __clone() {
-    _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
+        _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
     }
 
     /**
@@ -82,13 +82,13 @@ class KIA_Subtitle {
      * @since 1.6
      */
     public function __wakeup() {
-    _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
+        _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '1.6' );
     }
 
     /**
-     * Radio_Buttons_for_Taxonomies Constructor.
+     * KIA_Subtitle Constructor.
      * @access public
-     * @return Radio_Buttons_for_Taxonomies
+     * @return KIA_Subtitle
      * @since  1.0
      */
     function __construct(){
@@ -467,7 +467,7 @@ endif; // class_exists check
  * Returns the main instance of WC to prevent the need to use globals.
  *
  * @since  1.6
- * @return WooCommerce
+ * @return KIA_Subtitle
  */
 function KIA_Subtitle() {
   return KIA_Subtitle::instance();
