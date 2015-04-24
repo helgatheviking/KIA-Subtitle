@@ -1,16 +1,17 @@
-# Copyright (C) 2014 KIA Subtitle
-# This file is distributed under the same license as the KIA Subtitle package.
+# Copyright (C) 2015 Kathy Darling
+# This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: KIA Subtitle 1.6.2\n"
+"Project-Id-Version: KIA Subtitle 1.6.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/kia-subtitle\n"
-"POT-Creation-Date: 2014-04-11 10:08:16+00:00\n"
+"POT-Creation-Date: 2015-04-24 20:55:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
 
 #. Plugin Name of the plugin/theme
 msgid "KIA Subtitle"
@@ -28,8 +29,7 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: kia-subtitle.php:76 kia-subtitle.php:85 nav-menu-roles.php:76
-#: nav-menu-roles.php:85
+#: kia-subtitle.php:76 kia-subtitle.php:85
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -40,22 +40,6 @@ msgstr ""
 #: kia-subtitle.php:278 kia-subtitle.php:321 kia-subtitle.php:350
 #: kia-subtitle.php:374 kia-subtitle.php:412
 msgid "Subtitle"
-msgstr ""
-
-#: nav-menu-roles.php:158
-msgid "Nav Menu Roles"
-msgstr ""
-
-#: nav-menu-roles.php:158
-msgid ""
-"Import %snav menu roles%s and other menu item meta skipped by the default "
-"importer"
-msgstr ""
-
-#: nav-menu-roles.php:209
-msgid ""
-"Nav Menu Roles has detected a conflict with the following functions or "
-"classes: %1$s. Please see the %2$sFAQ%3$s for more information."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
