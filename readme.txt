@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: subtitle, simple
 Requires at least: 3.8
-Tested up to: 4.2
-Stable tag: 1.6.3
+Tested up to: 4.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,13 +12,15 @@ The KIA Subtitle plugin allows you to easily add a subtitle to your posts.
 
 == Description ==
 
-This plugin is adapted from [Luc Princen's The Subtitle plugin](http://www.to-wonder.com/the-subtitle).  It differs in its class-based organization, uses less jquery, and only saves the post meta when needed.
+KIA subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
 
-The subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
-
-It adds a simple inputfield right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
+It adds a simple input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
 You can also use the shortcode `[the-subtitle]` to display it within the post content.
+
+= WPML Ready =
+
+KIA Subtitle has been tested by WPML and will allow you to translate the subtitle multilingual sites.  
 
 = Support =
 
@@ -93,7 +95,24 @@ If you have wrapped the subtitle in an H2 tag with the class of subtitle like in
 h2.subtitle { color: pink; }
 `
 
+= Can I add the subtitle to the Page Title Meta tag =
+`
+function kia_add_subtitle_to_wp_title( $title ) {
+   if ( is_single() && function_exists('get_the_subtitle')) && $subtitle == get_the_subtitle( get_the_ID() ) ) {
+        $title .= $subtitle;
+   }
+}
+add_filter('wp_title','kia_add_subtitle_to_wp_title');
+`
+
+= Is this translation ready? =
+WPML now supports KIA Subtitle!
+
 == Changelog ==
+
+= 1.6.4 =
+* Add link to plugin settings
+* testing against WP4.3
 
 = 1.6.3 =
 * fix docblock
