@@ -107,6 +107,9 @@ class KIA_Subtitle {
         //add plugin options page
         add_action( 'admin_menu', array( $this, 'add_options_page' ) );
 
+        //add settings link to plugins page
+		add_filter( 'plugin_action_links', array( $this,'add_action_links' ), 10, 2 );
+
         // register the shortcode:
         add_shortcode( 'the-subtitle', array( $this, 'shortcode' ) );
 
@@ -179,6 +182,25 @@ class KIA_Subtitle {
         add_options_page(__( 'KIA Subtitle Options Page', 'kia-subtitle' ), __( 'KIA Subtitle', 'kia-subtitle' ), 'manage_options', 'kia_subtitle', array( $this, 'render_form' ) );
     }
 
+  /**
+   * Display a Settings link on the main Plugins page
+   * @param  array $links
+   * @param  string $file
+   * @return array
+   * @since  1.6.4
+   */
+  public function add_action_links( $links, $file ) {
+
+	if ( $file == plugin_basename( __FILE__ ) ) {
+	  $plugin_link = '<a href="'. add_query_arg( 'page', 'kia_subtitle', admin_url( 'options-general.php' ) ) . '">' . __( 'Settings', 'kia-subtitle' ) . '</a>';
+	  // make the 'Settings' link appear first
+	  array_unshift( $links, $plugin_link );
+	}
+
+	return $links;
+	
+  }
+  
     /**
      * Render the Plugin options form
      * @since 1.4
