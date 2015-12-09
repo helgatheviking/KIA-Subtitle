@@ -110,9 +110,12 @@ WPML now supports KIA Subtitle!
 
 == Changelog ==
 
+= 1.6.5 =
+* Add wpml-config.xml for compatibility with WPML
+
 = 1.6.4 =
 * Add link to plugin settings
-* testing against WP4.3
+* testing against WP4.4
 
 = 1.6.3 =
 * fix docblock
