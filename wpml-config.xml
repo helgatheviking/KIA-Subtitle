@@ -1,0 +1,5 @@
+<wpml-config>
+	<custom-fields>
+		<custom-field action="translate">kia_subtitle</custom-field>
+	</custom-fields>
+</wpml-config>
