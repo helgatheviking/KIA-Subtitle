@@ -393,17 +393,24 @@ class KIA_Subtitle {
 	 */
 	public function column_header( $columns ){
 
-		// reset the new columns
-		$new_columns = array();
+		// insert after title column
+		if( isset( $columns['title'] ) ){
+		
+			// the subtitle as an array for subsequent array manip
+			$subtitle = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
+			
+			// find the "title" column
+			$index =  array_search( "title", array_keys( $columns) );
 
-		foreach( $columns as $key => $value ) {
-			$new_columns[ $key ] = $value;
-			if ( $key == 'title' ){
-				$new_columns['subtitle'] = __( 'Subtitle', 'kia-subtitle' );
-			}
+			// reform the array
+			$columns = array_merge( array_slice( $columns, 0, $index + 1, true ), $subtitle, array_slice( $columns, $index, count( $columns ) - $index, true ) );
+		
+		// or add to end
+		} else {
+			$columns['subtitle'] = __( 'Subtitle', 'kia-subtitle' );
 		}
 
-		return $new_columns;
+		return $columns;
 	}
 
 	/**
