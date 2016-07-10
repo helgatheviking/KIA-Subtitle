@@ -131,8 +131,8 @@ class KIA_Subtitle {
 		if ( isset ( $options['post_types'] ) && is_array( $options[ 'post_types'] ) ) {
 
 			foreach( $options['post_types'] as $post_type ) {
-				add_action( "manage_{$post_type}_posts_columns", array( $this, 'column_header' ) );
-				add_filter( "manage_{$post_type}_posts_custom_column", array( $this, 'column_value'), 10, 2 );
+				add_filter( "manage_{$post_type}_posts_columns", array( $this, 'column_header' ), 10 );
+				add_action( "manage_{$post_type}_posts_custom_column", array( $this, 'column_value'), 10, 2 );
 			}
 
 		}
