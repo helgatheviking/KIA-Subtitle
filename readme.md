@@ -4,7 +4,7 @@
 **Tags:** subtitle, simple  
 **Requires at least:** 3.8  
 **Tested up to:** 4.5.1  
-**Stable tag:** 1.6.5
+**Stable tag:** 1.6.6  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
