@@ -20,11 +20,11 @@ You can also use the shortcode `[the-subtitle]` to display it within the post co
 
 = WPML Ready =
 
-KIA Subtitle has been tested by WPML and will allow you to translate the subtitle multilingual sites.  
+KIA Subtitle has been tested by WPML and will allow you to translate the subtitle multilingual sites.
 
 = Support =
 
-Support is handled in the [WordPress forums](http://wordpress.org/support/plugin/kia-subtitle). Please note that support is limited and does not cover any custom implementation of the plugin. 
+Support is handled in the [WordPress forums](http://wordpress.org/support/plugin/kia-subtitle). Please note that support is limited and does not cover any custom implementation of the plugin.
 
 Please report any bugs, errors, warnings, code problems to [Github](https://github.com/helgatheviking/KIA-Subtitle/issues)
 
@@ -74,7 +74,7 @@ As an *example* if you wanted to display the subtitle on standard single posts, 
 	<?php the_post_thumbnail(); ?>
 	<?php if ( is_single() ) : ?>
 	<h1 class="entry-title"><?php the_title(); ?></h1>
-        <?php if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
+		<?php if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
 	<?php else : ?>
 	<h1 class="entry-title">
 		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentytwelve' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
@@ -98,9 +98,9 @@ h2.subtitle { color: pink; }
 = Can I add the subtitle to the Page Title Meta tag =
 `
 function kia_add_subtitle_to_wp_title( $title ) {
-   if ( is_single() && function_exists('get_the_subtitle')) && $subtitle == get_the_subtitle( get_the_ID() ) ) {
-        $title .= $subtitle;
-   }
+	if ( is_single() && function_exists('get_the_subtitle')) && $subtitle == get_the_subtitle( get_the_ID() ) ) {
+	$title .= $subtitle;
+	}
 }
 add_filter('wp_title','kia_add_subtitle_to_wp_title');
 `
@@ -110,19 +110,18 @@ WPML now supports KIA Subtitle!
 
 = The Subtitle is not after the product title in WooCommerce =
 
-WooCommerce calls their product title column "name" and completely removes the default "title" column, so KIA Subtitle inserts the subtitle at the end. You can add the following to your child theme's `functions.php` or preferably a site-specific snippets plugin and re-arrange the products posts column order. 
+WooCommerce calls their product title column "name" and completely removes the default "title" column, so KIA Subtitle inserts the subtitle at the end. You can add the following to your child theme's `functions.php` or preferably a site-specific snippets plugin and re-arrange the products posts column order.
 
-```
-
+`
 add_filter( 'manage_product_posts_columns', 'kia_reorder_woocommerce_columns', 99 );
 
 function kia_reorder_woocommerce_columns( $columns ){
 	if( isset( $columns['subtitle'] ) && isset( $columns['name'] ) ){
-		
+
 		// remove and stash the subtitle column
 		$subtitle = array( 'subtitle' => $columns['subtitle'] );
 		unset( $columns['subtitle'] );
-		
+
 		// find the "name" column
 		$index =  array_search( "name", array_keys( $columns) );
 
@@ -131,7 +130,7 @@ function kia_reorder_woocommerce_columns( $columns ){
 	}
 	return $columns;
 }
-```
+`
 
 == Changelog ==
 
