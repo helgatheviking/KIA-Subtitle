@@ -24,7 +24,7 @@ KIA Subtitle has been tested by WPML and will allow you to translate the subtitl
 
 ### Support ###
 
-Support is handled in the [WordPress forums](http://wordpress.org/support/plugin/kia-subtitle). Please note that support is limited and does not cover any custom implementation of the plugin. 
+Support is handled in the [WordPress forums](http://wordpress.org/support/plugin/kia-subtitle). Please note that support is limited and does not cover any custom implementation of the plugin.
 
 Please report any bugs, errors, warnings, code problems to [Github](https://github.com/helgatheviking/KIA-Subtitle/issues)
 
@@ -50,14 +50,10 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 ### How do I display the subtitle in my theme? ###
 
 The simplest way is with the `the_subtitle()` template tag as follows:
-`
-if( function_exists( 'the_subtitle' ) ) the_subtitle();
-`
+`if( function_exists( 'the_subtitle' ) ) the_subtitle();`
 
 You can wrap the string in some markup using the *$before* and *$after* parameters.
-`
-if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
-`
+`if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );`
 
 ### Where do I add this code? ###
 
@@ -65,47 +61,44 @@ Unfortunately, I cannot tell you *exactly* what file to place the above code in 
 
 However, in general, `the_subtitle()` is a template tag so you will want to put it in a template file.  Probably, you are looking for the file that contains your post loop.  For most themes it's *single.php* ( or *page.php* for pages ), but for many it could also be *content.php*.  Assuming you want the subtitle to display directly after your main title, you'd place the above code after:
 
-`
-<h1 class="entry-title"><?php the_title(); ?></h1>
-`
+`<h1 class="entry-title"><?php the_title(); ?></h1>`
 
 As an *example* if you wanted to display the subtitle on standard single posts, in the Twenty Twelve theme you'd edit the content.php ( or preferabbly override the template in a child theme ):
 
-`
+```
 <header class="entry-header">
 	<?php the_post_thumbnail(); ?>
-**	<?php if ( is_single() ) :** ?>  
+	<?php if ( is_single() ) : ?>
 	<h1 class="entry-title"><?php the_title(); ?></h1>
-        <?php if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
-**	<?php else :** ?>  
+	<?php if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
+	<?php else : ?>
 	<h1 class="entry-title">
 		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentytwelve' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
 	</h1>
 	<?php endif; // is_single() ?>
-**	<?php if ( comments_open() ) :** ?>  
+	<?php if ( comments_open() ) : ?>
 		<div class="comments-link">
 			<?php comments_popup_link( '<span class="leave-reply">' . __( 'Leave a reply', 'twentytwelve' ) . '</span>', __( '1 Reply', 'twentytwelve' ), __( '% Replies', 'twentytwelve' ) ); ?>
 		</div><!-- .comments-link -->
 	<?php endif; // comments_open() ?>
 </header><!-- .entry-header -->
-`
+```
 
 ### How do I style the subtitle? ###
 
 If you have wrapped the subtitle in an H2 tag with the class of subtitle like in the second example above, you can then style it any way you'd like.
-`
-**h2.subtitle { color:** pink; }  
-`
+`h2.subtitle { color: pink; }`
 
-### Can I add the subtitle to the Page Title Meta tag ###
-`
+### Can I add the subtitle to the Page Title Meta tag? ###
+
+```
 function kia_add_subtitle_to_wp_title( $title ) {
    if ( is_single() && function_exists('get_the_subtitle')) && $subtitle == get_the_subtitle( get_the_ID() ) ) {
         $title .= $subtitle;
    }
 }
 add_filter('wp_title','kia_add_subtitle_to_wp_title');
-`
+```
 
 ### Is this translation ready? ###
 WPML now supports KIA Subtitle!
