@@ -48,7 +48,13 @@ class KIA_Subtitle {
 	 * @var KIA_Subtitle The single instance of the class
 	 * @since 1.6
 	 */
-	public $version = '1.6.6';
+	public $version = '1.6.7';
+
+	/**
+	* @constant string donate url
+	* @since 1.5
+	*/
+	CONST DONATE_URL = "https://www.paypal.me/usathwnt/25";
 
 	/**
 	 * Main KIA_Subtitle Instance
@@ -109,6 +115,9 @@ class KIA_Subtitle {
 
 		// Add settings link to plugins page.
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_action_links' ), 10, 2 );
+
+		// Add Donate link to plugin.
+		add_filter( 'plugin_row_meta', array( $this, 'add_meta_links' ), 10, 2 );
 
 		// Register the shortcode.
 		add_shortcode( 'the-subtitle', array( $this, 'shortcode' ) );
@@ -200,6 +209,19 @@ class KIA_Subtitle {
 		return $links;
 		
 	  }
+
+	/**
+	 * Add donation link
+	 * @param array $plugin_meta
+	 * @param string $plugin_file
+	 * @since 1.6.7
+	 */
+	public function add_meta_links( $plugin_meta, $plugin_file ) {
+		if( $plugin_file == plugin_basename(__FILE__) ){
+			$plugin_meta[] = '<a class="dashicons-before dashicons-awards" href="' . self::DONATE_URL . '" target="_blank">' . __( 'Donate', 'kia-subtitle' ) . '</a>';
+		}
+		return $plugin_meta;
+	}
 
 	/**
 	 * Render the Plugin options form
