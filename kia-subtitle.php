@@ -98,8 +98,8 @@ class KIA_Subtitle {
 		// Set-up Action and Filter Hooks
 		register_uninstall_hook( __FILE__, array( __CLASS__, 'delete_plugin_options' ) );
 
-		// load the textdomain
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		// Load the textdomain
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		//register settings
 		add_action( 'admin_init', array( $this, 'admin_init' ));
