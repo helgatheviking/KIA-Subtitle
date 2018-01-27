@@ -2,9 +2,9 @@
 Contributors: helgatheviking
 Donate link: https://www.paypal.me/usathwnt/25
 Tags: subtitle, simple
-Requires at least: 3.8
-Tested up to: 4.7.0
-Stable tag: 1.6.6
+Requires at least: 4.5
+Tested up to: 4.9.2
+Stable tag: 1.6.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -133,6 +133,11 @@ function kia_reorder_woocommerce_columns( $columns ){
 `
 
 == Changelog ==
+
+= 1.6.7 =
+* Update donation link
+* Update required and tested against versions
+* Fix column location for WooCommerce products
 
 = 1.6.6 =
 * Insert subtitle after title, or at end if subtitle does not exist
