@@ -393,15 +393,17 @@ class KIA_Subtitle {
 	 */
 	public function column_header( $columns ){
 
-		if( isset( $columns['title'] ) ){
 		// Insert after title column.
+		if( isset( $columns['title'] ) || isset( $columns['name'] ) ){
 		
 			// The subtitle as an array for subsequent array manip.
 			$subtitle = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
 
+			// WooCommerce uses the "name" column for titles.
+			$needle = isset( $columns['title'] ) ? 'title' : 'name';
 			
-			$index =  array_search( "title", array_keys( $columns) );
 			// Find the "title" column.
+			$index =  array_search( $needle, array_keys( $columns) );
 
 			// Reform the array.
 			$columns = array_merge( array_slice( $columns, 0, $index + 1, true ), $subtitle, array_slice( $columns, $index, count( $columns ) - $index, true ) );
