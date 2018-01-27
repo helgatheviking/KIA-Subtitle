@@ -321,7 +321,8 @@ class KIA_Subtitle {
 			}
 
 			// Load the script.
-			wp_enqueue_script( 'kia_subtitle', plugins_url( 'js/subtitle.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			wp_enqueue_script( 'kia_subtitle', plugins_url( 'js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 
 			$translation_array = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
 			wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
