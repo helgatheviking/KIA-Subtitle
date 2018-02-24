@@ -317,7 +317,9 @@ class KIA_Subtitle {
 
 			// Only add style on post screens.
 			if( $hook == 'post.php' || $hook == 'post-new.php' ){
-				add_action('admin_head',array( $this,'inline_style' ) );
+				add_action( 'admin_head', array( $this, 'inline_style' ) );
+			} else if ( $hook == 'edit.php' ) {
+				add_action( 'admin_head', array( $this, 'subtitle_column_style' ) );
 			}
 
 			// Load the script.
@@ -344,7 +346,8 @@ class KIA_Subtitle {
 			color: #BBB;
 		}
 		</style>
-	<?php }
+	<?php 
+	}
 
 	/**
 	 * Add the text input on the post screen
@@ -407,7 +410,19 @@ class KIA_Subtitle {
 		return $post_id;
 	}
 
-
+	/**
+	 * Style the Subtitle's column for WooCommerce products
+	 * @since 1.6.8
+	 */
+	public function subtitle_column_style(){ ?>
+		<style type="text/css">
+		.post-type-product .column-subtitle {
+			width: 10ch;
+		}
+		</style>
+	<?php 
+	}
+	
 	/**
 	 * Create the Subtitle Column
 	 * @since 1.1
