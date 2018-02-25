@@ -4,7 +4,7 @@
 **Tags:** subtitle, simple  
 **Requires at least:** 4.5  
 **Tested up to:** 4.9.2  
-**Stable tag:** 1.6.7  
+**Stable tag:** 1.6.8  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -133,6 +133,9 @@ WooCommerce calls their product title column "name" and completely removes the d
 
 
 ## Changelog ##
+
+### 1.6.8 ###
+* Add width to column for WooCommerce products
 
 ### 1.6.7 ###
 * Update donation link
