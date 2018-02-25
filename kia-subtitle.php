@@ -417,7 +417,7 @@ class KIA_Subtitle {
 	public function subtitle_column_style(){ ?>
 		<style type="text/css">
 		.post-type-product .column-subtitle {
-			width: 10ch;
+			width: 20ch;
 		}
 		</style>
 	<?php 
