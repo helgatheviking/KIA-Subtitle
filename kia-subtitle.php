@@ -127,8 +127,12 @@ class KIA_Subtitle {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
 
 		// Add the input field.
-		add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
-
+		if ( function_exists( 'register_block_type' ) ) {
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+		} else {
+			add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
+		}
+		
 		// Save the subtitle as post meta.
 		add_action( 'save_post', array( $this, 'meta_save' ) );
 		add_action( 'edit_attachment', array( $this, 'meta_save' ) );
@@ -352,6 +356,58 @@ class KIA_Subtitle {
 	 * Add the text input on the post screen
 	 * @since 1.0
 	 */
+	public function add_meta_box(){
+
+		global $post;
+
+		$options = get_option( 'kia_subtitle_options' );
+
+		$enabled_post_types = isset( $options['post_types'] ) ? $options['post_types'] : array();
+ 
+        foreach ( $enabled_post_types as $post_type ) {
+            add_meta_box(
+                'some_meta_box_name',
+                __( 'Subtitle', 'kia-subtitle' ),
+                array( $this, 'render_meta_box_content' ),
+                $post_type,
+                'advanced',
+                'high',
+                array(
+			        '__block_editor_compatible_meta_box' => true,
+				 )
+            );
+        }
+    }
+
+
+    /**
+     * Render Meta Box content.
+     *
+     * @param WP_Post $post The post object.
+     */
+    public function render_meta_box_content( $post ) {
+ 
+		// Create the meta field (don't use a metabox, we have our own styling).
+		wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
+
+		// Get the subtitle value (if set).
+		$value = get_post_meta( get_the_ID(), 'kia_subtitle', true );
+
+		// Display the form, using the current value.
+		?>
+		<label for="the_subtitle" class="screen-reader-text">
+			<?php _e( 'Subtitle', 'kia-subtitle' ); ?>
+		</label>
+		<input type="text" id="the_subtitle" class="widefat" name="subtitle" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php echo __( 'Enter subtitle', 'kia-subtitle' ); ?>"  />
+
+		<?php
+    }
+
+
+	/**
+	 * Add the text input on the post screen
+	 * @since 1.0
+	 */
 	public function add_input(){
 
 		global $post;
@@ -360,18 +416,7 @@ class KIA_Subtitle {
 
 		// Only show input if the post type was not enabled in options.
 		if ( isset ( $options['post_types'] ) && in_array( $post->post_type, $options[ 'post_types'] ) ) {
-
-			// Create the meta field (don't use a metabox, we have our own styling).
-			wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
-
-			// Get the subtitle value (if set).
-			$sub = get_post_meta( get_the_ID(), 'kia_subtitle', true );
-
-			// Echo the inputfield with the value.
-			printf( '<input type="text" class="widefat" name="subtitle" placeholder="%s" value="%s" id="the_subtitle" />',
-				__( 'Subtitle', 'kia-subtitle' ),
-				esc_attr($sub) );
-
+			$this->render_meta_box_content();
 		}
 	}
 
