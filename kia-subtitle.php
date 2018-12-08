@@ -99,7 +99,6 @@ class KIA_Subtitle {
 	 */
 	public function __construct(){
 
-		global $wp_version;
 
 		// Set-up uninstall action.
 		register_uninstall_hook( __FILE__, array( __CLASS__, 'delete_plugin_options' ) );
@@ -550,8 +549,7 @@ function KIA_Subtitle() {
   return KIA_Subtitle::instance();
 }
 
-// Global for backwards compatibility.
-$GLOBALS['KIA_Subtitle'] = KIA_Subtitle();
+add_action( 'plugins_loaded', 'KIA_Subtitle' );
 
 /**
 * Public Shortcut Function to KIA_Subtitle::the_subtitle()
