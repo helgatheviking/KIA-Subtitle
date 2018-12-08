@@ -9,9 +9,6 @@
     h2.nav-tab-wrapper { margin-bottom: 1em;}
   </style>
 
-  <!-- Display Plugin Icon, Header, and Description -->
-  <?php screen_icon(); ?>
-
   <h2><?php _e( 'KIA Subtitle', 'kia-subtitle' );?></h2>
 
   <!-- Beginning of the Plugin Options Form -->
