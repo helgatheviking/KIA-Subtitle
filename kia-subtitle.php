@@ -131,7 +131,11 @@ class KIA_Subtitle {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		} else {
 			add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
+		
 		}
+		
+		// Hide ket from Custom Fields
+		add_filter( 'is_protected_meta', array( $this, 'make_key_private' ), 10, 2 );
 		
 		// Save the subtitle as post meta.
 		add_action( 'save_post', array( $this, 'meta_save' ) );
@@ -419,6 +423,25 @@ class KIA_Subtitle {
 			$this->render_meta_box_content();
 		}
 	}
+
+
+	/**
+	 * Make the meta key private
+	 * 
+	 * @since 2.0
+	 * 
+	 * @param  bool 	$is_private
+	 * @param  string	$key
+	 * @return bool
+	 */
+	public function make_key_private( $is_private, $key ){
+		if( 'kia_subtitle' == $key ) {
+			$is_private = true;
+		}
+		return $is_private;
+	}
+	
+	
 
 	/**
 	 * Save the Meta Value
