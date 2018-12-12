@@ -319,23 +319,18 @@ class KIA_Subtitle {
 	 */
 	public function load_scripts( $hook ) {
 
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_register_script( 'kia_subtitle', plugins_url( 'js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+
 		// Conditionally add the styles and scripts.
-		if( in_array( $hook, array ( 'post.php', 'post-new.php', 'edit.php' ) ) ) {
-
-			// Only add style on post screens.
-			if( $hook == 'post.php' || $hook == 'post-new.php' ){
-				add_action( 'admin_head', array( $this, 'inline_style' ) );
-			} else if ( $hook == 'edit.php' ) {
-				add_action( 'admin_head', array( $this, 'subtitle_column_style' ) );
-			}
-
-			// Load the script.
-			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-			wp_enqueue_script( 'kia_subtitle', plugins_url( 'js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
-
-			$translation_array = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
-			wp_localize_script( 'kia_subtitle', 'KIA_Subtitle', $translation_array );
+		if ( ! function_exists( 'register_block_type' ) && in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
+			add_action( 'admin_head', array( $this, 'inline_style' ) );
+		} elseif ( $hook == 'edit.php' ) {
+			add_action( 'admin_head', array( $this, 'subtitle_column_style' ) );
+			wp_enqueue_script( 'kia_subtitle' );
 		}
+
+
 
 	}
 
@@ -389,13 +384,15 @@ class KIA_Subtitle {
      *
      * @param WP_Post $post The post object.
      */
-    public function render_meta_box_content( $post ) {
+    public function render_meta_box_content( $post = false ) {
+
+    	$post_id = $post === false ? get_the_ID() : $post->ID;
  
 		// Create the meta field (don't use a metabox, we have our own styling).
 		wp_nonce_field( plugin_basename( __FILE__ ), 'kia_subnonce' );
 
 		// Get the subtitle value (if set).
-		$value = get_post_meta( get_the_ID(), 'kia_subtitle', true );
+		$value = get_post_meta( $post_id, 'kia_subtitle', true );
 
 		// Display the form, using the current value.
 		?>
@@ -414,13 +411,15 @@ class KIA_Subtitle {
 	 */
 	public function add_input(){
 
+		wp_enqueue_script( 'kia_subtitle' );
+
 		global $post;
 
 		$options = get_option( 'kia_subtitle_options' );
 
 		// Only show input if the post type was not enabled in options.
 		if ( isset ( $options['post_types'] ) && in_array( $post->post_type, $options[ 'post_types'] ) ) {
-			$this->render_meta_box_content();
+			$this->render_meta_box_content( $post );
 		}
 	}
 
