@@ -1,0 +1,30 @@
+{
+  "name": "kia-subtitle",
+  "version": "2.0.0",
+  "description": "Adds a subtitle field to WordPress' Post editor",
+  "main": "Gruntfile.js",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/helgatheviking/kia-subtitle"
+  },
+  "bugs": {
+    "url": "https://github.com/helgatheviking/kia-subtitle/issues"
+  },
+  "author": "helgatheviking",
+  "scripts": {
+    "build": "parcel build sidebar/sidebar.jsx --out-dir sidebar --public-url ."
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "~2.0.0",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-wp-deploy": "~1.3.0",
+    "grunt-wp-i18n": "~1.0.1",
+    "grunt-wp-readme-to-markdown": "~2.0.0",
+    "load-grunt-tasks": "~4.0.0",
+    "parcel-bundler": "^1.10.1",
+    "sass": "^1.15.1"
+  }
+}
