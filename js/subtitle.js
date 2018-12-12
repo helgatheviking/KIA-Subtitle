@@ -4,7 +4,7 @@
 	 * SINGLE POST SCREEN
 	 * @since 1.0
 	 */
-	// move to just after the title
+	// Move to just after the title
 	$( '#the_subtitle' ).insertAfter( '#title' );
 
 	// props to Giuseppe Mazzapica for this tabbing script
@@ -28,14 +28,14 @@
 
 	$( '#the-list' ).on( 'click', '.editinline', function(){
 
-		// revert Quick Edit menu so that it refreshes properly
+		// Revert Quick Edit menu so that it refreshes properly
 		inlineEditPost.revert();
 
 		tag_id = $( this ).parents( 'tr' ).attr( 'id' );
 		posttitlelabel = $( ':input[name="post_title"]', '.inline-edit-row' ).parents( 'label' );
 		subtitle = $( 'div.kia-subtitle-value', '#' + tag_id ).text();
 
-		//move the subtitle input and set its value from the hidden field
+		// Move the subtitle input and set its value from the hidden field
 		$( 'input.kia-subtitle-input', '.inline-edit-row' ).val( subtitle ).parents( 'label' ).insertAfter( posttitlelabel );
 
 	});
