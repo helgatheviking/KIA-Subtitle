@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KIA Subtitle 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/KIA-Subtitle\n"
-"POT-Creation-Date: 2018-12-12 02:43:58+00:00\n"
+"POT-Creation-Date: 2018-12-12 18:15:29+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -49,13 +49,12 @@ msgstr ""
 msgid "Donate"
 msgstr ""
 
-#: kia-subtitle.php:336 kia-subtitle.php:374 kia-subtitle.php:403
-#: kia-subtitle.php:471 kia-subtitle.php:505 kia-subtitle.php:518
-#: kia-subtitle.php:556
+#: kia-subtitle.php:369 kia-subtitle.php:400 kia-subtitle.php:470
+#: kia-subtitle.php:504 kia-subtitle.php:517 kia-subtitle.php:555
 msgid "Subtitle"
 msgstr ""
 
-#: kia-subtitle.php:405
+#: kia-subtitle.php:402
 msgid "Enter subtitle"
 msgstr ""
 
