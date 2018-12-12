@@ -6,6 +6,31 @@ module.exports = function(grunt) {
   grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
 
+    uglify: {
+        options: {
+            compress: {
+                global_defs: {
+                    "EO_SCRIPT_DEBUG": false
+                },
+                dead_code: true
+            },
+            banner: '/*! <%= pkg.name %> <%= pkg.version %> */\n'
+        },
+        build: {
+            files: [{
+                expand: true, // Enable dynamic expansion.
+                src: ['js/*.js', '!js/*.min.js'], // Actual pattern(s) to match.
+                ext: '.min.js', // Dest filepaths will have this extension.
+            }, ]
+        }
+    },
+    jshint: {
+        options: {
+            reporter: require("jshint-stylish")
+        },
+        all: ["js/*.js", "!js/*.min.js"]
+    },
+
 	clean: {
 		//Clean up build folder
 		main: ['build/<%= pkg.name %>']
@@ -36,7 +61,10 @@ module.exports = function(grunt) {
 				'!languages/.tx',
 				'!languages/tx.exe',
 				'!README.md',
-				'!wp-assets/**'
+				'!wp-assets/**',
+				'!sidebar/**',
+				'!package-lock.json',
+				'!readme.md'
 			],
 			dest: 'build/<%= pkg.name %>/'
 		},
@@ -113,7 +141,7 @@ module.exports = function(grunt) {
 });
 
 grunt.registerTask( 'docs', [ 'wp_readme_to_markdown'] );
-grunt.registerTask( 'build', [ 'replace', 'makepot' ] );
+grunt.registerTask( 'build', [ 'jshint', 'uglify', 'replace', 'makepot' ] );
 grunt.registerTask( 'make', [ 'build', 'clean', 'copy' ] );
 
 };
