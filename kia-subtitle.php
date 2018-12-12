@@ -67,9 +67,9 @@ class KIA_Subtitle {
 	 * @return KIA_Subtitle - Main instance
 	 */
 	public static function instance() {
-	if ( is_null( self::$_instance ) ) {
-		self::$_instance = new self();
-	}
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
 		return self::$_instance;
 	}
 
