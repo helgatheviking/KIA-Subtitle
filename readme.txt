@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://www.paypal.me/usathwnt/25
 Tags: subtitle, simple
 Requires at least: 4.5
-Tested up to: 4.9.2
-Stable tag: 1.6.8
+Tested up to: 5.0.0
+Stable tag: 2.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -133,6 +133,9 @@ function kia_reorder_woocommerce_columns( $columns ){
 `
 
 == Changelog ==
+
+= 2.0.0 =
+* Add subtitle as a metabox that is compatible with Gutenberg editor
 
 = 1.6.8 =
 * Add width to column for WooCommerce products
