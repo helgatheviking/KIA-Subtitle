@@ -95,6 +95,10 @@ If you have wrapped the subtitle in an H2 tag with the class of subtitle like in
 h2.subtitle { color: pink; }
 `
 
+= Can I display the subtitle for my WooCommmerce products =
+
+Yes! You can use this [bridge plugin](https://github.com/helgatheviking/kia-subtitle-woocommerce-bridge) to automatically display the subtitle in most WooCommerce locations.
+
 = Can I add the subtitle to the Page Title Meta tag =
 `
 function kia_add_subtitle_to_wp_title( $title ) {
