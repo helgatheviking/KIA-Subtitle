@@ -313,17 +313,19 @@ class KIA_Subtitle {
 	public function load_scripts( $hook ) {
 
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$current_screen = get_current_screen();
+		
 		wp_register_script( 'kia_subtitle', plugins_url( 'js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
-
-		// Conditionally add the styles and scripts.
-		if ( ! function_exists( 'register_block_type' ) && in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
+		
+		// Add styles and scripts for classic editor.
+    	if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) && self::is_enabled_for_post_type( $current_screen->post_type ) && method_exists( $current_screen, 'is_block_editor' ) && ! $current_screen->is_block_editor() ) {
 			add_action( 'admin_head', array( $this, 'inline_style' ) );
-		} elseif ( $hook == 'edit.php' ) {
+			wp_enqueue_script( 'kia_subtitle' );
+		// Add scripts and styles for edit screen.
+		} elseif ( $hook == 'edit.php' && self::is_enabled_for_post_type( $current_screen->post_type ) ) {
 			add_action( 'admin_head', array( $this, 'subtitle_column_style' ) );
 			wp_enqueue_script( 'kia_subtitle' );
 		}
-
-
 
 	}
 
@@ -398,8 +400,6 @@ class KIA_Subtitle {
 	 * Add the text input on the post screen
 	 * @since 1.0
 	 */
-
-		wp_enqueue_script( 'kia_subtitle' );
 	public function add_input() {
 
 		global $post;
