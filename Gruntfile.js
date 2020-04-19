@@ -64,7 +64,8 @@ module.exports = function(grunt) {
 				'!wp-assets/**',
 				'!sidebar/**',
 				'!package-lock.json',
-				'!readme.md'
+				'!readme.md',
+				'!.github/**',
 			],
 			dest: 'build/<%= pkg.name %>/'
 		},
