@@ -217,7 +217,7 @@ class KIA_Subtitle {
 	 * @since 1.6.7
 	 */
 	public function add_meta_links( $plugin_meta, $plugin_file ) {
-		if( $plugin_file == plugin_basename(__FILE__) ) {
+		if( $plugin_file === plugin_basename(__FILE__) ) {
 			$plugin_meta[] = '<a class="dashicons-before dashicons-awards" href="' . self::DONATE_URL . '" target="_blank">' . __( 'Donate', 'kia-subtitle' ) . '</a>';
 		}
 		return $plugin_meta;
@@ -268,7 +268,7 @@ class KIA_Subtitle {
 	public function the_subtitle( $before = '', $after = '', $echo = true ) {
 		$subtitle = $this->get_the_subtitle();
 
-		if ( strlen( $subtitle ) == 0 ) {
+		if ( strlen( $subtitle ) === 0 ) {
 			return;
 		}
 
@@ -322,7 +322,7 @@ class KIA_Subtitle {
 			add_action( 'admin_head', array( $this, 'inline_style' ) );
 			wp_enqueue_script( 'kia_subtitle' );
 		// Add scripts and styles for edit screen.
-		} elseif ( $hook == 'edit.php' && self::is_enabled_for_post_type( $current_screen->post_type ) ) {
+		} elseif ( $hook === 'edit.php' && self::is_enabled_for_post_type( $current_screen->post_type ) ) {
 			add_action( 'admin_head', array( $this, 'subtitle_column_style' ) );
 			wp_enqueue_script( 'kia_subtitle' );
 		}
@@ -421,7 +421,7 @@ class KIA_Subtitle {
 	 * @return bool
 	 */
 	public function make_key_private( $is_private, $key ) {
-		if( 'kia_subtitle' == $key ) {
+		if( 'kia_subtitle' === $key ) {
 			$is_private = true;
 		}
 		return $is_private;
@@ -446,7 +446,7 @@ class KIA_Subtitle {
 		}
 
 		// Check permissions.
-		if ( 'page' == $_POST['post_type'] && ! current_user_can( 'edit_page', $post_id ) ) {
+		if ( 'page' === $_POST['post_type'] && ! current_user_can( 'edit_page', $post_id ) ) {
 			return $post_id;
 		} else if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return $post_id;
@@ -528,7 +528,7 @@ class KIA_Subtitle {
 	 * @return  string
 	 */
 	public function quick_edit_custom_box( $column_name ) {
-		if( $column_name == 'subtitle' ) {
+		if( $column_name === 'subtitle' ) {
 
 			global $post;
 
