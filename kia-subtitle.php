@@ -587,6 +587,19 @@ class KIA_Subtitle {
 	/*-----------------------------------------------------------------------------------*/
 
 	/**
+	 * Version compare for WordPress core.
+	 * 
+	 * @since 3.0
+	 *
+	 * @param  string $version - The version to test against.
+	 * @return  bool
+	 */
+	public static function is_wp_gte( $version = '5.3' ) {
+		global $wp_version;
+		return version_compare( $wp_version, '4.3', '>=' );
+	}
+
+	/**
 	 * Get enabled post types.
 	 * 
 	 * @since 3.0
