@@ -604,12 +604,11 @@ class KIA_Subtitle {
 	 */
 	public function enqueue_assets( $hook ) {
 
-		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		$current_screen = get_current_screen();
 				
 		// Add styles and scripts for block editor.
     	if ( self::is_enabled_for_post_type( $current_screen->post_type ) ) {
-			wp_enqueue_script( 'kia-subtitle-gutenberg-sidebar', plugins_url( 'js/dist/index' . $suffix . '.js', __FILE__ ), array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ), $this->version );
+			wp_enqueue_script( 'kia-subtitle-gutenberg-sidebar', plugins_url( 'js/dist/index.js', __FILE__ ), array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ), $this->version );
 		}
 
 	}
