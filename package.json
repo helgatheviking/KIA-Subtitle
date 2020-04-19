@@ -16,20 +16,20 @@
     "build": "parcel build sidebar/sidebar.jsx --out-dir sidebar --public-url ."
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
+    "grunt": "^1.1.0",
     "grunt-contrib-clean": "~2.0.0",
     "grunt-contrib-copy": "~1.0.0",
-    "grunt-contrib-jshint": "^2.0.0",
-    "grunt-contrib-uglify": "~3.1.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-uglify": "~4.0.1",
     "grunt-text-replace": "^0.4.0",
-    "grunt-wp-deploy": "~1.3.0",
-    "grunt-wp-i18n": "~1.0.1",
-    "grunt-wp-readme-to-markdown": "~2.0.0",
-    "load-grunt-tasks": "~4.0.0",
-    "parcel-bundler": "^1.10.1",
-    "sass": "^1.15.1"
+    "grunt-wp-i18n": "~1.0.3",
+    "grunt-wp-readme-to-markdown": "~2.0.1",
+    "load-grunt-tasks": "~5.1.0",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.3"
   },
   "dependencies": {
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
+    "npm-check-updates": "^4.1.2"
   }
 }
