@@ -97,7 +97,7 @@ class KIA_Subtitle {
 	 * @return KIA_Subtitle
 	 * @since  1.0
 	 */
-	public function __construct(){
+	public function __construct() {
 
 
 		// Set-up uninstall action.
@@ -168,10 +168,10 @@ class KIA_Subtitle {
 	 * @since 1.4
 	 */
 	public static function delete_plugin_options() {
-		$options = get_option( 'kia_subtitle_options', true );
+		$options = get_option( 'kia_subtitle_options' );
 		if( isset( $options['delete'] ) && $options['delete'] ) {
-		delete_option( 'kia_subtitle_options' );
-		delete_option( 'kia_subtitle_db_version' );
+			delete_option( 'kia_subtitle_options' );
+			delete_option( 'kia_subtitle_db_version' );
 		}
 	}
 
@@ -187,7 +187,7 @@ class KIA_Subtitle {
 	 * Register admin settings
 	 * @since 1.4
 	 */
-	public function admin_init(){
+	public function admin_init() {
 		register_setting( 'kia_subtitle_options', 'kia_subtitle_options', array( $this, 'validate_options' ) );
 	  }
 
@@ -224,7 +224,7 @@ class KIA_Subtitle {
 	 * @since 1.6.7
 	 */
 	public function add_meta_links( $plugin_meta, $plugin_file ) {
-		if( $plugin_file == plugin_basename(__FILE__) ){
+		if( $plugin_file == plugin_basename(__FILE__) ) {
 			$plugin_meta[] = '<a class="dashicons-before dashicons-awards" href="' . self::DONATE_URL . '" target="_blank">' . __( 'Donate', 'kia-subtitle' ) . '</a>';
 		}
 		return $plugin_meta;
@@ -234,7 +234,7 @@ class KIA_Subtitle {
 	 * Render the Plugin options form
 	 * @since 1.4
 	 */
-	public function render_form(){
+	public function render_form() {
 		include( 'inc/plugin-options.php' );
 	}
 
@@ -245,7 +245,7 @@ class KIA_Subtitle {
 	 * @param array $input all posted data
 	 * @return array $clean data that is allowed to be save
 	 */
-	public function validate_options( $input ){
+	public function validate_options( $input ) {
 
 		$clean = array();
 
@@ -254,7 +254,7 @@ class KIA_Subtitle {
 
 		$post_types = get_post_types( $args );
 
-		if( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ){
+		if( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ) {
 			if( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
 		}
 
@@ -272,16 +272,16 @@ class KIA_Subtitle {
 	 * @param  boolean $echo should the subtitle be printed or returned
 	 * @return string
 	 */
-	public function the_subtitle( $before = '', $after = '', $echo = true ){
+	public function the_subtitle( $before = '', $after = '', $echo = true ) {
 		$subtitle = $this->get_the_subtitle();
 
-		if ( strlen( $subtitle ) == 0 ){
+		if ( strlen( $subtitle ) == 0 ) {
 			return;
 		}
 
 		$subtitle = $before . $subtitle . $after;
 
-		if ( $echo ){
+		if ( $echo ) {
 			echo $subtitle;
 		} else {
 			return $subtitle;
@@ -294,7 +294,7 @@ class KIA_Subtitle {
 	 * @param  int $post_id the post ID for which you want to retrieve the subtitle
 	 * @return string
 	 */
-	public function get_the_subtitle( $post_id = null ){
+	public function get_the_subtitle( $post_id = null ) {
 		$post_id = ! is_null( $post_id ) ? $post_id : get_the_ID();
 		$sub = get_post_meta( $post_id, 'kia_subtitle', true );
 		return apply_filters( 'the_subtitle', $sub, $post_id );
@@ -305,7 +305,7 @@ class KIA_Subtitle {
 	 * @return string
 	 * @since 1.0
 	 */
-	public function shortcode(){
+	public function shortcode() {
 		return $this->get_the_subtitle();
 	}
 
@@ -339,7 +339,7 @@ class KIA_Subtitle {
 	 * @since 1.0
 	 */
 
-	public function inline_style(){ ?>
+	public function inline_style() { ?>
 		<style type="text/css">
 		#the_subtitle {
 			margin: 5px 0px;
@@ -355,7 +355,7 @@ class KIA_Subtitle {
 	 * Add the text input on the post screen
 	 * @since 1.0
 	 */
-	public function add_meta_box(){
+	public function add_meta_box() {
 
 		global $post;
 
@@ -409,9 +409,9 @@ class KIA_Subtitle {
 	 * Add the text input on the post screen
 	 * @since 1.0
 	 */
-	public function add_input(){
 
 		wp_enqueue_script( 'kia_subtitle' );
+	public function add_input() {
 
 		global $post;
 
@@ -433,13 +433,12 @@ class KIA_Subtitle {
 	 * @param  string	$key
 	 * @return bool
 	 */
-	public function make_key_private( $is_private, $key ){
+	public function make_key_private( $is_private, $key ) {
 		if( 'kia_subtitle' == $key ) {
 			$is_private = true;
 		}
 		return $is_private;
 	}
-	
 	
 
 	/**
@@ -448,19 +447,19 @@ class KIA_Subtitle {
 	 * @param  int $post_id the ID of the post we're saving
 	 * @return null
 	 */
-	public function meta_save( $post_id ){
+	public function meta_save( $post_id ) {
 
 		// Check to see if this is an autosafe and if the nonce is verified.
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ){
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
 
-		if ( ! isset( $_POST['kia_subnonce'] ) || ! wp_verify_nonce( $_POST['kia_subnonce'], plugin_basename( __FILE__ ) ) ){
+		if ( ! isset( $_POST['kia_subnonce'] ) || ! wp_verify_nonce( $_POST['kia_subnonce'], plugin_basename( __FILE__ ) ) ) {
 			return $post_id;
 		}
 
 		// Check permissions.
-		if ( 'page' == $_POST['post_type'] && ! current_user_can( 'edit_page', $post_id ) ){
+		if ( 'page' == $_POST['post_type'] && ! current_user_can( 'edit_page', $post_id ) ) {
 			return $post_id;
 		} else if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return $post_id;
@@ -480,7 +479,7 @@ class KIA_Subtitle {
 	 * Style the Subtitle's column for WooCommerce products
 	 * @since 1.6.8
 	 */
-	public function subtitle_column_style(){ ?>
+	public function subtitle_column_style() { ?>
 		<style type="text/css">
 		.post-type-product .column-subtitle {
 			width: 20ch;
@@ -495,10 +494,10 @@ class KIA_Subtitle {
 	 * @param array $columns the columns for edit screen
 	 * @return  array of new columns
 	 */
-	public function column_header( $columns ){
+	public function column_header( $columns ) {
 
 		// Insert after title column.
-		if( isset( $columns['title'] ) || isset( $columns['name'] ) ){
+		if( isset( $columns['title'] ) || isset( $columns['name'] ) ) {
 		
 			// The subtitle as an array for subsequent array manip.
 			$subtitle = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
@@ -527,7 +526,7 @@ class KIA_Subtitle {
 	 * @param int $post_id the post ID of the row
 	 * @return  string
 	 */
-	public function column_value( $column_name, $post_id ){
+	public function column_value( $column_name, $post_id ) {
 		switch ( $column_name ) :
 			case 'subtitle' :
 				echo $sub = get_post_meta( get_the_ID(), 'kia_subtitle', true );
@@ -627,8 +626,8 @@ add_action( 'plugins_loaded', 'KIA_Subtitle' );
 * @param  boolean $echo should the subtitle be printed or returned
 * @return string
 */
-if( ! function_exists( 'the_subtitle' ) ){
-	function the_subtitle( $before = '', $after = '', $echo = true ){
+if( ! function_exists( 'the_subtitle' ) ) {
+	function the_subtitle( $before = '', $after = '', $echo = true ) {
 		return KIA_Subtitle()->the_subtitle( $before, $after, $echo );
 	}
 }
@@ -640,8 +639,8 @@ if( ! function_exists( 'the_subtitle' ) ){
 * @param  int $post_id the post ID for which you want to retrieve the subtitle
 * @return string
 */
-if( ! function_exists( 'get_the_subtitle' )){
-	function get_the_subtitle( $post_id = null ){
+if( ! function_exists( 'get_the_subtitle' )) {
+	function get_the_subtitle( $post_id = null ) {
 		return KIA_Subtitle()->get_the_subtitle( $post_id );
 	}
 }
