@@ -153,6 +153,15 @@ class KIA_Subtitle {
 		// Upgrade routine.
 		add_action( 'admin_init', array( $this, 'upgrade_routine' ) );
 
+		// Add Block Editor compatibility.
+		if ( self::is_wp_gte( '5.3' ) ) {
+			// Load the Gutenberg scripts.
+			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_assets' ) );
+
+			// Register meta key in REST
+			add_action('init', array( $this, 'register_meta') );
+		}
+
 	}
 
 	/**
@@ -363,7 +372,7 @@ class KIA_Subtitle {
                 'advanced',
                 'high',
                 array(
-			        '__block_editor_compatible_meta_box' => true,
+			        '__back_compat_meta_box' => self::is_wp_gte( '5.3' ),
 				 )
             );
         }
@@ -579,6 +588,49 @@ class KIA_Subtitle {
 		}
 
 		update_option( 'kia_subtitle_db_version', $this->version );
+
+	}
+
+	/*-----------------------------------------------------------------------------------*/
+	/* Block Editor Functions */
+	/*-----------------------------------------------------------------------------------*/
+
+	/**
+	 * Load Script in Block Editor
+	 * 
+	 * @since 3.0
+	 * @param string $hook the name of the page we're on in the WP admin
+	 * @return null
+	 */
+	public function enqueue_assets( $hook ) {
+
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$current_screen = get_current_screen();
+				
+		// Add styles and scripts for block editor.
+    	if ( self::is_enabled_for_post_type( $current_screen->post_type ) ) {
+			wp_enqueue_script( 'kia-subtitle-gutenberg-sidebar', plugins_url( 'js/dist/index' . $suffix . '.js', __FILE__ ), array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ), $this->version );
+		}
+
+	}
+
+	/**
+	 * Register meta key for block editor.
+	 * 
+	 * @since 3.0
+	 * @return null
+	 */
+	public function register_meta() {
+
+		register_meta('post', 'kia_subtitle', array(
+			'show_in_rest' => true,
+			'type' => 'string',
+			'single' => true,
+			'sanitize_callback' => 'sanitize_text_field',
+			'auth_callback' => function() { 
+				return current_user_can( 'edit_posts' );
+			}
+		));
 
 	}
 
