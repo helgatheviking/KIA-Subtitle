@@ -13,9 +13,11 @@
   },
   "author": "helgatheviking",
   "scripts": {
-    "build": "parcel build sidebar/sidebar.jsx --out-dir sidebar --public-url ."
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
   },
   "devDependencies": {
+    "@wordpress/scripts": "^8.0.1",
     "grunt": "^1.1.0",
     "grunt-contrib-clean": "~2.0.0",
     "grunt-contrib-copy": "~1.0.0",
@@ -24,11 +26,15 @@
     "grunt-text-replace": "^0.4.0",
     "grunt-wp-i18n": "~1.0.3",
     "grunt-wp-readme-to-markdown": "~2.0.1",
-    "load-grunt-tasks": "~5.1.0",
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.26.3"
+    "load-grunt-tasks": "~5.1.0"
   },
   "dependencies": {
+    "@wordpress/components": "^9.4.1",
+    "@wordpress/data": "^4.16.1",
+    "@wordpress/edit-post": "^3.15.1",
+    "@wordpress/i18n": "^3.11.0",
+    "@wordpress/icons": "^1.3.1",
+    "@wordpress/plugins": "^2.14.1",
     "jshint-stylish": "^2.2.1",
     "npm-check-updates": "^4.1.2"
   }
