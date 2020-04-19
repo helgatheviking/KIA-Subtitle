@@ -142,16 +142,9 @@ class KIA_Subtitle {
 		add_action( 'edit_attachment', array( $this, 'meta_save' ) );
 
 		// Edit Columns + Quickedit.
-		$options = get_option( 'kia_subtitle_options', false );
-
-		// Only show input if the post type was enabled in options
-		if ( isset ( $options['post_types'] ) && is_array( $options[ 'post_types'] ) ) {
-
-			foreach( $options['post_types'] as $post_type ) {
-				add_action( "manage_{$post_type}_posts_columns", array( $this, 'column_header' ), 20 );
-				add_filter( "manage_{$post_type}_posts_custom_column", array( $this, 'column_value'), 10, 2 );
-			}
-
+		foreach( self::get_enabled_post_types() as $post_type ) {
+			add_action( "manage_{$post_type}_posts_columns", array( $this, 'column_header' ), 20 );
+			add_filter( "manage_{$post_type}_posts_custom_column", array( $this, 'column_value'), 10, 2 );
 		}
 
 		// Quick edit support.
@@ -359,11 +352,7 @@ class KIA_Subtitle {
 
 		global $post;
 
-		$options = get_option( 'kia_subtitle_options' );
-
-		$enabled_post_types = isset( $options['post_types'] ) ? $options['post_types'] : array();
- 
-        foreach ( $enabled_post_types as $post_type ) {
+        foreach ( self::get_enabled_post_types() as $post_type ) {
             add_meta_box(
                 'some_meta_box_name',
                 __( 'Subtitle', 'kia-subtitle' ),
@@ -415,10 +404,8 @@ class KIA_Subtitle {
 
 		global $post;
 
-		$options = get_option( 'kia_subtitle_options' );
-
-		// Only show input if the post type was not enabled in options.
-		if ( isset ( $options['post_types'] ) && in_array( $post->post_type, $options[ 'post_types'] ) ) {
+		// Only show input if the post type was enabled in options.
+		if( self::is_enabled_for_post_type( $post->post_type ) ) {
 			$this->render_meta_box_content( $post );
 		}
 	}
@@ -545,10 +532,8 @@ class KIA_Subtitle {
 
 			global $post;
 
-			$options = get_option( 'kia_subtitle_options' );
-
 			// Only show input if the post type was enabled in options.
-			if ( isset ( $options['post_types'] ) && in_array( $post->post_type, $options[ 'post_types'] ) ) { ?>
+			if( self::is_enabled_for_post_type( $post->post_type ) ) { ?>
 
 				<label class="kia-subtitle">
 					<span class="title"><?php _e( 'Subtitle', 'kia-subtitle'   ) ?></span>
@@ -583,9 +568,7 @@ class KIA_Subtitle {
 			ksort( $post_types );
 
 			// We're going to switch any checked to *disable* options from previous version into unchecked to disable.
-			if( isset( $options['post_types'] ) && is_array( $options['post_types'] ) ){
-				$post_types = array_diff( $post_types, $options['post_types'] );
-			}
+			$post_types = array_diff( $post_types, self::get_enabled_post_types() );
 
 			// Merge the new options with any old options.
 			$update_options = array_merge( (array)$options, array ( 'post_types' => $post_types, 'db_version' => '1.5' ) );
@@ -597,6 +580,31 @@ class KIA_Subtitle {
 
 		update_option( 'kia_subtitle_db_version', $this->version );
 
+	}
+
+
+	/**
+	 * Get enabled post types.
+	 * 
+	 * @since 2.1
+	 *
+	 * @return  array
+	 */
+	public static function get_enabled_post_types() {
+		$options = get_option( 'kia_subtitle_options', false );
+		return isset( $options['post_types'] ) && is_array( $options[ 'post_types'] ) ? $options['post_types'] : array();
+	}
+
+	/**
+	 * Is a post type enabled?
+	 * 
+	 * @since 2.1
+	 *
+	 * @param  string $type - The post type to check is enabled.
+	 * @return  bool
+	 */
+	public static function is_enabled_for_post_type( $type ) {
+		return in_array( $type, self::get_enabled_post_types() );
 	}
 
 } // End class.
