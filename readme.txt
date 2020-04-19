@@ -112,30 +112,6 @@ add_filter('wp_title','kia_add_subtitle_to_wp_title');
 = Is this translation ready? =
 WPML now supports KIA Subtitle!
 
-= The Subtitle is not after the product title in WooCommerce =
-
-WooCommerce calls their product title column "name" and completely removes the default "title" column, so KIA Subtitle inserts the subtitle at the end. You can add the following to your child theme's `functions.php` or preferably a site-specific snippets plugin and re-arrange the products posts column order.
-
-`
-add_filter( 'manage_product_posts_columns', 'kia_reorder_woocommerce_columns', 99 );
-
-function kia_reorder_woocommerce_columns( $columns ){
-	if( isset( $columns['subtitle'] ) && isset( $columns['name'] ) ){
-
-		// remove and stash the subtitle column
-		$subtitle = array( 'subtitle' => $columns['subtitle'] );
-		unset( $columns['subtitle'] );
-
-		// find the "name" column
-		$index =  array_search( "name", array_keys( $columns) );
-
-		// reform the array
-		$columns = array_merge( array_slice( $columns, 0, $index + 1, true ), $subtitle, array_slice( $columns, $index, count( $columns ) - $index, true ) );
-	}
-	return $columns;
-}
-`
-
 == Changelog ==
 
 = 2.0.0 =
