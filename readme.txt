@@ -1,6 +1,6 @@
 === KIA Subtitle ===
 Contributors: helgatheviking
-Donate link: https://www.paypal.me/usathwnt/25
+Donate link: https://www.paypal.com/fundraiser/charity/1451316
 Tags: subtitle, simple
 Requires at least: 4.5
 Tested up to: 5.0.0
