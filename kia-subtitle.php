@@ -582,11 +582,14 @@ class KIA_Subtitle {
 
 	}
 
+	/*-----------------------------------------------------------------------------------*/
+	/* Helper Functions */
+	/*-----------------------------------------------------------------------------------*/
 
 	/**
 	 * Get enabled post types.
 	 * 
-	 * @since 2.1
+	 * @since 3.0
 	 *
 	 * @return  array
 	 */
@@ -598,7 +601,7 @@ class KIA_Subtitle {
 	/**
 	 * Is a post type enabled?
 	 * 
-	 * @since 2.1
+	 * @since 3.0
 	 *
 	 * @param  string $type - The post type to check is enabled.
 	 * @return  bool
