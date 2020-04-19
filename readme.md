@@ -1,10 +1,10 @@
 # KIA Subtitle #
-**Donate link:** https://www.paypal.me/usathwnt/25  
+**Contributors:** [helgatheviking](https://github.com/helgatheviking)  
 **Donate link:** https://www.paypal.com/fundraiser/charity/1451316  
 **Tags:** subtitle, simple  
 **Requires at least:** 4.5  
-**Tested up to:** 4.9.2  
-**Stable tag:** 2.0.0  
+**Tested up to:** 5.4.0  
+**Stable tag:** 3.0.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -97,7 +97,6 @@ If you have wrapped the subtitle in an H2 tag with the class of subtitle like in
 ### Can I display the subtitle for my WooCommmerce products ###
 
 Yes! You can use this [bridge plugin](https://github.com/helgatheviking/kia-subtitle-woocommerce-bridge) to automatically display the subtitle in most WooCommerce locations.
-
 
 ### Can I add the subtitle to the Page Title Meta tag ###
 

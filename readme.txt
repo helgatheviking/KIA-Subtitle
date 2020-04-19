@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://www.paypal.com/fundraiser/charity/1451316
 Tags: subtitle, simple
 Requires at least: 4.5
-Tested up to: 5.0.0
-Stable tag: 2.0.0
+Tested up to: 5.4.0
+Stable tag: 3.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,7 +41,8 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 
 == Screenshots ==
 
-1. This is what the input will look like on the post editor screen.
+1. This is what the input will look like in the Block Editor.
+1. This is what the input will look like in the Classic Editor.
 
 == Frequently Asked Questions ==
 
@@ -67,32 +68,13 @@ However, in general, `the_subtitle()` is a template tag so you will want to put 
 <h1 class="entry-title"><?php the_title(); ?></h1>
 `
 
-As an *example* if you wanted to display the subtitle on standard single posts, in the Twenty Twelve theme you'd edit the content.php ( or preferabbly override the template in a child theme ):
-
-`
-<header class="entry-header">
-	<?php the_post_thumbnail(); ?>
-	<?php if ( is_single() ) : ?>
-	<h1 class="entry-title"><?php the_title(); ?></h1>
-		<?php if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
-	<?php else : ?>
-	<h1 class="entry-title">
-		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentytwelve' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
-	</h1>
-	<?php endif; // is_single() ?>
-	<?php if ( comments_open() ) : ?>
-		<div class="comments-link">
-			<?php comments_popup_link( '<span class="leave-reply">' . __( 'Leave a reply', 'twentytwelve' ) . '</span>', __( '1 Reply', 'twentytwelve' ), __( '% Replies', 'twentytwelve' ) ); ?>
-		</div><!-- .comments-link -->
-	<?php endif; // comments_open() ?>
-</header><!-- .entry-header -->
-`
+As an *example* if you wanted to display the subtitle on standard single posts, in the Twenty Twenty theme you'd create a copy of the entry-header.php template in your child theme and modify it as shown in this [gist](https://gist.github.com/helgatheviking/6754a8a381ace9aef325ca3f7b4128c1)
 
 = How do I style the subtitle? =
 
-If you have wrapped the subtitle in an H2 tag with the class of subtitle like in the second example above, you can then style it any way you'd like.
+If you have wrapped the subtitle in an H2 tag with the class of subtitle like in the gist above, you can then style it any way you'd like.
 `
-h2.subtitle { color: pink; }
+.subtitle { color: pink; }
 `
 
 = Can I display the subtitle for my WooCommmerce products =
@@ -113,6 +95,9 @@ add_filter('wp_title','kia_add_subtitle_to_wp_title');
 WPML now supports KIA Subtitle!
 
 == Changelog ==
+
+= 3.0.0 =
+* Add subtitle as a panel in the Gutenberg editor
 
 = 2.0.0 =
 * Add subtitle as a metabox that is compatible with Gutenberg editor
