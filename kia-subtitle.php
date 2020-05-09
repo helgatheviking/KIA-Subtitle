@@ -237,7 +237,7 @@ class KIA_Subtitle {
 	 * @since 1.4
 	 */
 	public function render_form() {
-		include( 'inc/plugin-options.php' );
+		include( 'includes/views/plugin-options.php' );
 	}
 
 	/**
