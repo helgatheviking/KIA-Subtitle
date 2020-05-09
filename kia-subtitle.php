@@ -184,6 +184,7 @@ class KIA_Subtitle {
 		load_plugin_textdomain( 'kia-subtitle', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
+
 	/**
 	 * Register admin settings
 	 * @since 1.4
@@ -679,6 +680,7 @@ class KIA_Subtitle {
 
 	}
 
+		
 	/*-----------------------------------------------------------------------------------*/
 	/* Helper Functions */
 	/*-----------------------------------------------------------------------------------*/
