@@ -269,21 +269,57 @@ class KIA_Subtitle {
 	/**
 	 * Outputs the Subtitle
 	 * @since 1.0
-	 * @param  string $before any text that should be prepended to the subtitle
-	 * @param  string $after any text that should be appended to the subtitle
-	 * @param  boolean $echo should the subtitle be printed or returned
+	 * @param  array $args. In 3.1 converted to array that accepts multiple keys.
+	 *         array(
+	 *              'post_id' => int
+	 *              'before'  => string - Any text that should be prepended to the subtitle
+	 *              'after'   => string - Any text that should be appended to the subtitle.
+	 *              'echo'    => bool 
+	 *         )
+	 * @param  mixed $after - Deprecated in 3.1
+	 * @param  boolean $echo - Deprecated in 3.1
 	 * @return string
 	 */
-	public function the_subtitle( $before = '', $after = '', $echo = true ) {
-		$subtitle = $this->get_the_subtitle();
+	public function the_subtitle( $args = array(), $after = false, $echo = null ) {
+
+		$new_args = array();
+
+		if( is_array( $args ) ) {
+			$new_args = $args;
+		} else {
+			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
+			$new_args['before'] = $args;
+		}
+
+		if( is_string( $after ) ) {
+			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
+			$new_args['after'] = $after;
+		}
+
+		if( ! is_null( $echo ) ) {
+			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
+			$new_args['echo'] = $echo;
+		}
+
+		$defaults = 
+			array( 
+				'post_id' => null,
+				'before'  => '',
+				'after'   => '',
+				'echo'    => true
+			);
+
+		$args = wp_parse_args( $new_args, $defaults );
+
+		$subtitle = $this->get_the_subtitle( $args['post_id'] );
 
 		if ( strlen( $subtitle ) === 0 ) {
 			return;
 		}
 
-		$subtitle = $before . $subtitle . $after;
+		$subtitle = $args['before'] . $subtitle . $args['after'];
 
-		if ( $echo ) {
+		if ( $args['echo'] ) {
 			echo $subtitle;
 		} else {
 			return $subtitle;
@@ -304,11 +340,22 @@ class KIA_Subtitle {
 
 	/**
 	 * Callback for the Shortcode [the-subtitle]
+	 *
 	 * @return string
 	 * @since 1.0
 	 */
-	public function shortcode() {
-		return $this->get_the_subtitle();
+	public function shortcode( $atts ) {
+
+		$atts = shortcode_atts(
+			array( 
+				'post_id' => null,
+				'before'  => '<h2 class="subtitle">',
+				'after'   => '</h2>'
+			), $atts, 'the-subtitle' );
+
+		$atts['echo'] = false;
+
+		return $this->the_subtitle( $atts );
 	}
 
 
@@ -703,7 +750,12 @@ add_action( 'plugins_loaded', 'KIA_Subtitle' );
 */
 if( ! function_exists( 'the_subtitle' ) ) {
 	function the_subtitle( $before = '', $after = '', $echo = true ) {
-		return KIA_Subtitle()->the_subtitle( $before, $after, $echo );
+		$args = array(
+			'before' => $before,
+			'after'  => $after,
+			'echo'   => $echo
+		);
+		return KIA_Subtitle()->the_subtitle( $args );
 	}
 }
 
