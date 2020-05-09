@@ -333,7 +333,7 @@ class KIA_Subtitle {
 	 * @return string
 	 */
 	public function get_the_subtitle( $post_id = null ) {
-		$post_id = ! is_null( $post_id ) ? $post_id : get_the_ID();
+		$post_id = ! is_null( $post_id ) ? intval( $post_id ) : get_the_ID();
 		$sub = get_post_meta( $post_id, 'kia_subtitle', true );
 		return apply_filters( 'the_subtitle', $sub, $post_id );
 	}
