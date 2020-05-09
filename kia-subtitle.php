@@ -99,7 +99,6 @@ class KIA_Subtitle {
 	 */
 	public function __construct() {
 
-
 		// Set-up uninstall action.
 		register_uninstall_hook( __FILE__, array( __CLASS__, 'delete_plugin_options' ) );
 
@@ -159,7 +158,7 @@ class KIA_Subtitle {
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_assets' ) );
 
 			// Register meta key in REST
-			add_action('init', array( $this, 'register_meta') );
+			add_action( 'init', array( $this, 'register_meta') );
 		}
 
 	}
