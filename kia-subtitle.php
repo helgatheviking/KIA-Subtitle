@@ -161,6 +161,11 @@ class KIA_Subtitle {
 			add_action( 'init', array( $this, 'register_meta') );
 		}
 
+		// Add Beaver Builder compatibility.
+		if ( class_exists( 'FLThemeBuilderLoader' ) ) {
+			require_once self::get_plugin_path() . '/includes/beaver-builder/class-kia-subtitle-bb.php';
+		}
+
 	}
 
 	/**
@@ -721,6 +726,30 @@ class KIA_Subtitle {
 	public static function is_enabled_for_post_type( $type ) {
 		return in_array( $type, self::get_enabled_post_types() );
 	}
+
+
+	/**
+	 * Plugin URL.
+	 * 
+	 * @since 3.1
+	 *
+	 * @return  string
+	 */
+	public static function get_plugin_url() {
+		return untrailingslashit( plugins_url( '/', __FILE__ ) );
+	}
+
+	/**
+	 * Plugin Path.
+	 * 
+	 * @since 3.1
+	 *
+	 * @return  string
+	 */
+	public static function get_plugin_path() {
+		return untrailingslashit( plugin_dir_path( __FILE__ ) );
+	}
+
 
 } // End class.
 
