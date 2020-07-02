@@ -148,13 +148,10 @@ class KIA_Subtitle {
 		add_action( 'admin_init', array( $this, 'upgrade_routine' ) );
 
 		// Add Block Editor compatibility.
-		if ( self::is_wp_gte( '5.3' ) ) {
-			// Load the Gutenberg scripts.
-			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_assets' ) );
 
-			// Register meta key in REST
-			add_action( 'init', array( $this, 'register_meta') );
-		}
+		// Register meta key in REST
+		add_action( 'init', array( $this, 'register_meta' ) );
 
 	}
 
