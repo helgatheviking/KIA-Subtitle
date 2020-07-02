@@ -125,13 +125,8 @@ class KIA_Subtitle {
 		// Load the subtitle script.
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
 
-		// Add the input field.
-		if ( function_exists( 'register_block_type' ) ) {
-			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-		} else {
-			add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
-		
-		}
+		// Add the input field in Classic Editor.
+		add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
 		
 		// Hide ket from Custom Fields
 		add_filter( 'is_protected_meta', array( $this, 'make_key_private' ), 10, 2 );
@@ -403,10 +398,13 @@ class KIA_Subtitle {
 	}
 
 	/**
-	 * Add the text input on the post screen
-	 * @since 1.0
+	 * Add the text input as a metabox in Gutenberg
+	 * @since 2.0
+	 * @deprecated 3.1.1
 	 */
 	public function add_meta_box() {
+
+		_deprecated_function( 'KIA_Subtitle::add_meta_box', '3.1.1', 'Metaboxes are no longer needed now that there is explicit Gutenberg support.' );
 
 		global $post;
 
