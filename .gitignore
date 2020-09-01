@@ -2,3 +2,4 @@ node_modules/
 sidebar/
 build/
 *.afdesign
+package-lock.json
