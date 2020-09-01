@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: KIA Subtitle 3.0.0\n"
+"Project-Id-Version: KIA Subtitle 3.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kia-subtitle\n"
-"POT-Creation-Date: 2020-04-19 20:17:05+00:00\n"
+"POT-Creation-Date: 2020-09-01 16:12:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,15 +17,15 @@ msgstr ""
 msgid "KIA Subtitle"
 msgstr ""
 
-#: inc/plugin-options.php:23
+#: includes/views/plugin-options.php:23
 msgid "Enable on Post Types"
 msgstr ""
 
-#: inc/plugin-options.php:47
+#: includes/views/plugin-options.php:47
 msgid "Completely remove options on plugin removal"
 msgstr ""
 
-#: inc/plugin-options.php:57
+#: includes/views/plugin-options.php:57
 msgid "Save Changes"
 msgstr ""
 
@@ -37,15 +37,15 @@ msgstr ""
 msgid "Unserializing instances of this class is forbidden."
 msgstr ""
 
-#: kia-subtitle.php:203
+#: kia-subtitle.php:194
 msgid "KIA Subtitle Options Page"
 msgstr ""
 
-#: kia-subtitle.php:215
+#: kia-subtitle.php:206
 msgid "Settings"
 msgstr ""
 
-#: kia-subtitle.php:231
+#: kia-subtitle.php:222
 msgid "Donate"
 msgstr ""
 
