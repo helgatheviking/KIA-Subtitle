@@ -131,7 +131,7 @@ class KIA_Subtitle {
 		// Add the input field in Classic Editor.
 		add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
 		
-		// Hide ket from Custom Fields
+		// Hide key from Custom Fields
 		add_filter( 'is_protected_meta', array( $this, 'make_key_private' ), 10, 2 );
 		
 		// Save the subtitle as post meta.
