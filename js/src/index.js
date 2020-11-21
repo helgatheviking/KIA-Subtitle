@@ -4,7 +4,7 @@ import { __ } from "@wordpress/i18n";
 import { PanelBody, TextControl } from "@wordpress/components";
 import { withSelect, withDispatch } from "@wordpress/data";
 
-let PluginMetaField = (props) => {
+let SubtitleMetaField = (props) => {
     return (
         <TextControl 
             value={props.text_metafield}
@@ -14,23 +14,25 @@ let PluginMetaField = (props) => {
     )
 }
 
-PluginMetaField = withSelect(
+SubtitleMetaField = withSelect(
     (select) => {
         return {
             text_metafield: select('core/editor').getEditedPostAttribute('meta')['kia_subtitle']
         }
     }
-)(PluginMetaField);
+)(SubtitleMetaField);
 
-PluginMetaField = withDispatch(
+SubtitleMetaField = withDispatch(
     (dispatch) => {
         return {
             onMetaFieldChange: (value) => {
-                dispatch('core/editor').editPost({meta: {kia_subtitle: value}})
+                dispatch('core/editor').editPost(
+                    { meta: { kia_subtitle: value } }
+                );
             }
         }
     }
-)(PluginMetaField);
+)(SubtitleMetaField);
 
 const PluginDocumentSettingPanelDemo = (props) => (
 	<PluginDocumentSettingPanel
@@ -38,7 +40,7 @@ const PluginDocumentSettingPanelDemo = (props) => (
 		title={__("Subtitle", "kia-subtitle")}
 		className="kia-subtitle-panel"
 	>
-		<PluginMetaField />
+		<SubtitleMetaField />
 	</PluginDocumentSettingPanel>
 );
 
