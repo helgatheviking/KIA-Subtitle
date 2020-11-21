@@ -66,6 +66,9 @@ module.exports = function(grunt) {
 				'!package-lock.json',
 				'!readme.md',
 				'!.github/**',
+				'!js/src/**',
+				'webpack.config.js',
+
 			],
 			dest: 'build/<%= pkg.name %>/'
 		},
