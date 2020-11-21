@@ -125,6 +125,9 @@ class KIA_Subtitle {
 		// Load the subtitle script.
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
 
+		// Add metaboxes for CPTs that don't support custom-fields in Gutenberg.
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+
 		// Add the input field in Classic Editor.
 		add_action( 'edit_form_after_title', array( $this, 'add_input' ) );
 		
@@ -396,28 +399,36 @@ class KIA_Subtitle {
 
 	/**
 	 * Add the text input as a metabox in Gutenberg
+	 * 
 	 * @since 2.0
-	 * @deprecated 3.1.1
 	 */
 	public function add_meta_box() {
 
-		_deprecated_function( 'KIA_Subtitle::add_meta_box', '3.1.1', 'Metaboxes are no longer needed now that there is explicit Gutenberg support.' );
-
 		global $post;
 
-        foreach ( self::get_enabled_post_types() as $post_type ) {
-            add_meta_box(
-                'some_meta_box_name',
-                __( 'Subtitle', 'kia-subtitle' ),
-                array( $this, 'render_meta_box_content' ),
-                $post_type,
-                'advanced',
-                'high',
-                array(
-			        '__back_compat_meta_box' => self::is_wp_gte( '5.3' ),
+		$current_screen = get_current_screen();
+
+		// Classic editor screens don't need metaboxes since they use the edit_form_after_title hook.
+		if ( is_callable( array( $current_screen, 'is_block_editor' ) ) && ! $current_screen->is_block_editor() ) {
+			return;
+		}
+
+        if ( $post && in_array( $post->post_type, self::get_enabled_post_types() ) && ! post_type_supports( $post->post_type, 'custom-fields' ) ) {
+
+			add_meta_box(
+				'kia_subtitle_meta_box',
+				__( 'Subtitle', 'kia-subtitle' ),
+				array( $this, 'render_meta_box_content' ),
+				$post->post_type,
+				'advanced',
+				'high',
+				array(
+				    '__block_editor_compatible_meta_box' => true,
 				 )
-            );
-        }
+			);
+
+		}
+        
     }
 
 
@@ -649,7 +660,7 @@ class KIA_Subtitle {
 		$current_screen = get_current_screen();
 				
 		// Add styles and scripts for block editor.
-    	if ( self::is_enabled_for_post_type( $current_screen->post_type ) ) {
+    	if ( self::is_enabled_for_post_type( $current_screen->post_type ) && post_type_supports( $current_screen->post_type, 'custom-fields' ) ) {
 			wp_enqueue_script( 'kia-subtitle-gutenberg-sidebar', plugins_url( 'js/dist/index.js', __FILE__ ), array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ), $this->version );
 		}
 
