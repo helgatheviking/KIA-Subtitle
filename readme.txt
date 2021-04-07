@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/fundraiser/charity/1451316
 Tags: subtitle, simple
 Requires at least: 4.5
 Tested up to: 5.7.0
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -95,6 +95,9 @@ add_filter('wp_title','kia_add_subtitle_to_wp_title');
 WPML now supports KIA Subtitle!
 
 == Changelog ==
+
+= 3.0.3 =
+* Fix: Check subtitle is set before updating.
 
 = 3.0.2 =
 * Fix: Do not load Gutenberg assets if CPT does not support 'custom-fields'. Replace with fallback metabox.
