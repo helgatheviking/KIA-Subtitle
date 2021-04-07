@@ -387,12 +387,9 @@ class KIA_Subtitle {
 
 	public function inline_style() { ?>
 		<style type="text/css">
-		#the_subtitle {
-			margin: 5px 0px;
-		}
-		#the_subtitle.prompt {
-			color: #BBB;
-		}
+			#the_subtitle {
+				margin: 5px 0px;
+			}
 		</style>
 	<?php 
 	}
