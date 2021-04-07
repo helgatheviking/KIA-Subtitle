@@ -93,7 +93,7 @@ class KIA_Subtitle {
 
 	/**
 	 * KIA_Subtitle Constructor.
-	 * @access public
+	 * 
 	 * @return KIA_Subtitle
 	 * @since  1.0
 	 */
@@ -161,6 +161,7 @@ class KIA_Subtitle {
 	/**
 	 * Delete options table entries ONLY when plugin deactivated AND deleted
 	 * register_uninstall_hook( __FILE__, array( $this,'delete_plugin_options' ) );
+	 * 
 	 * @since 1.4
 	 */
 	public static function delete_plugin_options() {
@@ -173,6 +174,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Make Plugin Translation-ready
+	 * 
 	 * @since 1.0
 	 */
 	public function load_textdomain() {
@@ -182,6 +184,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Register admin settings
+	 * 
 	 * @since 1.4
 	 */
 	public function admin_init() {
@@ -191,6 +194,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Add options page
+	 * 
 	 * @since 1.4
 	 */
 	public function add_options_page() {
@@ -199,10 +203,12 @@ class KIA_Subtitle {
 
 	/**
 	 * Display a Settings link on the main Plugins page
+	 *
+	 * @since  1.6.4
+	 * 
 	 * @param  array $links
 	 * @param  string $file
 	 * @return array
-	 * @since  1.6.4
 	 */
 	public function add_action_links( $links, $file ) {
 
@@ -216,9 +222,11 @@ class KIA_Subtitle {
 
 	/**
 	 * Add donation link
+	 *
+	 * @since 1.6.7
+	 * 
 	 * @param array $plugin_meta
 	 * @param string $plugin_file
-	 * @since 1.6.7
 	 */
 	public function add_meta_links( $plugin_meta, $plugin_file ) {
 		if( $plugin_file === plugin_basename(__FILE__) ) {
@@ -229,6 +237,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Render the Plugin options form
+	 * 
 	 * @since 1.4
 	 */
 	public function render_form() {
@@ -238,7 +247,9 @@ class KIA_Subtitle {
 	/**
 	 * Sanitize and validate input.
 	 * Accepts an array, return a sanitized array.
+	 * 
 	 * @since 1.4
+	 * 
 	 * @param array $input all posted data
 	 * @return array $clean data that is allowed to be save
 	 */
@@ -263,7 +274,9 @@ class KIA_Subtitle {
 
 	/**
 	 * Outputs the Subtitle
+	 * 
 	 * @since 1.0
+	 * 
 	 * @param  array $args. In 3.1 converted to array that accepts multiple keys.
 	 *         array(
 	 *              'post_id' => int
@@ -323,7 +336,9 @@ class KIA_Subtitle {
 
 	/**
 	 * Returns the Subtitle
+	 * 
 	 * @since 1.0
+	 * 
 	 * @param  int $post_id the post ID for which you want to retrieve the subtitle
 	 * @return string
 	 */
@@ -336,8 +351,9 @@ class KIA_Subtitle {
 	/**
 	 * Callback for the Shortcode [the-subtitle]
 	 *
-	 * @return string
 	 * @since 1.0
+	 * 
+	 * @return string
 	 */
 	public function shortcode( $atts ) {
 
@@ -357,9 +373,10 @@ class KIA_Subtitle {
 	/**
 	 * Load Script in Admin
 	 * Uses jquery to re-locate the subtitle text input to just below the Title input
+	 * 
 	 * @since 1.0
+	 * 
 	 * @param string $hook the name of the page we're on in the WP admin
-	 * @return null
 	 */
 	public function load_scripts( $hook ) {
 
@@ -382,6 +399,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Style the Subtitle's text input
+	 * 
 	 * @since 1.0
 	 */
 
@@ -457,6 +475,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Add the text input on the post screen
+	 * 
 	 * @since 1.0
 	 */
 	public function add_input() {
@@ -489,9 +508,11 @@ class KIA_Subtitle {
 
 	/**
 	 * Save the Meta Value
+	 * 
 	 * @since 1.0
+	 * 
 	 * @param  int $post_id the ID of the post we're saving
-	 * @return null
+	 * @return int
 	 */
 	public function meta_save( $post_id ) {
 
@@ -521,6 +542,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Style the Subtitle's column for WooCommerce products
+	 * 
 	 * @since 1.6.8
 	 */
 	public function subtitle_column_style() { ?>
@@ -534,7 +556,9 @@ class KIA_Subtitle {
 	
 	/**
 	 * Create the Subtitle Column
+	 * 
 	 * @since 1.1
+	 * 
 	 * @param array $columns the columns for edit screen
 	 * @return  array of new columns
 	 */
@@ -565,7 +589,9 @@ class KIA_Subtitle {
 
 	/**
 	 * Add subtitle value to column data
+	 * 
 	 * @since 1.1
+	 * 
 	 * @param string $column_name
 	 * @param int $post_id the post ID of the row
 	 * @return  string
@@ -581,6 +607,7 @@ class KIA_Subtitle {
 
 	/**
 	 * Add Quick Edit Form
+	 * 
 	 * @param string $column_name
 	 * @return  string
 	 */
@@ -608,6 +635,7 @@ class KIA_Subtitle {
 	 * Plugin Upgrade Routine
 	 * previously used options to *exclude* post types from having subtitle
 	 * going to switch to including them all by default
+	 * 
 	 * @since 1.5
 	 */
 	public function upgrade_routine() {
@@ -647,6 +675,7 @@ class KIA_Subtitle {
 	 * Load Script in Block Editor
 	 * 
 	 * @since 3.0
+	 * 
 	 * @param string $hook the name of the page we're on in the WP admin
 	 * @return null
 	 */
@@ -665,7 +694,6 @@ class KIA_Subtitle {
 	 * Register meta key for block editor.
 	 * 
 	 * @since 3.0
-	 * @return null
 	 */
 	public function register_meta() {
 
@@ -744,7 +772,9 @@ add_action( 'plugins_loaded', 'KIA_Subtitle' );
 /**
 * Public Shortcut Function to KIA_Subtitle::the_subtitle()
 * do not compete with any other subtitle plugins
+* 
 * @since 1.0
+* 
 * @param  string $before any text that should be prepended to the subtitle
 * @param  string $after any text that should be appended to the subtitle
 * @param  boolean $echo should the subtitle be printed or returned
@@ -764,7 +794,9 @@ if( ! function_exists( 'the_subtitle' ) ) {
 /**
 * Public Shortcut Function to KIA_Subtitle::get_the_subtitle($post_id)
 * do not compete with any other subtitle plugins
+* 
 * @since 1.0
+* 
 * @param  int $post_id the post ID for which you want to retrieve the subtitle
 * @return string
 */
