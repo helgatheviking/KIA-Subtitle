@@ -3,3 +3,5 @@ sidebar/
 build/
 *.afdesign
 package-lock.json
+.cache/
+*.sublime-workspace
