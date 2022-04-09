@@ -18,9 +18,31 @@ It adds a simple input field right under the title field of posts, pages and any
 
 You can also use the shortcode `[the-subtitle]` to display it within the post content.
 
+= Displaying the subtitle on the front-end =
+
+This plugin does _not_ attempt to output the subtitle. With an infinite number of themes, it is not possible for us to support that. The onus is on the user to customize their theme accordingly.
+
+This plugin creates an `the_subtitle()` template tag that can be used in your theme's templates as follows:
+
+`
+if( function_exists( 'the_subtitle' ) ) the_subtitle();
+`
+
+You can wrap the string in some markup using the *$before* and *$after* parameters.
+`
+if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+`
+
+= WooCommerce support =
+
+There is a small [bridge plugin](https://github.com/helgatheviking/kia-subtitle-woocommerce-bridge) you can install and activate to automatically display the subtitle in most WooCommerce locations. This will work for all themes that are using WooCommerce's default hooks.
+
+*NB:* It's known that the Ocean WP theme has it's own hooks in the WooCommerce templates. You will need to alter the bridge plugin... please take a look at this [support thread](https://wordpress.org/support/topic/compatibility-with-latest-wp-and-wc/#post-15456180).
+
+
 = WPML Ready =
 
-KIA Subtitle has been tested by WPML and will allow you to translate the subtitle multilingual sites.
+KIA Subtitle has been tested by WPML and will allow you to translate the subtitle on multilingual sites.
 
 = Support =
 
