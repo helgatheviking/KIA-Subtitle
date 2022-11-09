@@ -36,6 +36,6 @@
     "@wordpress/icons": "^2.4.0",
     "@wordpress/plugins": "^2.20.3",
     "jshint-stylish": "^2.2.1",
-    "npm-check-updates": "^8.0.3"
+    "npm-check-updates": "^16.3.18"
   }
 }
