@@ -17,7 +17,7 @@
     "build": "wp-scripts build"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^12.1.1",
+    "@wordpress/scripts": "^24.5.0",
     "grunt": "^1.5.3",
     "grunt-contrib-clean": "~2.0.0",
     "grunt-contrib-copy": "~1.0.0",
