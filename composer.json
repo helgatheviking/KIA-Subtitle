@@ -1,0 +1,18 @@
+{
+    "require-dev": {
+        "wp-cli/i18n-command": "^2.6"
+    },
+    "scripts": {
+        "makepot-audit": [
+            "wp --allow-root i18n make-pot . languages/kia-subtitle.pot --slug=kia-subtitle --exclude=\".github,.wordpress-org,node_modules,vendor,src,build,deploy\" --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/helgatheviking/kia-subtitle/issues/new/\"}'"
+        ],
+        "makepot": [
+            "@makepot-audit --skip-audit"
+        ]
+     },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
