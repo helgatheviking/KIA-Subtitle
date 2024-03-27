@@ -14,7 +14,8 @@
   "author": "helgatheviking",
   "devDependencies": {
     "@wordpress/dependency-extraction-webpack-plugin": "^5.5.0",
-    "grunt": "^1.5.3",
+    "@wordpress/scripts": "^27.5.0",
+    "grunt": "^1.6.1",
     "grunt-contrib-clean": "~2.0.1",
     "grunt-contrib-copy": "~1.0.0",
     "grunt-contrib-jshint": "^3.2.0",
@@ -22,6 +23,7 @@
     "grunt-text-replace": "^0.4.0",
     "grunt-wp-i18n": "~1.0.3",
     "grunt-wp-readme-to-markdown": "~2.1.0",
+    "jshint-stylish": "^2.2.1",
     "load-grunt-tasks": "~5.1.0"
   },
   "scripts": {
