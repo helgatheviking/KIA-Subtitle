@@ -37,6 +37,6 @@
     "lint:js": "wp-scripts lint-js",
     "makepot": "composer run-script makepot",
     "release": "npm run build && npm run makepot && grunt build",
-    "start": "wp-scripts start --webpack-src-dir=\"assets/js/src\" --output-path=\"assets/js/dist\" --webpack-copy-php",
+    "start": "wp-scripts start --webpack-src-dir=\"assets/js/src\" --output-path=\"assets/js/dist\" --webpack-copy-php"
   }
 }
