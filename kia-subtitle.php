@@ -383,7 +383,7 @@ class KIA_Subtitle {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		$current_screen = get_current_screen();
 		
-		wp_register_script( 'kia_subtitle', plugins_url( 'js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+		wp_register_script( 'kia_subtitle', plugins_url( 'assets/js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 		
 		// Add styles and scripts for classic editor.
     	if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) && self::is_enabled_for_post_type( $current_screen->post_type ) && method_exists( $current_screen, 'is_block_editor' ) && ! $current_screen->is_block_editor() ) {
