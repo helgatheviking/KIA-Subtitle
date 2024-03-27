@@ -118,6 +118,10 @@ WPML now supports KIA Subtitle!
 
 == Changelog ==
 
+= 4.0.0 =
+* New: Subtitle block
+* New: Introduce `kia_subtitle_sanitize_subtitle` for adding your own custom sanitization rules.
+
 = 3.0.3 =
 * Fix: Check subtitle is set before updating.
 

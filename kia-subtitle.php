@@ -534,7 +534,18 @@ class KIA_Subtitle {
 
 		// Save if set.
 		if( isset( $_POST['subtitle'] ) ) {
-			update_post_meta( $post_id, 'kia_subtitle', sanitize_post_field( 'post_title', $_POST['subtitle'], $post_id, 'db' ) );
+
+			/**
+			 * `kia_subtitle_sanitize_subtitle` filter
+			 * 
+			 * @since 4.0.0
+			 * 
+			 * @param string $subtitle the subtitle to be sanitized.
+			 * @param int $post_id the post ID of the post being saved.
+			 */
+			$sanitized_subtitle = apply_filters( 'kia_subtitle_sanitize_subtitle', wp_unslash( $_POST['subtitle'] ), $post_id );
+
+			update_post_meta( $post_id, 'kia_subtitle', sanitize_post_field( 'post_title', $sanitized_subtitle, $post_id, 'db' ) );
 		}
 
 		return $post_id;
