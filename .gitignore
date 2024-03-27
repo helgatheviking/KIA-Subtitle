@@ -6,3 +6,4 @@ package-lock.json
 .cache/
 *.sublime-workspace
 package-lock.json
+*.min.js
