@@ -2,7 +2,7 @@
 Contributors: helgatheviking
 Donate link: https://www.paypal.me/kathyisawesome
 Tags: subtitle, simple
-Requires at least: 4.5
+Requires at least: 6.1
 Tested up to: 5.9.3
 Stable tag: 3.0.3
 License: GPLv3 or later
@@ -119,6 +119,7 @@ WPML now supports KIA Subtitle!
 == Changelog ==
 
 = 4.0.0 =
+* Important: Requires WordPress 6.1
 * New: Subtitle block
 * New: Introduce `kia_subtitle_sanitize_subtitle` for adding your own custom sanitization rules.
 
