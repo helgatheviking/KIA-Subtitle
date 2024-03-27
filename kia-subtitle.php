@@ -156,6 +156,9 @@ class KIA_Subtitle {
 		// Register meta key in REST
 		add_action( 'init', array( $this, 'register_meta' ) );
 
+		// Register block
+		add_action( 'init', array( $this, 'register_block' ) );
+
 	}
 
 	/**
@@ -736,6 +739,16 @@ class KIA_Subtitle {
 
 	}
 
+
+	/**
+	 * Register block
+	 * 
+	 * @since 4.0
+	 */
+	public function register_block() {
+		register_block_type( __DIR__ . '/assets/js/dist/block' );
+	}
+	
 		
 	/*-----------------------------------------------------------------------------------*/
 	/* Helper Functions */
