@@ -1,20 +1,39 @@
-# Copyright (C) 2021 Kathy Darling
+# Copyright (C) 2024 Kathy Darling
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: KIA Subtitle 3.0.3\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kia-subtitle\n"
-"POT-Creation-Date: 2021-04-07 18:00:33+00:00\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: KIA Subtitle 4.0.0-beta.1\n"
+"Report-Msgid-Bugs-To: https://github.com/helgatheviking/kia-subtitle/issues/new/\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n 1.0.3\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-03-27T16:20:08-04:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: kia-subtitle\n"
 
-#. Plugin Name of the plugin/theme
+#. Plugin Name of the plugin
+#: includes/views/plugin-options.php:12
+#: kia-subtitle.php:204
 msgid "KIA Subtitle"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "http://www.kathyisawesome.com/436/kia-subtitle/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Adds a subtitle field to WordPress' Post editor"
+msgstr ""
+
+#. Author of the plugin
+msgid "Kathy Darling"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.kathyisawesome.com"
 msgstr ""
 
 #: includes/views/plugin-options.php:23
@@ -37,39 +56,45 @@ msgstr ""
 msgid "Unserializing instances of this class is forbidden."
 msgstr ""
 
-#: kia-subtitle.php:201
+#: kia-subtitle.php:204
 msgid "KIA Subtitle Options Page"
 msgstr ""
 
-#: kia-subtitle.php:215
+#: kia-subtitle.php:218
 msgid "Settings"
 msgstr ""
 
-#: kia-subtitle.php:233
+#: kia-subtitle.php:236
 msgid "Donate"
 msgstr ""
 
-#: kia-subtitle.php:435 kia-subtitle.php:468 kia-subtitle.php:571
-#: kia-subtitle.php:584 kia-subtitle.php:623
+#: kia-subtitle.php:438
+#: kia-subtitle.php:471
+#: kia-subtitle.php:585
+#: kia-subtitle.php:598
+#: kia-subtitle.php:637
+#: assets/js/dist/index.js:1
 msgid "Subtitle"
 msgstr ""
 
-#: kia-subtitle.php:470
+#: kia-subtitle.php:473
 msgid "Enter subtitle"
 msgstr ""
 
-#. Plugin URI of the plugin/theme
-msgid "http://www.kathyisawesome.com/436/kia-subtitle/"
+#: assets/js/dist/index.js:1
+msgid "No Subtitle"
 msgstr ""
 
-#. Description of the plugin/theme
-msgid "Adds a subtitle field to WordPress' Post editor"
+#: assets/js/dist/index.js:1
+msgid "Make subtitle a link"
 msgstr ""
 
-#. Author of the plugin/theme
-msgid "Kathy Darling"
+#: assets/js/dist/block/block.json
+msgctxt "block title"
+msgid "Subtitle"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://www.kathyisawesome.com"
+#: assets/js/dist/block/block.json
+msgctxt "block description"
+msgid "Displays the subtitle of a post, page, or any other content-type."
 msgstr ""
