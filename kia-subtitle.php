@@ -696,7 +696,23 @@ class KIA_Subtitle {
 				
 		// Add styles and scripts for block editor.
     	if ( self::is_enabled_for_post_type( $current_screen->post_type ) && post_type_supports( $current_screen->post_type, 'custom-fields' ) ) {
-			wp_enqueue_script( 'kia-subtitle-gutenberg-sidebar', plugins_url( 'js/dist/index.js', __FILE__ ), array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ), $this->version );
+
+			$script_asset_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'assets/js/dist/frontend/index.asset.php';
+			$script_asset      = file_exists( $script_asset_path )
+				? require $script_asset_path
+				: array(
+					'dependencies' => array(),
+					'version'      => $this->version,
+				);
+	
+			wp_enqueue_script(
+				'kia-subtitle-block-editor',
+				plugins_url( 'assets/js/dist/index.js', __FILE__ ),
+				$script_asset[ 'dependencies' ],
+				$script_asset[ 'version' ],
+				true
+			);
+
 		}
 
 	}

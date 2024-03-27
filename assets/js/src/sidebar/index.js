@@ -48,3 +48,4 @@ registerPlugin( 'plugin-document-setting-panel-demo', {
 	render: PluginDocumentSettingPanelDemo,
 	icon: 'edit',
 } );
+

@@ -1,5 +1,4 @@
 node_modules/
-sidebar/
 build/
 *.afdesign
 package-lock.json
@@ -7,3 +6,4 @@ package-lock.json
 *.sublime-workspace
 package-lock.json
 *.min.js
+assets/js/dist

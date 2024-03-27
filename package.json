@@ -12,10 +12,6 @@
     "url": "https://github.com/helgatheviking/kia-subtitle/issues"
   },
   "author": "helgatheviking",
-  "scripts": {
-    "start": "wp-scripts start",
-    "build": "wp-scripts build"
-  },
   "devDependencies": {
     "@wordpress/scripts": "^24.5.0",
     "grunt": "^1.5.3",
@@ -28,14 +24,14 @@
     "grunt-wp-readme-to-markdown": "~2.1.0",
     "load-grunt-tasks": "~5.1.0"
   },
-  "dependencies": {
-    "@wordpress/components": "^22.0.0",
+  "scripts": {
+    "build": "wp-scripts build --webpack-src-dir=\"assets/js/src\" --output-path=\"assets/js/dist\" --webpack-copy-php",
     "@wordpress/data": "^7.5.0",
     "@wordpress/edit-post": "^6.18.0",
     "@wordpress/i18n": "^4.21.0",
     "@wordpress/icons": "^9.12.0",
     "@wordpress/plugins": "^4.19.0",
     "jshint-stylish": "^2.2.1",
-    "npm-check-updates": "^16.3.18"
+    "start": "wp-scripts start --webpack-src-dir=\"assets/js/src\" --output-path=\"assets/js/dist\" --webpack-copy-php"
   }
 }
