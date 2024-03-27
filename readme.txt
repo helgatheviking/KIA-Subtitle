@@ -8,11 +8,11 @@ Stable tag: 3.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-The KIA Subtitle plugin allows you to easily add a subtitle to your posts.
+The KIA Subtitle plugin allows you to add a subtitle to your posts.
 
 == Description ==
 
-KIA subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
+KIA subtitle allows you to add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
 
 It adds a simple input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
