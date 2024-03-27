@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         build: {
             files: [{
                 expand: true, // Enable dynamic expansion.
-                src: ['js/*.js', '!js/*.min.js'], // Actual pattern(s) to match.
+                src: ['assets/js/*.js', '!assets/js/*.min.js'], // Actual pattern(s) to match.
                 ext: '.min.js', // Dest filepaths will have this extension.
             }, ]
         }
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         options: {
             reporter: require("jshint-stylish")
         },
-        all: ["js/*.js", "!js/*.min.js"]
+        all: ["assets/js/*.js", "!assets/js/*.min.js"]
     },
 
 	clean: {
@@ -66,13 +66,28 @@ module.exports = function(grunt) {
 				'!package-lock.json',
 				'!readme.md',
 				'!.github/**',
-				'!js/src/**',
-				'webpack.config.js',
+				'!assets/js/src/**',
+				'!webpack.config.js',
+				'!.nvmrc'
 
 			],
 			dest: 'build/<%= pkg.name %>/'
 		},
 	}, 
+
+	// Make a zipfile.
+	compress: {
+		main: {
+			options: {
+				mode: 'zip',
+				archive: 'deploy/<%= pkg.name %>-<%= pkg.version %>.zip',
+			},
+			expand: true,
+			cwd: 'build/',
+			dest: '<%= pkg.name %>',
+			src: [ '**/*' ]
+		},
+	},
 
 	// bump version numbers
 	replace: {
@@ -84,24 +99,24 @@ module.exports = function(grunt) {
 			],
 			overwrite: true,
 			replacements: [
-				{ 
-					from: /\*\*Stable tag:\*\* .*/,
-					to: "**Stable tag:** <%= pkg.version %>  "
-				},
 				{
-					from: /Stable tag: .*/,
+					from: /Stable tag:.*$/m,
 					to: "Stable tag: <%= pkg.version %>"
 				},
-				{ 
-					from: /Version:.\d+(\.\d+)+/,
+				{
+					from: /Version:.*$/m,
 					to: "Version: <%= pkg.version %>"
 				},
-				{ 
-					from: /public \$version = \'.*/,
-					to: "public $version = '<%= pkg.version %>';"
+				{
+					from: /public \$version = \'.*.'/m,
+					to: "public $version = '<%= pkg.version %>'"
 				},
 				{
-					from: /CONST VERSION = \'.*/,
+					from: /public \$version      = \'.*.'/m,
+					to: "public $version      = '<%= pkg.version %>'"
+				},
+				{
+					from: /CONST VERSION = \'.*.'/m,
 					to: "CONST VERSION = '<%= pkg.version %>';"
 				}
 			]
@@ -127,25 +142,13 @@ module.exports = function(grunt) {
 				src: ['*.php', '**/*.php', '!node_modules/**', '!build/**']
 			}
 		}
-	},
-
-	// Generate .pot file
-	makepot: {
-		target: {
-			options: {
-				domainPath: '/languages', // Where to save the POT file.
-				exclude: ['build'], // List of files or directories to ignore.
-				mainFile: '<%= pkg.name %>.php', // Main project file.
-				potFilename: '<%= pkg.name %>.pot', // Name of the POT file.
-				type: 'wp-plugin' // Type of project (wp-plugin or wp-theme).
-			}
-		}
 	}
 
 });
 
 grunt.registerTask( 'docs', [ 'wp_readme_to_markdown'] );
-grunt.registerTask( 'build', [ 'jshint', 'uglify', 'replace', 'makepot' ] );
-grunt.registerTask( 'make', [ 'build', 'clean', 'copy' ] );
-
+grunt.registerTask( 'build', [ 'replace', 'jshint', 'uglify','clean', 'copy' ] );
+grunt.registerTask( 'deploy', [ 'build', 'compress' ] );
+grunt.registerTask( 'release', [ 'deploy', 'clean' ] );
+grunt.registerTask( 'zip', [ 'clean', 'copy', 'compress' ] );
 };
