@@ -1,51 +1,45 @@
-import { registerPlugin } from '@wordpress/plugins';
+/**
+ * External Dependencies
+ */
+import {
+    PanelRow, TextControl,
+} from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { useEntityProp } from '@wordpress/core-data';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { registerPlugin } from '@wordpress/plugins';
 import { __ } from "@wordpress/i18n";
-import { PanelBody, TextControl } from "@wordpress/components";
-import { withSelect, withDispatch } from "@wordpress/data";
 
-let SubtitleMetaField = (props) => {
+const SubtitlePanel = (props) => {
+    const { getCurrentPostType } = useSelect('core/editor');
+
+    const postType = getCurrentPostType();
+
+    const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
+    const subtitle = meta?.kia_subtitle || '';
+
+    const updateSubtitle = (newValue) => {
+        setMeta({ ...meta, kia_subtitle: newValue });
+    };
+
     return (
-        <TextControl 
-            value={props.text_metafield}
-            label={__("Subtitle", "kia-subtitle")}
-            onChange={(value) => props.onMetaFieldChange(value)}
-        />
-    )
+        <PluginDocumentSettingPanel
+            name="kia-subtitle-panel"
+            title={__("Subtitle", "kia-subtitle")}
+            className="kia-subtitle-panel"
+        >
+            <PanelRow>
+                <TextControl
+                    value={subtitle}
+                    onChange={updateSubtitle}
+                />
+            </PanelRow>
+        </PluginDocumentSettingPanel>
+    );
 }
 
-SubtitleMetaField = withSelect(
-    (select) => {
-        return {
-            text_metafield: select('core/editor').getEditedPostAttribute('meta')['kia_subtitle']
-        }
-    }
-)(SubtitleMetaField);
-
-SubtitleMetaField = withDispatch(
-    (dispatch) => {
-        return {
-            onMetaFieldChange: (value) => {
-                dispatch('core/editor').editPost(
-                    { meta: { kia_subtitle: value } }
-                );
-            }
-        }
-    }
-)(SubtitleMetaField);
-
-const PluginDocumentSettingPanelDemo = (props) => (
-	<PluginDocumentSettingPanel
-		name="kia-subtitle-panel"
-		title={__("Subtitle", "kia-subtitle")}
-		className="kia-subtitle-panel"
-	>
-		<SubtitleMetaField />
-	</PluginDocumentSettingPanel>
-);
-
-registerPlugin( 'plugin-document-setting-panel-demo', {
-	render: PluginDocumentSettingPanelDemo,
+registerPlugin( 'kia-subtitle', {
+	render: SubtitlePanel,
 	icon: 'edit',
 } );
 
