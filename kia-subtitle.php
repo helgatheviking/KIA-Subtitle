@@ -166,7 +166,7 @@ class KIA_Subtitle {
 	 */
 	public static function delete_plugin_options() {
 		$options = get_option( 'kia_subtitle_options' );
-		if( isset( $options['delete'] ) && $options['delete'] ) {
+		if ( isset( $options['delete'] ) && $options['delete'] ) {
 			delete_option( 'kia_subtitle_options' );
 			delete_option( 'kia_subtitle_db_version' );
 		}
@@ -229,7 +229,7 @@ class KIA_Subtitle {
 	 * @param string $plugin_file
 	 */
 	public function add_meta_links( $plugin_meta, $plugin_file ) {
-		if( $plugin_file === plugin_basename(__FILE__) ) {
+		if ( $plugin_file === plugin_basename(__FILE__) ) {
 			$plugin_meta[] = '<a class="dashicons-before dashicons-awards" href="' . self::DONATE_URL . '" target="_blank">' . __( 'Donate', 'kia-subtitle' ) . '</a>';
 		}
 		return $plugin_meta;
@@ -262,8 +262,8 @@ class KIA_Subtitle {
 
 		$post_types = get_post_types( $args );
 
-		if( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ) {
-			if( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
+		if ( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ) {
+			if ( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
 		}
 
 		$clean['delete'] =  isset( $input['delete'] ) && $input['delete'] ? 1 : 0 ;  // Checkbox.
@@ -292,19 +292,19 @@ class KIA_Subtitle {
 
 		$new_args = array();
 
-		if( is_array( $args ) ) {
+		if ( is_array( $args ) ) {
 			$new_args = $args;
 		} else {
 			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
 			$new_args['before'] = $args;
 		}
 
-		if( is_string( $after ) ) {
+		if ( is_string( $after ) ) {
 			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
 			$new_args['after'] = $after;
 		}
 
-		if( ! is_null( $echo ) ) {
+		if ( ! is_null( $echo ) ) {
 			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
 			$new_args['echo'] = $echo;
 		}
@@ -483,7 +483,7 @@ class KIA_Subtitle {
 		global $post;
 
 		// Only show input if the post type was enabled in options.
-		if( self::is_enabled_for_post_type( $post->post_type ) ) {
+		if ( self::is_enabled_for_post_type( $post->post_type ) ) {
 			$this->render_meta_box_content( $post );
 		}
 	}
@@ -499,7 +499,7 @@ class KIA_Subtitle {
 	 * @return bool
 	 */
 	public function make_key_private( $is_private, $key ) {
-		if( 'kia_subtitle' === $key ) {
+		if ( 'kia_subtitle' === $key ) {
 			$is_private = true;
 		}
 		return $is_private;
@@ -533,7 +533,7 @@ class KIA_Subtitle {
 		}
 
 		// Save if set.
-		if( isset( $_POST['subtitle'] ) ) {
+		if ( isset( $_POST['subtitle'] ) ) {
 
 			/**
 			 * `kia_subtitle_sanitize_subtitle` filter
@@ -576,7 +576,7 @@ class KIA_Subtitle {
 	public function column_header( $columns ) {
 
 		// Insert after title column.
-		if( isset( $columns['title'] ) || isset( $columns['name'] ) ) {
+		if ( isset( $columns['title'] ) || isset( $columns['name'] ) ) {
 		
 			// The subtitle as an array for subsequent array manip.
 			$subtitle = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
@@ -623,12 +623,12 @@ class KIA_Subtitle {
 	 * @return  string
 	 */
 	public function quick_edit_custom_box( $column_name ) {
-		if( $column_name === 'subtitle' ) {
+		if ( $column_name === 'subtitle' ) {
 
 			global $post;
 
 			// Only show input if the post type was enabled in options.
-			if( self::is_enabled_for_post_type( $post->post_type ) ) { ?>
+			if ( self::is_enabled_for_post_type( $post->post_type ) ) { ?>
 
 				<label class="kia-subtitle">
 					<span class="title"><?php _e( 'Subtitle', 'kia-subtitle'   ) ?></span>
@@ -791,7 +791,7 @@ add_action( 'plugins_loaded', 'KIA_Subtitle' );
 * @param  boolean $echo should the subtitle be printed or returned
 * @return string
 */
-if( ! function_exists( 'the_subtitle' ) ) {
+if ( ! function_exists( 'the_subtitle' ) ) {
 	function the_subtitle( $before = '', $after = '', $echo = true ) {
 		$args = array(
 			'before' => $before,
@@ -811,7 +811,7 @@ if( ! function_exists( 'the_subtitle' ) ) {
 * @param  int $post_id the post ID for which you want to retrieve the subtitle
 * @return string
 */
-if( ! function_exists( 'get_the_subtitle' )) {
+if ( ! function_exists( 'get_the_subtitle' )) {
 	function get_the_subtitle( $post_id = null ) {
 		return KIA_Subtitle()->get_the_subtitle( $post_id );
 	}
