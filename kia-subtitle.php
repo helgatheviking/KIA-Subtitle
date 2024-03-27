@@ -54,7 +54,7 @@ class KIA_Subtitle {
 	* @constant string donate url
 	* @since 1.5
 	*/
-	CONST DONATE_URL = 'https://www.paypal.com/fundraiser/charity/1451316';
+	CONST DONATE_URL = 'https://www.paypal.me/kathyisawesome';
 
 	/**
 	 * Main KIA_Subtitle Instance
