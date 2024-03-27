@@ -25,12 +25,12 @@ This plugin does _not_ attempt to output the subtitle. With an infinite number o
 This plugin creates an `the_subtitle()` template tag that can be used in your theme's templates as follows:
 
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle();
+if ( function_exists( 'the_subtitle' ) ) the_subtitle();
 `
 
 You can wrap the string in some markup using the *$before* and *$after* parameters.
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
 `
 
 = WooCommerce support =
@@ -72,12 +72,12 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 
 The simplest way is with the `the_subtitle()` template tag as follows:
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle();
+if ( function_exists( 'the_subtitle' ) ) the_subtitle();
 `
 
 You can wrap the string in some markup using the *$before* and *$after* parameters.
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
 `
 
 = Where do I add this code? =

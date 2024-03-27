@@ -33,9 +33,9 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add the 'the_subtitle()' tag to your theme:
-		`if(function_exists('the_subtitle')) the_subtitle();`
+		`if (function_exists('the_subtitle')) the_subtitle();`
 1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
-		`if(function_exists('the_subtitle')) $subtitle = get_the_subtitle( $post_id );`
+		`if (function_exists('the_subtitle')) $subtitle = get_the_subtitle( $post_id );`
 1. As of version 1.2 `the_subtitle` accepts 3 parameters: `the_subtitle( $before = Null, $after = Null, $echo = True );`
 1. As of version 1.3.4, there is a filter for `the_subtitle`
 
@@ -49,12 +49,12 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 
 The simplest way is with the `the_subtitle()` template tag as follows:
 
-	if( function_exists( 'the_subtitle' ) ) the_subtitle();
+	if ( function_exists( 'the_subtitle' ) ) the_subtitle();
 
 
 You can wrap the string in some markup using the *$before* and *$after* parameters.
 
-	if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+	if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
 
 
 ### Where do I add this code? ###
@@ -74,7 +74,7 @@ As an *example* if you wanted to display the subtitle on standard single posts, 
 		<?php the_post_thumbnail(); ?>
 		<?php if ( is_single() ) : ?>
 		<h1 class="entry-title"><?php the_title(); ?></h1>
-			<?php if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
+			<?php if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' ); ?>
 		<?php else : ?>
 		<h1 class="entry-title">
 			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentytwelve' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
@@ -120,7 +120,7 @@ WooCommerce calls their product title column "name" and completely removes the d
 	add_filter( 'manage_product_posts_columns', 'kia_reorder_woocommerce_columns', 99 );
 	
 	function kia_reorder_woocommerce_columns( $columns ){
-		if( isset( $columns['subtitle'] ) && isset( $columns['name'] ) ){
+		if ( isset( $columns['subtitle'] ) && isset( $columns['name'] ) ){
 	
 			// remove and stash the subtitle column
 			$subtitle = array( 'subtitle' => $columns['subtitle'] );
