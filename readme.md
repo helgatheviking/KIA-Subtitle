@@ -1,18 +1,15 @@
 # KIA Subtitle #
-**Contributors:** [helgatheviking](https://github.com/helgatheviking)  
-**Donate link:** https://www.paypal.com/fundraiser/charity/1451316  
-**Tags:** subtitle, simple  
-**Requires at least:** 4.5  
-**Tested up to:** 5.4.0  
-**Stable tag:** 3.0.3  
-**License:** GPLv3 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
-The KIA Subtitle plugin allows you to easily add a subtitle to your posts.
+The KIA Subtitle plugin allows you to add a subtitle to your posts.
+
+This is a developmental repo. Clone this repo and run `npm install && npm run build`   
+OR    
+|[Download latest release](https://github.com/helgatheviking/KIA-Subtitle/releases/latest)|
+
 
 ## Description ##
 
-KIA subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
+KIA subtitle allows you to add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
 
 It adds a simple input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
@@ -135,118 +132,3 @@ WooCommerce calls their product title column "name" and completely removes the d
 		return $columns;
 	}
 
-
-## Changelog ##
-
-### 1.6.8 ###
-* Add width to column for WooCommerce products
-
-### 1.6.7 ###
-* Update donation link
-* Update required and tested against versions
-* Fix column location for WooCommerce products
-* Minify admin script
-
-### 1.6.6 ###
-* Insert subtitle after title, or at end if subtitle does not exist
-
-### 1.6.5 ###
-* Add wpml-config.xml for compatibility with WPML
-
-### 1.6.4 ###
-* Add link to plugin settings
-* testing against WP4.4
-
-### 1.6.3 ###
-* fix docblock
-
-### 1.6.2 ###
-* save subtitles on attachments. Apparently attachments don't fire save_post hook
-
-### 1.6.1 ###
-* resolve PHP warnings in strict-standards mode
-
-### 1.6 ###
-* switch to KIA_Subtitle() instance versus global variable
-
-### 1.5.4 ###
-* restored accidentally deleted script for quick edit
-
-### 1.5.4 ###
-* remove unneeded script code now that input is using 'placeholder'
-* remove tabindex on input (wasn't doing anything anyway)
-* add script to tab from title to subtitle, to content. props @Giuseppe Mazzapica
-* add readme.md
-
-### 1.5.3 ###
-* verify WP3.8 compatibility
-* remove backcompat on edit_form_after_title hook
-* better docbloc
-
-### 1.5.2 ###
-* Move changelog back to readme.txt #facepalm
-
-### 1.5.1 ###
-* Switch sanitization to less restrictive sanitize_post_field, which matches how the main post title is sanitized by WordPress
-* Move changelog to separate file
-
-### 1.5 ###
-* Switch options to "check to enable" instead of "check to disable" (all post types are enabled by default)
-* Include upgrade routine to switch any old options to new format
-* Update FAQ with example for Twenty Twelve
-
-### 1.4.3 ###
-* Adjust $args for get_post_types()
-* Fix buggy conditional logic for users with no post types excluded
-
-### 1.4.2 ###
-* Adjust $args for get_post_types()
-* switch 'kia_subtitle_post_types' filter to 'kia_subtitle_post_type_args'
-
-### 1.4.1 ###
-* Adjust $args for get_post_types()
-* add 'kia_subtitle_post_types' filter to plugin's options
-
-### 1.4 ###
-* Add ability to exclude subtitle from certain post types
-
-### 1.3.4 ###
-* Add filter `the_subtitle` to allow subtitle content to be modified
-
-### 1.3.3 ###
-* Fix Notice: Undefined property
-* Clean up enqueue scripts
-
-### 1.3.2 ###
-* Fix for back-compatibility
-
-### 1.3.1 ###
-* Add example code to FAQ
-
-### 1.3 ###
-* Better escaping of HTML attributes thanks to @nealpoole
-* Take advantage of new action hook in WP 3.5
-
-### 1.2 ###
-* Mimic the_title(), so the_subtitle() now accepts before, after and echo parameters:
-	`the_subtitle( $before = '', $after = '', $echo = true )`
-
-### 1.1.2 ###
-* Fixed quick edit refresh ( second click on quick edit for same item and the value still reflected the original )
-
-### 1.1.1 ###
-* Fix ability to remove subtitle
-
-### 1.1 ###
-* Add column to edit.php screen
-* Add subtitle to quick edit
-* Load script on edit.php screen again
-
-### 1.0.2 ###
-* update donate link
-
-### 1.0.1 ###
-* Don't load script on edit.php screen
-
-### 1.0 ###
-* Initial release.

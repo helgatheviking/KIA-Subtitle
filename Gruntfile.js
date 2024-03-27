@@ -94,7 +94,6 @@ module.exports = function(grunt) {
 		Version: {
 			src: [
 				'readme.txt',
-				'readme.md',
 				'<%= pkg.name %>.php'
 			],
 			overwrite: true,
@@ -123,15 +122,6 @@ module.exports = function(grunt) {
 		}
 	},
 
-    // Documentation
-	wp_readme_to_markdown: {
-		convert:{
-			files: {
-				'readme.md': 'readme.txt'
-			},
-		},
-	},
-
 	// # Internationalization 
 
 	// Add text domain
@@ -146,7 +136,6 @@ module.exports = function(grunt) {
 
 });
 
-grunt.registerTask( 'docs', [ 'wp_readme_to_markdown'] );
 grunt.registerTask( 'build', [ 'replace', 'jshint', 'uglify','clean', 'copy' ] );
 grunt.registerTask( 'deploy', [ 'build', 'compress' ] );
 grunt.registerTask( 'release', [ 'deploy', 'clean' ] );
