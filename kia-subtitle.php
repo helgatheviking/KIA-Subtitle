@@ -1,29 +1,29 @@
 <?php
-/*
-Plugin Name: KIA Subtitle
-Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
-Description: Adds a subtitle field to WordPress' Post editor
-Version: 3.0.3
-Author: Kathy Darling
-Author URI: http://www.kathyisawesome.com
-License: GPL2
-Text Domain: kia-subtitle
-
-Copyright 2017  Kathy Darling  (email: kathy@kathyisawesome.com)
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as
-published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+/**
+ * Plugin Name: KIA Subtitle
+ * Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
+ * Description: Adds a subtitle field to WordPress' Post editor
+ * Author: Kathy Darling
+ * Version: 3.0.3
+ * Author URI: http://www.kathyisawesome.com
+ * License: GPL3
+ * Text Domain: kia-subtitle
+ * 
+ * Copyright 2024 Kathy Darling				
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License, version 2, as
+ * published by the Free Software Foundation.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 
 
 // Don't load directly.
