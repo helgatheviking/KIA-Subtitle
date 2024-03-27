@@ -14,7 +14,9 @@
   "author": "helgatheviking",
   "devDependencies": {
     "@wordpress/dependency-extraction-webpack-plugin": "^5.5.0",
+    "@wordpress/icons": "^9.45.0",
     "@wordpress/scripts": "^27.5.0",
+    "classnames": "^2.5.1",
     "grunt": "^1.6.1",
     "grunt-contrib-clean": "~2.0.1",
     "grunt-contrib-compress": "^2.0.0",
