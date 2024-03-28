@@ -11,7 +11,7 @@ OR
 
 KIA subtitle allows you to add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
 
-It adds a simple input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
+It adds an input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
 You can also use the shortcode `[the-subtitle]` to display it within the post content.
 
@@ -30,7 +30,7 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add the 'the_subtitle()' tag to your theme:
-		`if (function_exists( 'the_subtitle' ) ) the_subtitle();`
+		`if ( function_exists( 'the_subtitle' ) ) the_subtitle();`
 1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
 		`if (function_exists( 'the_subtitle' ) ) $subtitle = get_the_subtitle( $post_id );`
 1. As of version 1.2 `the_subtitle` accepts 3 parameters: `the_subtitle( $before = Null, $after = Null, $echo = True );`
@@ -44,7 +44,7 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 
 ### How do I display the subtitle in my theme? ###
 
-The simplest way is with the `the_subtitle()` template tag as follows:
+The intended way is with the `the_subtitle()` template tag as follows:
 
 	if ( function_exists( 'the_subtitle' ) ) the_subtitle();
 
