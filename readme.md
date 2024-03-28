@@ -53,6 +53,43 @@ You can wrap the string in some markup using the *$before* and *$after* paramete
 
 	if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
 
+As an absolute worst case fallback you could also add the following snippet to your functions.php in order to prepend the subtitle to the content. 
+
+	/**
+	* Prepend the subtitle to the post content. 
+	*
+	* @param string $content The post content
+	* @return string
+	*/
+	function kia_prepend_subtitle_to_content( $content ) {
+		$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+
+		if ( ! empty( $subtitle ) ) {
+			$content = '<h2 class="subtitle">' . wp_kses_post( $subtitle ) . '</h2>' . $content;
+		}
+
+		return $content;
+	}
+	add_filter( 'the_content', 'kia_prepend_subtitle_to_content' );
+
+You could also filter `the_title` and but it would have to be part of the post title's markup and could not have it's own markup as nesting header elements is invalid HTML markup.
+
+	/**
+	* Append the subtitle to the title. 
+	*
+	* @param string $title The post title
+	* @return string
+	*/
+	function kia_append_subtitle_to_title( $title ) {
+		$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+
+		if ( ! empty( $subtitle ) ) {
+			$title .= ' &mdash; ' . wp_kses_post( $subtitle );
+		}
+
+		return $title;
+	}
+	add_filter( 'the_title', 'kia_append_subtitle_to_title' );
 
 ### Where do I add this code? ###
 
