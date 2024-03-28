@@ -32,9 +32,9 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 1. Add the 'the_subtitle()' tag to your theme:
 		`if ( function_exists( 'the_subtitle' ) ) the_subtitle();`
 1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
-		`if (function_exists( 'the_subtitle' ) ) $subtitle = get_the_subtitle( $post_id );`
 1. As of version 1.2 `the_subtitle` accepts 3 parameters: `the_subtitle( $before = Null, $after = Null, $echo = True );`
 1. As of version 1.3.4, there is a filter for `the_subtitle`
+		`if ( function_exists( 'the_subtitle' ) ) $subtitle = get_the_subtitle( $post_id );`
 
 ## Screenshots ##
 
