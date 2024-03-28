@@ -1,5 +1,5 @@
 # Copyright (C) 2024 Kathy Darling
-# This file is distributed under the GPL2.
+# This file is distributed under the GPL3.
 msgid ""
 msgstr ""
 "Project-Id-Version: KIA Subtitle 4.0.0-beta.1\n"
@@ -9,14 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-27T16:20:08-04:00\n"
+"POT-Creation-Date: 2024-03-27T22:13:38-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: kia-subtitle\n"
 
 #. Plugin Name of the plugin
 #: includes/views/plugin-options.php:12
-#: kia-subtitle.php:204
+#: kia-subtitle.php:203
 msgid "KIA Subtitle"
 msgstr ""
 
@@ -48,36 +48,36 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: kia-subtitle.php:82
+#: kia-subtitle.php:81
 msgid "Cloning this object is forbidden."
 msgstr ""
 
-#: kia-subtitle.php:91
+#: kia-subtitle.php:90
 msgid "Unserializing instances of this class is forbidden."
 msgstr ""
 
-#: kia-subtitle.php:204
+#: kia-subtitle.php:203
 msgid "KIA Subtitle Options Page"
 msgstr ""
 
-#: kia-subtitle.php:218
+#: kia-subtitle.php:217
 msgid "Settings"
 msgstr ""
 
-#: kia-subtitle.php:236
+#: kia-subtitle.php:235
 msgid "Donate"
 msgstr ""
 
-#: kia-subtitle.php:438
-#: kia-subtitle.php:471
-#: kia-subtitle.php:585
-#: kia-subtitle.php:598
-#: kia-subtitle.php:637
+#: kia-subtitle.php:437
+#: kia-subtitle.php:470
+#: kia-subtitle.php:584
+#: kia-subtitle.php:597
+#: kia-subtitle.php:636
 #: assets/js/dist/index.js:1
 msgid "Subtitle"
 msgstr ""
 
-#: kia-subtitle.php:473
+#: kia-subtitle.php:472
 msgid "Enter subtitle"
 msgstr ""
 
