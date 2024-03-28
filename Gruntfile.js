@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 				'!.nvmrc'
 
 			],
-			dest: 'build/<%= pkg.name %>/'
+			dest: 'build/'
 		},
 	}, 
 
