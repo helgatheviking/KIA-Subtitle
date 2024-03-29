@@ -64,6 +64,7 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 == Screenshots ==
 
 1. This is what the input will look like in the Block Editor.
+1. Insert a subtitle block into your block theme's template, such as the Singular template for displaying Posts.
 1. This is what the input will look like in the Classic Editor.
 
 == Frequently Asked Questions ==
