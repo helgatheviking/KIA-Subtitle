@@ -1,36 +1,81 @@
 === KIA Subtitle ===
 Contributors: helgatheviking
-Donate link: https://www.paypal.com/fundraiser/charity/1451316
+Donate link: https://www.paypal.me/kathyisawesome
 Tags: subtitle, simple
-Requires at least: 4.5
-Tested up to: 5.9.3
-Stable tag: 3.0.3
+Requires at least: 6.1
+Tested up to: 6.5.0
+Stable tag: 4.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-The KIA Subtitle plugin allows you to easily add a subtitle to your posts.
+The KIA Subtitle plugin allows you to add a subtitle to your posts.
 
 == Description ==
 
-KIA subtitle allows you to easily add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
+KIA subtitle allows you to add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using the Subtitle block or the `the_subtitle()` or `get_the_subtitle() template tags`.
 
-It adds a simple input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
+It adds an input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
-You can also use the shortcode `[the-subtitle]` to display it within the post content.
+You can also use the Subtitle block or the shortcode `[the-subtitle]` to display it within the post content.
 
-= Displaying the subtitle on the front-end =
+== Installation ==
+
+1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. *For Block Themes:* Add the subtitle block to your template in the Site Editor
+1. *For Classic Themes:* Add the 'the_subtitle()' tag to your theme
+
+== Site Editor ==
+
+The plugin provides a Subtitle block in the editor. In the post editor, this doesn't make a lot of sense, but mimics the core Title block. The ideal use case for the Subtitle block is when editing your theme
+
+1. Click Edit Site in the WordPress toolbar
+1. Select the template you wish to edit, commonly this might be called Single Post, or Singular.
+1. Insert the Subtitle block where needed, commonly right after the Title block.
+
+== Template Tags ==
+
+The plugin provides two template tags that can be used to customize your theme as desired.
+
+= `the_subtitle( string $before = ”, string $after = ”, bool $display = true ): void|string` =
+
+Displays or retrieves the current post subtitle with optional markup.
+
+*Parameters*
+
+`$before` `string` `optional`
+    Markup to prepend to the title.
+    Default: `''`
+
+`$after` `string` `optional`
+    Markup to append to the title.
+    Default: `''`
+
+`$display` `bool` `optional`
+    Whether to echo or return the title. Default true for echo.
+    Default: `true`
+
+= `get_the_subtitle( int|WP_Post $post ): string` =
+
+Retrieves the post subtitle.
+
+*Parameters*
+
+`$post` `int|WP_Post` `optional`
+    Post ID or WP_Post object.
+    Default: global `$post` object.
 
 This plugin does _not_ attempt to output the subtitle. With an infinite number of themes, it is not possible for us to support that. The onus is on the user to customize their theme accordingly.
 
 This plugin creates an `the_subtitle()` template tag that can be used in your theme's templates as follows:
 
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle();
+if ( function_exists( 'the_subtitle' ) ) the_subtitle();
 `
 
 You can wrap the string in some markup using the *$before* and *$after* parameters.
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
 `
 
 = WooCommerce support =
@@ -50,34 +95,67 @@ Support is handled in the [WordPress forums](http://wordpress.org/support/plugin
 
 Please report any bugs, errors, warnings, code problems to [Github](https://github.com/helgatheviking/KIA-Subtitle/issues)
 
-== Installation ==
-
-1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Add the 'the_subtitle()' tag to your theme:
-		`if(function_exists('the_subtitle')) the_subtitle();`
-1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
-		`if(function_exists('the_subtitle')) $subtitle = get_the_subtitle( $post_id );`
-1. As of version 1.2 `the_subtitle` accepts 3 parameters: `the_subtitle( $before = Null, $after = Null, $echo = True );`
-1. As of version 1.3.4, there is a filter for `the_subtitle`
-
 == Screenshots ==
 
 1. This is what the input will look like in the Block Editor.
+1. Insert a subtitle block into your block theme's template, such as the Singular template for displaying Posts.
 1. This is what the input will look like in the Classic Editor.
 
 == Frequently Asked Questions ==
 
 = How do I display the subtitle in my theme? =
 
-The simplest way is with the `the_subtitle()` template tag as follows:
+The intended way is with the `the_subtitle()` template tag as follows:
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle();
+if ( function_exists( 'the_subtitle' ) ) the_subtitle();
 `
 
 You can wrap the string in some markup using the *$before* and *$after* parameters.
 `
-if( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
+`
+
+As an absolute worst case fallback you could also add the following snippet to your functions.php in order to prepend the subtitle to the content. 
+`
+/**
+ * Prepend the subtitle to the post content. 
+ *
+ * @param string $content The post content
+ * @return string
+ */
+function kia_prepend_subtitle_to_content( $content ) {
+	if ( ! is_admin() ) {
+
+		$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+
+		if ( ! empty( $subtitle ) ) {
+			$content = '<h2 class="subtitle">' . wp_kses_post( $subtitle ) . '</h2>' . $content;
+		}
+	}
+	return $content;
+}
+add_filter( 'the_content', 'kia_prepend_subtitle_to_content' );
+`
+
+You could also filter `the_title` and but it would have to be part of the post title's markup and could not have it's own markup as nesting header elements is invalid HTML markup.
+`
+/**
+ * Append the subtitle to the title. 
+ *
+ * @param string $title The post title
+ * @return string
+ */
+function kia_append_subtitle_to_title( $title ) {
+	if ( ! is_admin() ) {
+		$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+
+		if ( ! empty( $subtitle ) ) {
+			$title .= ' &mdash; ' . wp_kses_post( $subtitle );
+		}
+	}
+	return $title;
+}
+add_filter( 'the_title', 'kia_append_subtitle_to_title' );
 `
 
 = Where do I add this code? =
@@ -106,17 +184,22 @@ Yes! You can use this [bridge plugin](https://github.com/helgatheviking/kia-subt
 = Can I add the subtitle to the Page Title Meta tag =
 `
 function kia_add_subtitle_to_wp_title( $title ) {
-	if ( is_single() && function_exists('get_the_subtitle')) && $subtitle == get_the_subtitle( get_the_ID() ) ) {
+	if ( is_single() && function_exists( 'get_the_subtitle' ) ) && $subtitle == get_the_subtitle( get_the_ID() ) ) {
 	$title .= $subtitle;
 	}
 }
-add_filter('wp_title','kia_add_subtitle_to_wp_title');
+add_filter( 'wp_title', 'kia_add_subtitle_to_wp_title' );
 `
 
 = Is this translation ready? =
 WPML now supports KIA Subtitle!
 
 == Changelog ==
+
+= 4.0.0 =
+* Important: Requires WordPress 6.1
+* New: Subtitle block
+* New: Introduce `kia_subtitle_sanitize_subtitle` for adding your own custom sanitization rules.
 
 = 3.0.3 =
 * Fix: Check subtitle is set before updating.

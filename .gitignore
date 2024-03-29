@@ -1,8 +1,10 @@
 node_modules/
-sidebar/
 build/
 *.afdesign
 package-lock.json
 .cache/
 *.sublime-workspace
 package-lock.json
+*.min.js
+assets/js/dist
+deploy/

@@ -1,13 +1,14 @@
-const path = require('path');
-const defaultConfig = require("./node_modules/@wordpress/scripts/config/webpack.config");
+const defaultConfig                     = require( '@wordpress/scripts/config/webpack.config' );
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+const path                              = require( 'path' );
 
 module.exports = {
-  ...defaultConfig,
-	entry: {
-		index: path.resolve( __dirname, 'js/src', 'index.js' ),
-	},
-	output: {
-		filename: '[name].js',
-		path: path.resolve( __dirname, 'js/dist' ),
-	},
+	...defaultConfig,
+	plugins: [
+		...defaultConfig.plugins.filter(
+			( plugin ) =>
+				plugin.constructor.name !== 'DependencyExtractionWebpackPlugin'
+		),
+		new DependencyExtractionWebpackPlugin(),
+	],
 };

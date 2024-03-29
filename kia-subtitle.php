@@ -1,30 +1,29 @@
 <?php
-/*
-Plugin Name: KIA Subtitle
-Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
-Description: Adds a subtitle field to WordPress' Post editor
-Version: 3.0.3
-Author: Kathy Darling
-Author URI: http://www.kathyisawesome.com
-License: GPL2
-Text Domain: kia-subtitle
-
-Copyright 2017  Kathy Darling  (email: kathy@kathyisawesome.com)
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as
-published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-
+/**
+ * Plugin Name: KIA Subtitle
+ * Plugin URI: http://www.kathyisawesome.com/436/kia-subtitle/
+ * Description: Adds a subtitle field to WordPress' Post editor
+ * Author: Kathy Darling
+ * Version: 4.0.0
+ * Author URI: http://www.kathyisawesome.com
+ * License: GPL3
+ * Text Domain: kia-subtitle
+ * 
+ * Copyright 2024 Kathy Darling				
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License, version 2, as
+ * published by the Free Software Foundation.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 
 // Don't load directly.
 if ( ! function_exists( 'is_admin' ) ) {
@@ -48,13 +47,13 @@ class KIA_Subtitle {
 	 * @var KIA_Subtitle The single instance of the class
 	 * @since 1.6
 	 */
-	public $version = '3.0.3';
+	public $version = '4.0.0';
 
 	/**
 	* @constant string donate url
 	* @since 1.5
 	*/
-	CONST DONATE_URL = 'https://www.paypal.com/fundraiser/charity/1451316';
+	CONST DONATE_URL = 'https://www.paypal.me/kathyisawesome';
 
 	/**
 	 * Main KIA_Subtitle Instance
@@ -156,6 +155,9 @@ class KIA_Subtitle {
 		// Register meta key in REST
 		add_action( 'init', array( $this, 'register_meta' ) );
 
+		// Register block
+		add_action( 'init', array( $this, 'register_block' ) );
+
 	}
 
 	/**
@@ -166,7 +168,7 @@ class KIA_Subtitle {
 	 */
 	public static function delete_plugin_options() {
 		$options = get_option( 'kia_subtitle_options' );
-		if( isset( $options['delete'] ) && $options['delete'] ) {
+		if ( isset( $options['delete'] ) && $options['delete'] ) {
 			delete_option( 'kia_subtitle_options' );
 			delete_option( 'kia_subtitle_db_version' );
 		}
@@ -229,7 +231,7 @@ class KIA_Subtitle {
 	 * @param string $plugin_file
 	 */
 	public function add_meta_links( $plugin_meta, $plugin_file ) {
-		if( $plugin_file === plugin_basename(__FILE__) ) {
+		if ( $plugin_file === plugin_basename(__FILE__) ) {
 			$plugin_meta[] = '<a class="dashicons-before dashicons-awards" href="' . self::DONATE_URL . '" target="_blank">' . __( 'Donate', 'kia-subtitle' ) . '</a>';
 		}
 		return $plugin_meta;
@@ -262,8 +264,8 @@ class KIA_Subtitle {
 
 		$post_types = get_post_types( $args );
 
-		if( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ) {
-			if( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
+		if ( isset( $input['post_types'] ) && is_array( $input['post_types'] ) ) foreach ( $input['post_types'] as $post_type ) {
+			if ( in_array( $post_type, $post_types ) ) $clean['post_types'][] = $post_type;
 		}
 
 		$clean['delete'] =  isset( $input['delete'] ) && $input['delete'] ? 1 : 0 ;  // Checkbox.
@@ -292,19 +294,19 @@ class KIA_Subtitle {
 
 		$new_args = array();
 
-		if( is_array( $args ) ) {
+		if ( is_array( $args ) ) {
 			$new_args = $args;
 		} else {
 			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
 			$new_args['before'] = $args;
 		}
 
-		if( is_string( $after ) ) {
+		if ( is_string( $after ) ) {
 			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
 			$new_args['after'] = $after;
 		}
 
-		if( ! is_null( $echo ) ) {
+		if ( ! is_null( $echo ) ) {
 			_deprecated_argument( __FUNCTION__, '3.1.0', 'All arguments are now passed as a single array parameter.' );
 			$new_args['echo'] = $echo;
 		}
@@ -383,7 +385,7 @@ class KIA_Subtitle {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		$current_screen = get_current_screen();
 		
-		wp_register_script( 'kia_subtitle', plugins_url( 'js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+		wp_register_script( 'kia_subtitle', plugins_url( 'assets/js/subtitle'. $suffix . '.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 		
 		// Add styles and scripts for classic editor.
     	if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) && self::is_enabled_for_post_type( $current_screen->post_type ) && method_exists( $current_screen, 'is_block_editor' ) && ! $current_screen->is_block_editor() ) {
@@ -483,7 +485,7 @@ class KIA_Subtitle {
 		global $post;
 
 		// Only show input if the post type was enabled in options.
-		if( self::is_enabled_for_post_type( $post->post_type ) ) {
+		if ( self::is_enabled_for_post_type( $post->post_type ) ) {
 			$this->render_meta_box_content( $post );
 		}
 	}
@@ -499,7 +501,7 @@ class KIA_Subtitle {
 	 * @return bool
 	 */
 	public function make_key_private( $is_private, $key ) {
-		if( 'kia_subtitle' === $key ) {
+		if ( 'kia_subtitle' === $key ) {
 			$is_private = true;
 		}
 		return $is_private;
@@ -533,8 +535,19 @@ class KIA_Subtitle {
 		}
 
 		// Save if set.
-		if( isset( $_POST['subtitle'] ) ) {
-			update_post_meta( $post_id, 'kia_subtitle', sanitize_post_field( 'post_title', $_POST['subtitle'], $post_id, 'db' ) );
+		if ( isset( $_POST['subtitle'] ) ) {
+
+			/**
+			 * `kia_subtitle_sanitize_subtitle` filter
+			 * 
+			 * @since 4.0.0
+			 * 
+			 * @param string $subtitle the subtitle to be sanitized.
+			 * @param int $post_id the post ID of the post being saved.
+			 */
+			$sanitized_subtitle = apply_filters( 'kia_subtitle_sanitize_subtitle', wp_unslash( $_POST['subtitle'] ), $post_id );
+
+			update_post_meta( $post_id, 'kia_subtitle', sanitize_post_field( 'post_title', $sanitized_subtitle, $post_id, 'db' ) );
 		}
 
 		return $post_id;
@@ -565,7 +578,7 @@ class KIA_Subtitle {
 	public function column_header( $columns ) {
 
 		// Insert after title column.
-		if( isset( $columns['title'] ) || isset( $columns['name'] ) ) {
+		if ( isset( $columns['title'] ) || isset( $columns['name'] ) ) {
 		
 			// The subtitle as an array for subsequent array manip.
 			$subtitle = array( 'subtitle' => __( 'Subtitle', 'kia-subtitle' ) );
@@ -612,12 +625,12 @@ class KIA_Subtitle {
 	 * @return  string
 	 */
 	public function quick_edit_custom_box( $column_name ) {
-		if( $column_name === 'subtitle' ) {
+		if ( $column_name === 'subtitle' ) {
 
 			global $post;
 
 			// Only show input if the post type was enabled in options.
-			if( self::is_enabled_for_post_type( $post->post_type ) ) { ?>
+			if ( self::is_enabled_for_post_type( $post->post_type ) ) { ?>
 
 				<label class="kia-subtitle">
 					<span class="title"><?php _e( 'Subtitle', 'kia-subtitle'   ) ?></span>
@@ -682,10 +695,26 @@ class KIA_Subtitle {
 	public function enqueue_assets( $hook ) {
 
 		$current_screen = get_current_screen();
-				
+		
 		// Add styles and scripts for block editor.
-    	if ( self::is_enabled_for_post_type( $current_screen->post_type ) && post_type_supports( $current_screen->post_type, 'custom-fields' ) ) {
-			wp_enqueue_script( 'kia-subtitle-gutenberg-sidebar', plugins_url( 'js/dist/index.js', __FILE__ ), array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ), $this->version );
+    	if ( 'site-editor' === $current_screen->base || ( self::is_enabled_for_post_type( $current_screen->post_type ) && post_type_supports( $current_screen->post_type, 'custom-fields' ) ) ) {
+
+			$script_asset_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'assets/js/dist/frontend/index.asset.php';
+			$script_asset      = file_exists( $script_asset_path )
+				? require $script_asset_path
+				: array(
+					'dependencies' => array(),
+					'version'      => $this->version,
+				);
+	
+			wp_enqueue_script(
+				'kia-subtitle-block-editor',
+				plugins_url( 'assets/js/dist/index.js', __FILE__ ),
+				$script_asset[ 'dependencies' ],
+				$script_asset[ 'version' ],
+				true
+			);
+
 		}
 
 	}
@@ -709,6 +738,16 @@ class KIA_Subtitle {
 
 	}
 
+
+	/**
+	 * Register block
+	 * 
+	 * @since 4.0
+	 */
+	public function register_block() {
+		register_block_type( __DIR__ . '/assets/js/dist/block' );
+	}
+	
 		
 	/*-----------------------------------------------------------------------------------*/
 	/* Helper Functions */
@@ -780,7 +819,7 @@ add_action( 'plugins_loaded', 'KIA_Subtitle' );
 * @param  boolean $echo should the subtitle be printed or returned
 * @return string
 */
-if( ! function_exists( 'the_subtitle' ) ) {
+if ( ! function_exists( 'the_subtitle' ) ) {
 	function the_subtitle( $before = '', $after = '', $echo = true ) {
 		$args = array(
 			'before' => $before,
@@ -800,7 +839,7 @@ if( ! function_exists( 'the_subtitle' ) ) {
 * @param  int $post_id the post ID for which you want to retrieve the subtitle
 * @return string
 */
-if( ! function_exists( 'get_the_subtitle' )) {
+if ( ! function_exists( 'get_the_subtitle' )) {
 	function get_the_subtitle( $post_id = null ) {
 		return KIA_Subtitle()->get_the_subtitle( $post_id );
 	}
