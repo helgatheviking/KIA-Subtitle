@@ -27,7 +27,7 @@ You can also use the Subtitle block or the shortcode `[the-subtitle]` to display
 
 == Site Editor ==
 
-The plugin provides a Subtitle block in the editor. In the post editor, this doesn't make a lot of sense, but mimics the core Title block. The idea use case for the Subtitle block is when editing your theme
+The plugin provides a Subtitle block in the editor. In the post editor, this doesn't make a lot of sense, but mimics the core Title block. The ideal use case for the Subtitle block is when editing your theme
 
 1. Click Edit Site in the WordPress toolbar
 1. Select the template you wish to edit, commonly this might be called Single Post, or Singular.
