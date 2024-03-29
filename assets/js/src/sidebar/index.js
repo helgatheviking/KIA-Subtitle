@@ -1,9 +1,7 @@
 /**
  * External Dependencies
  */
-import {
-    PanelRow, TextControl,
-} from '@wordpress/components';
+import { TextControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
@@ -33,12 +31,10 @@ const SubtitlePanel = (props) => {
             title={__("Subtitle", "kia-subtitle")}
             className="kia-subtitle-panel"
         >
-            <PanelRow>
-                <TextControl
-                    value={subtitle}
-                    onChange={updateSubtitle}
-                />
-            </PanelRow>
+            <TextControl
+                value={subtitle}
+                onChange={updateSubtitle}
+            />
         </PluginDocumentSettingPanel>
     );
 }
