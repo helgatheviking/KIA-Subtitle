@@ -35,7 +35,7 @@ The plugin provides a Subtitle block in the editor. In the post editor, this doe
 
 == Template Tags ==
 
-The plugin provides two template tags that can be used to customize your theme as desired.
+This plugin does _not_ attempt to output the subtitle. With an infinite number of themes, it is not possible for us to support that. The onus is on the user to customize their theme accordingly. The plugin provides two template tags that can be used to customize your theme as desired.
 
 = `the_subtitle( string $before = ”, string $after = ”, bool $display = true ): void|string` =
 
@@ -55,6 +55,11 @@ Displays or retrieves the current post subtitle with optional markup.
     Whether to echo or return the title. Default true for echo.
     Default: `true`
 
+
+Example usage:
+
+`if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );`
+
 = `get_the_subtitle( int|WP_Post $post ): string` =
 
 Retrieves the post subtitle.
@@ -65,17 +70,7 @@ Retrieves the post subtitle.
     Post ID or WP_Post object.
     Default: global `$post` object.
 
-This plugin does _not_ attempt to output the subtitle. With an infinite number of themes, it is not possible for us to support that. The onus is on the user to customize their theme accordingly.
 
-This plugin creates an `the_subtitle()` template tag that can be used in your theme's templates as follows:
-
-`
-if ( function_exists( 'the_subtitle' ) ) the_subtitle();
-`
-
-You can wrap the string in some markup using the *$before* and *$after* parameters.
-`
-if ( function_exists( 'the_subtitle' ) ) the_subtitle( '<h2 class="subtitle">', '</h2>' );
 `
 
 = WooCommerce support =
