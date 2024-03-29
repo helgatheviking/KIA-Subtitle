@@ -2,7 +2,7 @@
 
 The KIA Subtitle plugin allows you to add a subtitle to your posts.
 
-This is a developmental repo. Clone this repo and run `npm install && npm run build`   
+This is a developmental repo. Clone this repo and run `npm install && npm run release`   
 OR    
 |[Download latest release](https://github.com/helgatheviking/KIA-Subtitle/releases/latest)|
 
