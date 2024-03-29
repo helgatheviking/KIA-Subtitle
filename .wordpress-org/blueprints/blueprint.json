@@ -1,0 +1,42 @@
+{
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "landingPage": "/wp-admin/site-editor.php?postType=wp_template&postId=twentytwentyfour%2F%2Fsingle",
+    "preferredVersions": {
+        "php": "8.2",
+        "wp": "6.4"
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "features": {
+        "networking": true
+    },
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        },
+        {
+            "step": "activateTheme",
+            "themeFolderName": "twentytwentyfour"
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org\/plugins",
+                "slug": "kia-subtitle"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+			"step": "importFile",
+			"file": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/helgatheviking/kia-subtitle/trunk/demo-content/demo-content.xml"
+			}
+		}
+    ]
+}

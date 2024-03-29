@@ -68,8 +68,9 @@ module.exports = function(grunt) {
 				'!.github/**',
 				'!assets/js/src/**',
 				'!webpack.config.js',
-				'!.nvmrc'
+				'!.nvmrc',
 
+				'!demo-content/**'
 			],
 			dest: 'build/'
 		},
