@@ -12,13 +12,58 @@ The KIA Subtitle plugin allows you to add a subtitle to your posts.
 
 == Description ==
 
-KIA subtitle allows you to add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using `the_subtitle()` or `get_the_subtitle()`.
+KIA subtitle allows you to add a subtitle to your posts and retrieve it in the loop in the same manner as the post title. By using the Subtitle block or the `the_subtitle()` or `get_the_subtitle() template tags`.
 
 It adds an input field right under the title field of posts, pages and any custom post type.  It also add a subtitle column to the edit screen as well as to the quick edit.
 
-You can also use the shortcode `[the-subtitle]` to display it within the post content.
+You can also use the Subtitle block or the shortcode `[the-subtitle]` to display it within the post content.
 
-= Displaying the subtitle on the front-end =
+== Installation ==
+
+1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. *For Block Themes:* Add the subtitle block to your template in the Site Editor
+1. *For Classic Themes:* Add the 'the_subtitle()' tag to your theme
+
+== Site Editor ==
+
+The plugin provides a Subtitle block in the editor. In the post editor, this doesn't make a lot of sense, but mimics the core Title block. The idea use case for the Subtitle block is when editing your theme
+
+1. Click Edit Site in the WordPress toolbar
+1. Select the template you wish to edit, commonly this might be called Single Post, or Singular.
+1. Insert the Subtitle block where needed, commonly right after the Title block.
+
+== Template Tags ==
+
+The plugin provides two template tags that can be used to customize your theme as desired.
+
+= `the_subtitle( string $before = ”, string $after = ”, bool $display = true ): void|string` =
+
+Displays or retrieves the current post subtitle with optional markup.
+
+*Parameters*
+
+`$before` `string` `optional`
+    Markup to prepend to the title.
+    Default: `''`
+
+`$after` `string` `optional`
+    Markup to append to the title.
+    Default: `''`
+
+`$display` `bool` `optional`
+    Whether to echo or return the title. Default true for echo.
+    Default: `true`
+
+= `get_the_subtitle( int|WP_Post $post ): string` =
+
+Retrieves the post subtitle.
+
+*Parameters*
+
+`$post` `int|WP_Post` `optional`
+    Post ID or WP_Post object.
+    Default: global `$post` object.
 
 This plugin does _not_ attempt to output the subtitle. With an infinite number of themes, it is not possible for us to support that. The onus is on the user to customize their theme accordingly.
 
@@ -50,17 +95,6 @@ Support is handled in the [WordPress forums](http://wordpress.org/support/plugin
 
 Please report any bugs, errors, warnings, code problems to [Github](https://github.com/helgatheviking/KIA-Subtitle/issues)
 
-== Installation ==
-
-1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Add the 'the_subtitle()' tag to your theme:
-		`if ( function_exists( 'the_subtitle' ) ) the_subtitle();`
-1. if you need to 'return' the value, you can use `get_the_subtitle()` which accepts a `$post_id` parameter if you need to use it outside the loop
-		`if ( function_exists( 'the_subtitle' ) ) $subtitle = get_the_subtitle( $post_id );`
-1. As of version 1.2 `the_subtitle` accepts 3 parameters: `the_subtitle( $before = Null, $after = Null, $echo = True );`
-1. As of version 1.3.4, there is a filter for `the_subtitle`
-
 == Screenshots ==
 
 1. This is what the input will look like in the Block Editor.
@@ -90,12 +124,14 @@ As an absolute worst case fallback you could also add the following snippet to y
  * @return string
  */
 function kia_prepend_subtitle_to_content( $content ) {
-	$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+	if ( ! is_admin() ) {
 
-	if ( ! empty( $subtitle ) ) {
-		$content = '<h2 class="subtitle">' . wp_kses_post( $subtitle ) . '</h2>' . $content;
+		$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+
+		if ( ! empty( $subtitle ) ) {
+			$content = '<h2 class="subtitle">' . wp_kses_post( $subtitle ) . '</h2>' . $content;
+		}
 	}
-
 	return $content;
 }
 add_filter( 'the_content', 'kia_prepend_subtitle_to_content' );
@@ -110,12 +146,13 @@ You could also filter `the_title` and but it would have to be part of the post t
  * @return string
  */
 function kia_append_subtitle_to_title( $title ) {
-	$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
+	if ( ! is_admin() ) {
+		$subtitle = function_exists( 'get_the_subtitle' ) ? get_the_subtitle() : '';
 
-	if ( ! empty( $subtitle ) ) {
-		$title .= ' &mdash; ' . wp_kses_post( $subtitle );
+		if ( ! empty( $subtitle ) ) {
+			$title .= ' &mdash; ' . wp_kses_post( $subtitle );
+		}
 	}
-
 	return $title;
 }
 add_filter( 'the_title', 'kia_append_subtitle_to_title' );
