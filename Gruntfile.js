@@ -69,8 +69,9 @@ module.exports = function(grunt) {
 				'!assets/js/src/**',
 				'!webpack.config.js',
 				'!.nvmrc',
-
-				'!demo-content/**'
+				'!_playground/**',
+				'!demo-content/**',
+				'!deploy/**'
 			],
 			dest: 'build/'
 		},
