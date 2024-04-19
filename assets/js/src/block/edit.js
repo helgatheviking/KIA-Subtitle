@@ -66,8 +66,6 @@ export default function Edit( {
 	} );
 	const blockEditingMode = useBlockEditingMode();
 
-	console.debug('blockEditingMode', blockEditingMode);
-
 	let titleElement = <TagName { ...blockProps }>{ __( 'Subtitle', 'kia-subtitle' ) }</TagName>;
 
 	if ( postType && postId ) {
