@@ -49,6 +49,7 @@ export default function Edit( {
 
     // Get the subtitle out of the meta.
     const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
+
     const subtitle = meta?.kia_subtitle || '';
 
     const updateSubtitle = (newValue) => {
@@ -62,6 +63,7 @@ export default function Edit( {
 	const blockProps = useBlockProps( {
 		className: classnames( {
 			[ `has-text-align-${ textAlign }` ]: textAlign,
+			'no-subtitle': isDescendentOfQueryLoop && ! subtitle.length,
 		} ),
 	} );
 	const blockEditingMode = useBlockEditingMode();

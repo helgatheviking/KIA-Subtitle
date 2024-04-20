@@ -6,4 +6,8 @@
 	a {
 		display: inline-block;
 	}
+
+	&.no-subtitle {
+		opacity: 0.333;
+	}
 }
