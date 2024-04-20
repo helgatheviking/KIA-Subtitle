@@ -191,6 +191,9 @@ WPML now supports KIA Subtitle!
 
 == Changelog ==
 
+= 4.0.1 =
+* Fix: Fix script errors when using site editor, by preventing the sidebar panel from rendering if NOT editing a post.
+
 = 4.0.0 =
 * Important: Requires WordPress 6.1
 * New: Subtitle block
