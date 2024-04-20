@@ -84,7 +84,7 @@ export default function Edit( {
 		) : (
 			<TagName
 				{ ...blockProps }
-				dangerouslySetInnerHTML={ { __html: subtitle?.rendered } }
+				dangerouslySetInnerHTML={ { __html: subtitle || __( 'No Subtitle', 'kia-subtitle' ) } }
 			/>
 		);
 	}
@@ -112,13 +112,13 @@ export default function Edit( {
 					rel={ rel }
 					onClick={ ( event ) => event.preventDefault() }
 					dangerouslySetInnerHTML={ {
-						__html: subtitle?.rendered,
+						__html: subtitle || __( 'No Subtitle', 'kia-subtitle' )
 					} }
 				/>
 			</TagName>
 		);
 	}
-
+	
 	return (
 		<>
 			{ blockEditingMode === 'default' && (

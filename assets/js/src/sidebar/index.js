@@ -16,7 +16,7 @@ const SubtitlePanel = (props) => {
     // If no post type is selected (for example, if in Site Editor), return null.
     if ( ! postType ) {
         return null;
-    }   
+    }
 
     const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
     const subtitle = meta?.kia_subtitle || '';
