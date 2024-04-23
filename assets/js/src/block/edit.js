@@ -48,14 +48,14 @@ export default function Edit( {
 	);
 
     // Get the subtitle out of the meta.
-    const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
+    const [meta, setMeta] = useEntityProp( 'postType', postType, 'meta', postId );
 
     const subtitle = meta?.kia_subtitle || '';
 
     const updateSubtitle = (newValue) => {
         setMeta({ ...meta, kia_subtitle: newValue });
     };
-    
+ 
 	const [ link ] = useEntityProp( 'postType', postType, 'link', postId );
 	const onSplitAtEnd = () => {
 		insertBlocksAfter( createBlock( getDefaultBlockName() ) );
