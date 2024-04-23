@@ -9,7 +9,6 @@ import { registerPlugin } from '@wordpress/plugins';
 import { __ } from "@wordpress/i18n";
 import { store as coreStore } from '@wordpress/core-data';
 
-const PANEL_NAME = 'page-attributes';
 const editorStore = 'core/editor';
 
 const SubtitlePanel = (props) => {
