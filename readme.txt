@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/kathyisawesome
 Tags: subtitle, simple
 Requires at least: 6.1
 Tested up to: 6.5.0
-Stable tag: 4.0.1-beta.4
+Stable tag: 4.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
