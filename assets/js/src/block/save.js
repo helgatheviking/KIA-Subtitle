@@ -1,36 +1,24 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
  * WordPress dependencies
  */
-import { useBlockProps } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 
-export default function Save( {attributes} ) {
+export default function save( { attributes } ) {
+	const { textAlign, content, level } = attributes;
+	const TagName = 'h' + level;
 
-    const blockProps = useBlockProps.save();
-  
-    const TagName = 'h' + attributes?.level || 'h3';
+	const className = classnames( {
+		[ `has-text-align-${ textAlign }` ]: textAlign,
+	} );
 
-    // Get the subtitle out of the meta.
-    const { getCurrentPostType } = useSelect('core/editor');
-    console.debug('getCurrentPostType', getCurrentPostType() );
-
-
-    /*
-    if ( subtitle && attributes.isLink ) { 
-        subtitle = <a href={ attributes.link } target={ attributes.linkTarget } rel={ attributes.rel }> { subtitle } </a>;
-    }
-    */
-
-    return <p>WTF</p>;
-
-
-console.debug('attributes', attributes );
-console.debug('blockProps', blockProps  );
-console.debug('TagName', TagName );
-console.debug('content', subtitle   );
-    
-
-    return <TagName { ...blockProps }> { subtitle } </TagName>;
-
-};
+	return (
+		<TagName { ...useBlockProps.save( { className } ) }>
+			<RichText.Content value={ content } />
+		</TagName>
+	);
+}
