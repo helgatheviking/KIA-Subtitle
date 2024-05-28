@@ -2,37 +2,42 @@
 # This file is distributed under the GPL3.
 msgid ""
 msgstr ""
-"Project-Id-Version: KIA Subtitle 4.0.1-beta.1\n"
+"Project-Id-Version: KIA Subtitle 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/helgatheviking/kia-subtitle/issues/new/\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-20T13:17:56-04:00\n"
+"POT-Creation-Date: 2024-04-24T18:57:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.9.0\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: kia-subtitle\n"
 
 #. Plugin Name of the plugin
+#: kia-subtitle.php
 #: includes/views/plugin-options.php:12
 #: kia-subtitle.php:203
 msgid "KIA Subtitle"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: kia-subtitle.php
 msgid "http://www.kathyisawesome.com/436/kia-subtitle/"
 msgstr ""
 
 #. Description of the plugin
+#: kia-subtitle.php
 msgid "Adds a subtitle field to WordPress' Post editor"
 msgstr ""
 
 #. Author of the plugin
+#: kia-subtitle.php
 msgid "Kathy Darling"
 msgstr ""
 
 #. Author URI of the plugin
+#: kia-subtitle.php
 msgid "http://www.kathyisawesome.com"
 msgstr ""
 
