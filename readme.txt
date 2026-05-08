@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://www.paypal.me/kathyisawesome
 Tags: subtitle, simple
 Requires at least: 6.1
-Stable tag: 4.0.1
 Tested up to: 7.0.0
+Stable tag: 4.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
