@@ -191,6 +191,9 @@ WPML now supports KIA Subtitle!
 
 == Changelog ==
 
+= 4.0.2 =
+* Fix: Escape the before and after attributes using wp_kses_post() in the shortcode() method before passing them to the_subtitle().
+
 = 4.0.1 =
 * Fix: Fix script errors when using site editor, by preventing the sidebar panel from rendering if NOT editing a post.
 

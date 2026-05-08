@@ -366,6 +366,8 @@ class KIA_Subtitle {
 				'after'   => '</h2>'
 			), $atts, 'the-subtitle' );
 
+		$atts['before'] = wp_kses_post( $atts['before'] );
+		$atts['after']  = wp_kses_post( $atts['after'] );
 		$atts['echo'] = false;
 
 		return $this->the_subtitle( $atts );
