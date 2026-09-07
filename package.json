@@ -13,9 +13,9 @@
   },
   "author": "helgatheviking",
   "devDependencies": {
-    "@wordpress/dependency-extraction-webpack-plugin": "^6.49.0",
-    "@wordpress/icons": "^15.0.0",
-    "@wordpress/scripts": "^32.5.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^6.54.0",
+    "@wordpress/icons": "^15.5.0",
+    "@wordpress/scripts": "^34.2.0",
     "classnames": "^2.5.1",
     "grunt": "^1.6.3",
     "grunt-contrib-clean": "~2.0.1",
