@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/kathyisawesome
 Tags: subtitle, simple
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 4.0.2
+Stable tag: 4.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -190,6 +190,14 @@ add_filter( 'wp_title', 'kia_add_subtitle_to_wp_title' );
 WPML now supports KIA Subtitle!
 
 == Changelog ==
+
+= 4.1.0 =
+* Important: Requires WordPress 6.3
+* New: Edit the subtitle directly beneath the post title in the block editor. The sidebar panel is used as a fallback when the title area is not available.
+* New: Subtitle block can be displayed as a paragraph instead of a heading.
+* Update: In the editor, make it clearer when a post has no subtitle and nothing will be displayed.
+* Fix: Load the correct asset file for the block editor script so its dependencies and version are registered properly.
+* Update: Tested up to WordPress 7.1.
 
 = 4.0.2 =
 * Fix: Escape the before and after attributes using wp_kses_post() in the shortcode() method before passing them to the_subtitle().
