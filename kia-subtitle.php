@@ -5,6 +5,7 @@
  * Description: Adds a subtitle field to WordPress' Post editor
  * Author: Kathy Darling
  * Version: 4.0.2
+ * Requires at least: 6.3
  * Author URI: http://www.kathyisawesome.com
  * License: GPL3
  * Text Domain: kia-subtitle
