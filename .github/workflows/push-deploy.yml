@@ -87,11 +87,20 @@ jobs:
         run: |
           npm run deploy
 
+      - name: "Extract release notes from readme.txt changelog."
+        run: |
+          awk -v ver="${{ env.release_tag }}" '$0 == "= " ver " =" { found = 1; next } found && /^= .+ =$/ { exit } found' readme.txt | sed '/./,$!d' > "${{ runner.temp }}/release-notes.md"
+          if [ ! -s "${{ runner.temp }}/release-notes.md" ]; then
+            echo "::warning::No changelog entry found in readme.txt for ${{ env.release_tag }}."
+          fi
+          cat "${{ runner.temp }}/release-notes.md"
+
       - name: "Create GitHub release."
         uses: softprops/action-gh-release@v2
         with:
           files: ./deploy/${{ env.release_name }}-${{ env.release_tag }}.zip
           prerelease: ${{ env.release_status == 'pre-release' }}
+          body_path: ${{ runner.temp }}/release-notes.md
 
       - name: "Deploy stable release to WordPress.org."
         if: env.release_status != 'pre-release'
