@@ -63,7 +63,8 @@ export default function Edit( {
 	const blockProps = useBlockProps( {
 		className: classnames( {
 			[ `has-text-align-${ textAlign }` ]: textAlign,
-			'no-subtitle': isDescendentOfQueryLoop && ! subtitle.length,
+			// Flag missing subtitles (they won't be displayed), but not the generic placeholder shown when there is no post.
+			'no-subtitle': postType && postId && ! subtitle.length,
 		} ),
 	} );
 	const blockEditingMode = useBlockEditingMode();

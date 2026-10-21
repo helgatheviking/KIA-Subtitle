@@ -7,7 +7,9 @@
 		display: inline-block;
 	}
 
+	// Editor only: this post has no subtitle, so nothing will be displayed.
 	&.no-subtitle {
-		opacity: 0.333;
+		opacity: 0.5;
+		font-style: italic;
 	}
 }
