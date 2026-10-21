@@ -701,7 +701,7 @@ class KIA_Subtitle {
 		// Add styles and scripts for block editor.
     	if ( 'site-editor' === $current_screen->base || ( self::is_enabled_for_post_type( $current_screen->post_type ) && post_type_supports( $current_screen->post_type, 'custom-fields' ) ) ) {
 
-			$script_asset_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'assets/js/dist/frontend/index.asset.php';
+			$script_asset_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'assets/js/dist/index.asset.php';
 			$script_asset      = file_exists( $script_asset_path )
 				? require $script_asset_path
 				: array(
