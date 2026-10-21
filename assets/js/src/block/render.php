@@ -28,7 +28,8 @@ if ( ! $subtitle ) {
 
 $tag_name = 'h3';
 if ( isset( $attributes['level'] ) ) {
-	$tag_name = 'h' . $attributes['level'];
+	$level    = absint( $attributes['level'] );
+	$tag_name = 0 === $level ? 'p' : 'h' . min( $level, 6 );
 }
 
 if ( isset( $attributes['isLink'] ) && $attributes['isLink'] ) {

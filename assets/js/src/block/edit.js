@@ -33,7 +33,7 @@ export default function Edit( {
 	context: { postType, postId, queryId },
 	insertBlocksAfter,
 } ) {
-	const TagName = 'h' + level;
+	const TagName = level === 0 ? 'p' : 'h' + level;
 	const isDescendentOfQueryLoop = Number.isFinite( queryId );
 	/**
 	 * Hack: useCanEditEntity may trigger an OPTIONS request to the REST API via the canUser resolver.
@@ -125,6 +125,7 @@ export default function Edit( {
 				<>
 					<BlockControls group="block">
 						<HeadingLevelDropdown
+							options={ [ 0, 1, 2, 3, 4, 5, 6 ] }
 							value={ level }
 							onChange={ ( newLevel ) =>
 								setAttributes( { level: newLevel } )
